@@ -13,8 +13,8 @@ export function Footer(props: Props) {
 	const locale = useLocale() as 'eng' | 'fr';
 	return (
 		<div className={'pt-[48px]'}>
-			<div className={'flex justify-between relative p-7'}>
-				<div className={'pl-[48px] py-4'}>
+			<div className={'flex justify-between relative py-7 px-[var(--container-padding)]'}>
+				<div className={'py-4'}>
 					<Image src={props.logo} alt={'Logo'} height={100} width={100} />
 				</div>
 				<div className={'flex justify-between gap-9'}>
@@ -44,7 +44,7 @@ export function Footer(props: Props) {
 				</div>
 			</div>
 			<div className={'border-b-[#E7E7E7] border-b'}></div>
-			<div className={'flex justify-between relative p-4'}>
+			<div className={'flex justify-between relative p-4 px-[var(--container-padding)]'}>
 				<div className={'font-normal text-xs text-[#444444]'}>
 					{t('copyright')}
 				</div>

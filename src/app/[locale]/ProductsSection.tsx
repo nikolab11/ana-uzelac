@@ -12,7 +12,7 @@ interface Props {
 export function ProductsSection(props: Props) {
 	const t = useTranslations();
 	return (
-		<div className='py-6 px-9'>
+		<div>
 			{props.discoverAllButton && <div className='flex justify-end'>
 				<Link href={'shop'}>
 					<div

@@ -19,7 +19,9 @@ export default async function Home() {
 				<HeadText />
 			</div>
 			<GrandOpeningSection />
-			<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
+			<div className={'px-[var(--container-padding)] py-6'}>
+				<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
+			</div>
 			<CollectionsSection collections={collections.collections} />
 			<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
 		</div>

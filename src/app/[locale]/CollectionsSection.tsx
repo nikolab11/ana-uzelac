@@ -40,7 +40,9 @@ function CollectionItem(props: { collection: Collection }) {
 					<HoveringLink href={`collections/${props.collection.collection_id}`} label={t('view_collection')} />
 				</div>
 			</div>
-			<ProductsSection products={props.collection.products} />
+			<div className={'px-[var(--container-padding)] py-6'}>
+				<ProductsSection products={props.collection.products} />
+			</div>
 		</div>
 	);
 }

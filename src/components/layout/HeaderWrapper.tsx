@@ -1,20 +1,18 @@
 'use client';
 
-import { ReactNode, useLayoutEffect, useRef } from 'react';
+import { ReactNode, useLayoutEffect, useState } from 'react';
 
 interface Props {
 	children: ReactNode;
 }
 
-const baseClassName = 'bg-white z-1 p-3 absolute w-full hover:opacity-100 opacity-70 transition-all';
+const baseClassName = 'px-[var(--container-padding)] bg-[#FCF7F1] z-1 absolute w-full hover:opacity-100 opacity-70 transition-all';
 
 export function HeaderWrapper(props: Props) {
-	const ref = useRef<HTMLDivElement>(null);
+	const [scrolled, setScrolled] = useState(false);
 	useLayoutEffect(() => {
 		const handler = () => {
-			if (!ref.current) {
-				return;
-			}
+
 			const element = document.getElementById('app-container');
 			if (!element) {
 				return;
@@ -23,12 +21,8 @@ export function HeaderWrapper(props: Props) {
 			const windowHeight = element.offsetHeight;
 			const documentHeight = element.scrollHeight;
 			// Check if scrolled to bottom
-			if (scrollTop + windowHeight >= documentHeight) {
-				ref.current.className = `${baseClassName} opacity-100`;
-			} else {
+			setScrolled(scrollTop + windowHeight >= documentHeight);
 
-				ref.current.className = `${baseClassName} opacity-70`;
-			}
 		};
 		window.addEventListener('scroll', handler, true);
 
@@ -38,8 +32,8 @@ export function HeaderWrapper(props: Props) {
 	}, []);
 
 	return (
-		<div ref={ref}
-			 className='z-1 p-3 absolute w-full hover:opacity-100 opacity-70 transition-all bg-[#FCF7F1]'>
+		<div
+			className={`${baseClassName} opacity-${scrolled ? 100 : 70}`}>
 			{props.children}
 		</div>
 	);

@@ -2,9 +2,10 @@
 
 :root {
     --background: #ffffff;
-    --foreground: #171717;
+    --foreground: #444444;
     --hover-bg: rgba(255, 255, 255, 0.1);
-    --text-color: #444444
+    --text-color: #444444;
+    --container-padding: 15%;
 }
 
 .hovering-button {
@@ -72,4 +73,25 @@ h3 {
 
 .app-link:hover::after {
     transform: scaleX(1);
+}
+
+.collection-menu {
+    overflow: hidden;
+    transition: max-height 0.5s linear;
+    max-height: 0;
+    overflow-x: auto;
+    transform-origin: top;
+}
+
+.collection-menu-open {
+    max-height: 1000px;
+}
+
+.collection-item-chevron {
+    transition: transform 0.5s linear;
+}
+
+.rotate180 {
+    transform: rotate(-180deg);
+    transform-origin: center;
 }

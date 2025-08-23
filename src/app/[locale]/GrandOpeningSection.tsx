@@ -5,7 +5,8 @@ import { CountdownTimer } from '@/app/[locale]/CountdownTimer';
 export function GrandOpeningSection() {
 	const t = useTranslations();
 	return (
-		<div className='flex flex-wrap gap-6 items-center justify-between pt-[64px] pb-[64px] px-9'>
+		<div
+			className='flex flex-wrap gap-6 items-center justify-between pt-[64px] pb-[64px] px-[var(--container-padding)]'>
 			<div className={'basis-sm'}>
 				<h3 className={'text-4xl font-bold pb-5 text-[#444444]'}>
 					{t('grand_opening')}

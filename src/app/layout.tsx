@@ -37,7 +37,8 @@ export default async function RootLayout({
 		<NextIntlClientProvider>
 			<div
 				className={`antialiased relative flex flex-col h-screen `}>
-				<Header collections={collections.collections} logo={images.logo.logo_png} />
+				<Header productsImage={images.home_page.img_1050_copy} collections={collections.collections}
+						logo={images.logo.logo_png} />
 				<div id={'app-container'} style={containerStyle} className={'flex-1 overflow-y-auto'}>
 					{children}
 					<Footer collections={collections.collections} logo={images.logo.logo_png} />
