@@ -1,0 +1,26 @@
+{
+  "home_page": {
+    "main_img": "url od one prve slike",
+    "highlighted_images": [
+      "urlovi od one 3-4 slike sto stoje pored grand opening "
+    ]
+  },
+  "logo": {
+    "logo_png": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/Untitled+design(2).png"
+  },
+  "about_page": {
+    "main_img": "Ona prva slika",
+    "ana_uzelac_img": "url",
+    "moodboard_img": "url",
+    "work_in_progress_img": "url",
+    "why_it_matters_img": "url",
+    "different_kind_of_luxury": {
+      "main_img": "url",
+      "other_img": [
+        "urls"
+      ]
+    },
+    "art_that_finds_you_img": "url"
+  },
+  "bottom_img": "url od poslednje slike (vidim da se koristi i na about i na home)"
+}
