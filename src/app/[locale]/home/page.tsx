@@ -15,7 +15,7 @@ export default async function Home() {
 	const products = await fetchAllProducts();
 	const collections = await fetchAllCollections();
 	return (
-		<AppLayout>
+		<AppLayout mode='hover'>
 			<div className='min-h-screen relative'>
 				<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
 				<HeadText />

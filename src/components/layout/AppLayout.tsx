@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { fetchImages } from '@/api/images';
 import { fetchAllCollections } from '@/api/products';
 import { CSSProperties, ReactNode } from 'react';
+import { HeaderMode } from '@/components/layout/header/HeaderWrapper';
 
 const containerStyle: CSSProperties = {
 	msOverflowStyle: 'none',
@@ -10,16 +11,19 @@ const containerStyle: CSSProperties = {
 };
 
 export async function AppLayout({
-									children
+									children,
+									mode
 								}: Readonly<{
 	children: ReactNode;
+	mode?: HeaderMode;
 }>) {
 	const images = await fetchImages();
 	const collections = await fetchAllCollections();
 	return (
 		<div
 			className={`antialiased relative flex flex-col h-screen bg-[#F6F1EB]`}>
-			<Header productsImage={images.home_page.img_1050_copy} collections={collections.collections}
+			<Header mode={mode || 'regular'} productsImage={images.home_page.img_1050_copy}
+					collections={collections.collections}
 					logo={images.logo.logo_png} />
 			<div id={'app-container'} style={containerStyle} className={'flex-1 overflow-y-auto'}>
 				{children}

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { HeaderWrapper } from '@/components/layout/header/HeaderWrapper';
+import { HeaderMode, HeaderWrapper } from '@/components/layout/header/HeaderWrapper';
 import { Collection } from '@/types/api.types';
 import { CollectionMenuItem } from '@/components/layout/header/CollectionsMenuItem';
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
@@ -16,6 +16,7 @@ import { SearchInput } from '@/components/layout/header/SearchInput';
 interface Props {
 	logo: string;
 	productsImage: string;
+	mode: HeaderMode;
 	collections: Collection[];
 }
 
@@ -23,7 +24,7 @@ export function Header(props: Props) {
 	const t = useTranslations('header');
 	const locale = useLocale() as LocaleType;
 	return (
-		<HeaderWrapper>
+		<HeaderWrapper mode={props.mode}>
 			<div className='flex justify-center pb-4'>
 				<Image src={props.logo} alt={'Logo'} width={80} height={55} />
 			</div>
