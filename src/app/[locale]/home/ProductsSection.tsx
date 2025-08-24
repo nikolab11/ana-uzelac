@@ -1,5 +1,5 @@
 import { ProductItem } from '@/components/products/ProductItem';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Product } from '@/types/api.types';
 import { useTranslations } from 'next-intl';
 import { ChevronRight } from '@/components/icons/ChevronRight';
@@ -10,11 +10,11 @@ interface Props {
 }
 
 export function ProductsSection(props: Props) {
-	const t = useTranslations();
+	const t = useTranslations('home_page');
 	return (
 		<div>
 			{props.discoverAllButton && <div className='flex justify-end'>
-				<Link href={'shop'}>
+				<Link href={'/shop'}>
 					<div
 						className='border cursor-pointer gap-3 items-center flex justify-between border-[#444444] text-[#444444] rounded-lg p-3'>
 						<div> {t('discover_all_items')} </div>

@@ -13,7 +13,6 @@ const buttonClasses = 'border cursor-pointer border-white p-2 rounded-full trans
 
 export function ProductImages(props: Props) {
 	const [activeIndex, setActiveIndex] = useState(0);
-
 	return (
 		<div className='relative transition-all'>
 			<img width={'100%'} height={'auto'} src={props.product.images[activeIndex]} alt={props.product.name_eng} />

@@ -1,12 +1,13 @@
 'use client';
 
 import { ReactNode, useLayoutEffect, useState } from 'react';
+import { CollectionSubmenuContextProvider } from '@/context/collection-submenu/CollectionSubmenu.context-provider';
 
 interface Props {
 	children: ReactNode;
 }
 
-const baseClassName = 'px-[var(--container-padding)] bg-[#FCF7F1] z-1 absolute w-full hover:opacity-100 opacity-70 transition-all';
+const baseClassName = 'px-[var(--container-padding)] bg-[#FCF7F1] z-1 absolute w-full hover:opacity-100 transition-all';
 
 export function HeaderWrapper(props: Props) {
 	const [scrolled, setScrolled] = useState(false);
@@ -18,10 +19,7 @@ export function HeaderWrapper(props: Props) {
 				return;
 			}
 			const scrollTop = element.scrollTop;
-			const windowHeight = element.offsetHeight;
-			const documentHeight = element.scrollHeight;
-			// Check if scrolled to bottom
-			setScrolled(scrollTop + windowHeight >= documentHeight);
+			setScrolled(scrollTop > 0);
 
 		};
 		window.addEventListener('scroll', handler, true);
@@ -32,9 +30,11 @@ export function HeaderWrapper(props: Props) {
 	}, []);
 
 	return (
-		<div
-			className={`${baseClassName} opacity-${scrolled ? 100 : 70}`}>
-			{props.children}
-		</div>
+		<CollectionSubmenuContextProvider>
+			<div
+				className={`${baseClassName} opacity-${scrolled ? 100 : 70}`}>
+				{props.children}
+			</div>
+		</CollectionSubmenuContextProvider>
 	);
 }

@@ -7,7 +7,6 @@ interface Options {
 
 export const ApiClient = {
 	get: async <T = object>(url: string, options?: Partial<Options>): Promise<T> => {
-		// console.log(url);
 		url = `${process.env.API_BASE_URL}${url}`;
 		if (options?.params) {
 			url = `${url}?${querystring.stringify(options.params)}`;

@@ -1,9 +1,10 @@
 import { ChevronRight } from '@/components/icons/ChevronRight';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { BasePath, DynamicPath } from '@/types/routing';
 
 interface Props {
-	href: string;
+	href: BasePath | { params: never, pathname: DynamicPath };
 	label: string;
 }
 

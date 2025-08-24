@@ -1,12 +1,9 @@
 import { defineRouting } from 'next-intl/routing';
+import { BASE_PATHS, DYNAMIC_PATHS, LOCALES } from '@/types/routing';
 
 export const routing = defineRouting({
-	locales: ['eng', 'fr'],
+	locales: LOCALES,
 	defaultLocale: 'eng',
-	pathnames: {
-		'/': '/',
-		'/pathnames': {
-			fr: '/pfadnamen'
-		}
-	}
+	localeDetection: false,
+	pathnames: { ...BASE_PATHS, ...DYNAMIC_PATHS }
 });

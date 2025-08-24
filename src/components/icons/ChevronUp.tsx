@@ -1,6 +1,5 @@
 interface Props {
 	stroke?: string;
-	className?: string;
 	size?: number;
 }
 

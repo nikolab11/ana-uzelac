@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Collection } from '@/types/api.types';
 import { FooterList } from '@/components/layout/FooterList';
+import { LocaleType } from '@/types/routing';
 
 interface Props {
 	logo: string;
@@ -9,8 +10,8 @@ interface Props {
 }
 
 export function Footer(props: Props) {
-	const t = useTranslations();
-	const locale = useLocale() as 'eng' | 'fr';
+	const t = useTranslations('footer');
+	const locale = useLocale() as LocaleType;
 	return (
 		<div className={'pt-[48px]'}>
 			<div className={'flex justify-between relative py-7 px-[var(--container-padding)]'}>
@@ -20,25 +21,32 @@ export function Footer(props: Props) {
 				<div className={'flex justify-between gap-9'}>
 					<FooterList title={'Collections'} items={[{
 						name: 'Shop',
-						path: 'shop'
+						path: '/shop',
+						type: 'base'
 					}, ...props.collections.map(item => {
 						return {
+							type: 'dynamic',
 							name: item[`name_${locale}`],
-							path: '/collections/' + item.collection_id
-						};
+							path: '/collections/[collectionId]',
+							params: { collectionId: item.collection_id }
+						} as const;
 					})]} />
 					<FooterList title={t('about')} items={[{
-						path: 'story',
-						name: t('story')
+						path: '/story',
+						name: t('story'),
+						type: 'base'
 					}, {
-						path: 'news',
+						path: '/news',
+						type: 'base',
 						name: t('news')
 					}]} />
 					<FooterList title={t('legals')} items={[{
-						path: 'privacy-policy',
+						path: '/privacy-policy',
+						type: 'base',
 						name: t('privacy_policy')
 					}, {
-						path: 'terms-conditions',
+						path: '/terms-conditions',
+						type: 'base',
 						name: t('terms_conditions')
 					}]} />
 				</div>

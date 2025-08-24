@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { CountdownTimer } from '@/app/[locale]/CountdownTimer';
+import { Link } from '@/i18n/navigation';
+import { CountdownTimer } from '@/app/[locale]/home/CountdownTimer';
 
 export function GrandOpeningSection() {
-	const t = useTranslations();
+	const t = useTranslations('home_page');
 	return (
 		<div
 			className='flex flex-wrap gap-6 items-center justify-between pt-[64px] pb-[64px] px-[var(--container-padding)]'>
@@ -14,7 +14,7 @@ export function GrandOpeningSection() {
 				<p className={'pb-3'}>
 					{t('grand_opening_description')}
 				</p>
-				<Link href={'shop'}>
+				<Link href={'/shop'}>
 					<button className={'text-white py-4 px-8 bg-[#DBAC50] cursor-pointer'}>
 						{t('pre_order_now')}
 					</button>

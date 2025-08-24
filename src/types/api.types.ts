@@ -6,9 +6,22 @@ export interface ImagesResponse {
 	}
 }
 
+export interface TranslationItem {
+	header: Record<string, string>;
+	home_page: Record<string, string>;
+	wearing_the_moment_section: Record<string, string>;
+	shop_page: Record<string, string>;
+	filter_and_sort: Record<string, string>;
+	footer: Record<string, string>;
+	about_page: Record<string, string>;
+	journal_page: Record<string, string>;
+	privacy_policy_page: Record<string, string>;
+	terms_conditions_page: Record<string, string>;
+}
+
 export interface Translations {
-	eng: Record<string, string>,
-	fr: Record<string, string>,
+	eng: TranslationItem,
+	fr: TranslationItem,
 }
 
 export interface CollectionResponse {
@@ -19,7 +32,7 @@ export interface Collection {
 	collection_id: number;
 	name_eng: string;
 	name_fr: string;
-	images: string[],
+	images: Record<string, string>,
 	description: string;
 	products: Product[];
 }
@@ -30,7 +43,8 @@ export interface Product {
 	name_fr: string;
 	price: number;
 	currency: string;
-	description: string;
+	description_eng: string;
+	description_fr: string;
 	sizes: string[],
 	images: string[]
 }

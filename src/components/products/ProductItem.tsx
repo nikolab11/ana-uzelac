@@ -1,15 +1,16 @@
 import { Product } from '@/types/api.types';
 import { useLocale } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { ProductImages } from '@/components/products/ProductImages';
+import { LocaleType } from '@/types/routing';
 
 interface Props {
 	product: Product;
 }
 
 export function ProductItem(props: Props) {
-	const locale = useLocale() as 'eng' | 'fr';
+	const locale = useLocale() as LocaleType;
 	const name = props.product[`name_${locale}`];
 	console.log(name);
 	return (
@@ -25,7 +26,10 @@ export function ProductItem(props: Props) {
 					</div>
 				</div>
 				<div>
-					<Link href={`products/${props.product.product_id}`}>
+					<Link href={{
+						pathname: '/products/[productId]',
+						params: { productId: props.product.product_id }
+					}}>
 						<div className='border border-[#444444] p-2 rounded-full'>
 							<ShoppingBag stroke={'#444444'} />
 						</div>
