@@ -19,6 +19,7 @@ export function HeaderWrapper(props: Props) {
 				return;
 			}
 			const scrollTop = element.scrollTop;
+			console.log(scrollTop);
 			setScrolled(scrollTop > 0);
 
 		};
@@ -32,7 +33,9 @@ export function HeaderWrapper(props: Props) {
 	return (
 		<CollectionSubmenuContextProvider>
 			<div
-				className={`${baseClassName} opacity-${scrolled ? 100 : 70}`}>
+				className={baseClassName} style={{
+				opacity: scrolled ? '1' : '0.7'
+			}}>
 				{props.children}
 			</div>
 		</CollectionSubmenuContextProvider>

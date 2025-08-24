@@ -14,7 +14,8 @@ export const BASE_PATHS = {
 
 export const DYNAMIC_PATHS = {
 	'/products/[productId]': '/products/[productId]',
-	'/collections/[collectionId]': '/collections/[collectionId]'
+	'/collections/[collectionId]': '/collections/[collectionId]',
+	'/news/[newsId]': '/news/[newsId]'
 } as const;
 
 export type BasePath = keyof typeof BASE_PATHS

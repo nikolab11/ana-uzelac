@@ -5,9 +5,10 @@ import { fetchAllCollections, fetchAllProducts } from '@/api/products';
 import { CollectionsSection } from '@/app/[locale]/home/CollectionsSection';
 import { FooterImage } from '@/components/layout/FooterImage';
 import { useTranslations } from 'next-intl';
-import { HoveringLink } from '@/components/common/HoveringLink';
+import { HoveringButton } from '@/components/common/HoveringButton';
 import { GrandOpeningSection } from '@/app/[locale]/home/GrandOpeningSection';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { Link } from '@/i18n/navigation';
 
 export default async function Home() {
 	const images = await fetchImages();
@@ -15,18 +16,16 @@ export default async function Home() {
 	const collections = await fetchAllCollections();
 	return (
 		<AppLayout>
-			<div className={'bg-[#F6F1EB]'}>
-				<div className='min-h-screen relative'>
-					<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
-					<HeadText />
-				</div>
-				<GrandOpeningSection />
-				<div className={'px-[var(--container-padding)] py-6'}>
-					<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
-				</div>
-				<CollectionsSection collections={collections.collections} />
-				<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
+			<div className='min-h-screen relative'>
+				<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
+				<HeadText />
 			</div>
+			<GrandOpeningSection />
+			<div className={'px-[var(--container-padding)] py-6'}>
+				<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
+			</div>
+			<CollectionsSection collections={collections.collections} />
+			<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
 		</AppLayout>
 	);
 }
@@ -40,7 +39,9 @@ function HeadText() {
 				<p className={'text-white text-end font-normal text-2xl'}>{t('winter_2026')}</p>
 			</div>
 			<div>
-				<HoveringLink href={'/shop'} label={t('shop_now')} />
+				<Link href={'/shop'}>
+					<HoveringButton label={t('shop_now')} />
+				</Link>
 			</div>
 		</div>
 	);

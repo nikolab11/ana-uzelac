@@ -2,8 +2,9 @@ import { Collection } from '@/types/api.types';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { ProductsSection } from '@/app/[locale]/home/ProductsSection';
-import { HoveringLink } from '@/components/common/HoveringLink';
+import { HoveringButton } from '@/components/common/HoveringButton';
 import { LocaleType } from '@/types/routing';
+import { Link } from '@/i18n/navigation';
 
 interface Props {
 	collections: Collection[];
@@ -38,10 +39,13 @@ function CollectionItem(props: { collection: Collection }) {
 					<div className={'text-white text-base'}>
 						{props.collection.description}
 					</div>
-					<HoveringLink href={{
+					<Link href={{
 						pathname: '/collections/[collectionId]',
 						params: { collectionId: props.collection.collection_id } as never
-					}} label={t('view_collection')} />
+					}}>
+						<HoveringButton label={t('view_collection')} />
+					</Link>
+
 				</div>
 			</div>
 			<div className={'px-[var(--container-padding)] py-6'}>

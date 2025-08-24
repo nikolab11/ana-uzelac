@@ -15,7 +15,7 @@ export function GrandOpeningSection() {
 					{t('grand_opening_description')}
 				</p>
 				<Link href={'/shop'}>
-					<button className={'text-white py-4 px-8 bg-[#DBAC50] cursor-pointer'}>
+					<button className={'text-white py-4 px-8 bg-[#DBAC50] cursor-pointer hover:shadow-lg transition'}>
 						{t('pre_order_now')}
 					</button>
 				</Link>

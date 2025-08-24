@@ -13,11 +13,10 @@ export function LocalesMenu(props: Props) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const params = useParams();
-	console.log(pathname);
 	const [, startTransition] = useTransition();
 	return (
 		<div>
-			<select value={props.locale} onChange={event => {
+			<select value={props.locale} className={'text-sm'} onChange={event => {
 				const value = event.target.value as LocaleType;
 				startTransition(() => {
 					let newPath = pathname as string;
@@ -36,7 +35,7 @@ export function LocalesMenu(props: Props) {
 				{
 					routing.locales.map(val => {
 						return (
-							<option key={val} value={val}>{val.toLocaleUpperCase()}</option>
+							<option className={'text-sm'} key={val} value={val}>{val.toLocaleUpperCase()}</option>
 						);
 					})
 				}

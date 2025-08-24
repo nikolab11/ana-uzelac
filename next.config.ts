@@ -9,7 +9,7 @@ const withNextIntl = createNextIntlPlugin({
 const nextConfig: NextConfig = {
 	/* config options here */
 	images: {
-		remotePatterns: [new URL('https://anauzelac.s3.eu-north-1.amazonaws.com/**')]
+		remotePatterns: [new URL('https://anauzelac.s3.eu-north-1.amazonaws.com/**'), new URL('https://live.staticflickr.com/**')]
 	}
 };
 

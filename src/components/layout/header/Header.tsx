@@ -10,6 +10,8 @@ import { LocalesMenu } from '@/components/layout/header/LocalesMenu';
 import { CollectionViewContainer } from '@/components/layout/header/CollectionViewContainer';
 import { CollectionsView } from '@/components/layout/header/CollectionView';
 import { LocaleType } from '@/types/routing';
+import { SearchIcon } from '@/components/icons/SearchIcon';
+import { SearchInput } from '@/components/layout/header/SearchInput';
 
 interface Props {
 	logo: string;
@@ -25,11 +27,12 @@ export function Header(props: Props) {
 			<div className='flex justify-center pb-4'>
 				<Image src={props.logo} alt={'Logo'} width={80} height={55} />
 			</div>
-			<div className='flex justify-between pb-4'>
-				<div>
-					<input placeholder={t('search')} />
+			<div className='flex justify-between pb-4 overflow-x-auto items-end'>
+				<div className={'flex gap-3 items-center'}>
+					<SearchIcon />
+					<SearchInput placeholder={t('search')} />
 				</div>
-				<div className='flex flex-1 justify-center gap-[56px]'>
+				<div className='flex flex-1 justify-center items-end gap-[56px]'>
 					<Link className={'text-sm app-link'} href={'/home'}>{t('home')}</Link>
 					<Link className={'text-sm app-link'} href={'/shop'}>{t('shop')}</Link>
 					<div className={'text-sm app-link'}>

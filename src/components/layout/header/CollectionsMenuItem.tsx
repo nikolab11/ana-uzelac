@@ -15,7 +15,7 @@ export function CollectionMenuItem(props: Props) {
 	return (
 		<div className='flex gap-3 items-center cursor-pointer' onClick={onSwitch}>
 			<span>{t('collections')}</span>
-			<ChevronDown className={`collection-item-chevron ${open ? 'rotate180' : ''}`} />
+			<ChevronDown strokeWidth={2.5} className={`collection-item-chevron ${open ? 'rotate180' : ''}`} />
 		</div>
 	);
 }

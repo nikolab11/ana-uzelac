@@ -19,6 +19,14 @@
     z-index: 1;
 }
 
+.hovering-button-dark:before {
+    background-color: var(--foreground);
+}
+
+.hovering-button-light:before {
+    background-color: white;
+}
+
 .hovering-button:before {
     content: '';
     position: absolute;
@@ -28,7 +36,6 @@
     height: 100%;
     width: 100%;
     opacity: 0;
-    background-color: white;
     transform: translateX(-100%);
     transition: opacity 0.3s linear, transform 0.3s linear;
     z-index: -1;
@@ -94,4 +101,15 @@ h3 {
 .rotate180 {
     transform: rotate(-180deg);
     transform-origin: center;
+}
+
+.content-wrapper h3 {
+    font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.content-wrapper h2 {
+    font-size: 24px;
+    font-weight: 700;
 }

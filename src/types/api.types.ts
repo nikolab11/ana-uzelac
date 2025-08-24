@@ -55,3 +55,18 @@ export interface GeAllProductsResponse {
 		original_products: Product[]
 	};
 }
+
+export interface BaseNews {
+	id: number;
+	title_eng: string;
+	title_fr: string;
+	subtitle_eng: string;
+	subtitle_fr: string;
+	thumbnail: string;
+	date: string;
+}
+
+export interface News extends BaseNews {
+	content_eng: string;
+	content_fr: string;
+}

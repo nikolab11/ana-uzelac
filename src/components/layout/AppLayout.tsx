@@ -18,7 +18,7 @@ export async function AppLayout({
 	const collections = await fetchAllCollections();
 	return (
 		<div
-			className={`antialiased relative flex flex-col h-screen `}>
+			className={`antialiased relative flex flex-col h-screen bg-[#F6F1EB]`}>
 			<Header productsImage={images.home_page.img_1050_copy} collections={collections.collections}
 					logo={images.logo.logo_png} />
 			<div id={'app-container'} style={containerStyle} className={'flex-1 overflow-y-auto'}>
