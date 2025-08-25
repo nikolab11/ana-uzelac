@@ -5,17 +5,19 @@ import { useCallback } from 'react';
 
 interface Props {
 	label: string;
+	scrollElementId: string;
 }
 
 export function ScrollingButton(props: Props) {
 	const onClick = useCallback(() => {
-		const element = document.getElementById('app-container');
+		const element = document.getElementById(props.scrollElementId);
 		if (!element) return;
-		element.scrollBy({
+		element.scrollIntoView({
 			behavior: 'smooth',
-			top: window.innerHeight
+			block: 'start',
+			inline: 'nearest'
 		});
-	}, []);
+	}, [props.scrollElementId]);
 	return (
 		<HoveringButton label={props.label}
 						onClick={onClick}

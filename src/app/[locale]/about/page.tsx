@@ -19,6 +19,7 @@ export default function AboutPage() {
 		</AppLayout>
 	);
 }
+const ABOUT_ELEMENT_ID = 'about-description';
 
 function InnerPage({ images }: PageProps) {
 	const t = useTranslations('about_page');
@@ -29,7 +30,7 @@ function InnerPage({ images }: PageProps) {
 		<>
 			<div className='h-full relative'>
 				<Image objectFit='cover' src={images.about_page.img_20230713_wa0047} alt={'Image'} fill />
-				<HeadText title={t('founder_story')} buttonLabel={t('view_more')} />
+				<HeadText title={t('founder_story')} buttonLabel={t('view_more')} scrollElementId={ABOUT_ELEMENT_ID} />
 			</div>
 			<AboutDescription />
 			<MainImages images={images} />
@@ -45,7 +46,7 @@ function AboutDescription() {
 	const t = useTranslations('about_page');
 
 	return (
-		<div className={'bg-black text-white text-center'}>
+		<div id={ABOUT_ELEMENT_ID} className={'bg-black text-white text-center'}>
 			<div
 				className={'flex flex-col justify-center items-center py-[64px] px-[var(--container-padding)] gap-6'}>
 				<h3 className={'font-bold text-4xl'}>{t('about_ana_uzelac')}</h3>

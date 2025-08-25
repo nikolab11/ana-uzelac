@@ -40,7 +40,7 @@ export function HeaderWrapper(props: Props) {
 		<CollectionSubmenuContextProvider>
 			<div
 				className={baseClassName} style={{
-				opacity: scrolled ? '1' : '0.7',
+				opacity: (scrolled || props.mode === 'regular') ? '1' : '0.7',
 				position: props.mode === 'hover' ? 'absolute' : 'relative'
 			}}>
 				{props.children}

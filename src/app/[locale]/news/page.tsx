@@ -16,6 +16,8 @@ export default async function NewsPage() {
 	);
 }
 
+const SCROLL_ELEMENT_ID = 'news-section';
+
 function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
 	const t = useTranslations();
 	if (!images) {
@@ -25,9 +27,10 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
 		<>
 			<div className='h-full relative'>
 				<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
-				<HeadText title={t('journal_page.the_journal')} buttonLabel={t('about_page.view_more')} />
+				<HeadText title={t('journal_page.the_journal')} buttonLabel={t('about_page.view_more')}
+						  scrollElementId={SCROLL_ELEMENT_ID} />
 			</div>
-			<div className={'px-[var(--container-padding)] py-6'}>
+			<div id={SCROLL_ELEMENT_ID} className={'px-[var(--container-padding)] py-6'}>
 				<div className={'flex flex-wrap gap-9'}>
 					{
 						news.map(element => {
