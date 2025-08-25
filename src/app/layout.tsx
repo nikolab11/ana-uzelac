@@ -3,6 +3,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 import { Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
+import { CartContextProvider } from '@/context/cart/cart.context-provider';
 
 const playfair = Playfair_Display({
 	subsets: ['latin'],
@@ -24,7 +25,9 @@ export default async function RootLayout({
 		<html>
 		<body className={playfair.variable}>
 		<NextIntlClientProvider>
-			{children}
+			<CartContextProvider>
+				{children}
+			</CartContextProvider>
 		</NextIntlClientProvider>
 		</body>
 		</html>

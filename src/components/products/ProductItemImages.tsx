@@ -11,7 +11,7 @@ interface Props {
 
 const buttonClasses = 'border cursor-pointer border-white p-2 rounded-full transition-opacity child opacity-0 group-hover:opacity-100';
 
-export function ProductImages(props: Props) {
+export function ProductItemImages(props: Props) {
 	const [activeIndex, setActiveIndex] = useState(0);
 	return (
 		<div className='relative transition-all'>

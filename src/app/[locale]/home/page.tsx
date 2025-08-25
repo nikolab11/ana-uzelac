@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import { fetchImages } from '@/api/images';
 import { ProductsSection } from '@/app/[locale]/home/ProductsSection';
-import { fetchAllCollections, fetchAllProducts } from '@/api/products';
+import { fetchAllProducts } from '@/api/products';
 import { CollectionsSection } from '@/app/[locale]/home/CollectionsSection';
 import { FooterImage } from '@/components/layout/FooterImage';
 import { useTranslations } from 'next-intl';
@@ -9,24 +8,34 @@ import { HoveringButton } from '@/components/common/HoveringButton';
 import { GrandOpeningSection } from '@/app/[locale]/home/GrandOpeningSection';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Link } from '@/i18n/navigation';
+import { PageProps } from '@/types/pages.types';
 
 export default async function Home() {
-	const images = await fetchImages();
-	const products = await fetchAllProducts();
-	const collections = await fetchAllCollections();
 	return (
 		<AppLayout mode='hover'>
+			<InnerPage />
+		</AppLayout>
+	);
+}
+
+async function InnerPage({ images, collections }: PageProps) {
+	const products = await fetchAllProducts();
+	if (!images || !collections) {
+		throw new Error('Missing images and collections');
+	}
+	return (
+		<>
 			<div className='min-h-screen relative'>
-				<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
+				<Image objectFit='cover' src={images?.home_page.img_0089} alt={'Image'} fill />
 				<HeadText />
 			</div>
 			<GrandOpeningSection />
 			<div className={'px-[var(--container-padding)] py-6'}>
 				<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
 			</div>
-			<CollectionsSection collections={collections.collections} />
+			<CollectionsSection collections={collections} />
 			<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
-		</AppLayout>
+		</>
 	);
 }
 

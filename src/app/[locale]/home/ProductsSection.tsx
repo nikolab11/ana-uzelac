@@ -28,7 +28,7 @@ export function ProductsSection(props: Props) {
 				{
 					props.products.map(product => {
 						return (
-							<div key={product.product_id} className={'flex-1'}>
+							<div key={product.product_id} className={'grow basis-xs '}>
 								<ProductItem product={product} />
 							</div>
 						);

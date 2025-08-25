@@ -12,19 +12,20 @@ interface Params {
 }
 
 export default async function NewsShowPage(props: { params: Promise<Params> }) {
-	const { newsId } = await props.params;
+	const [{ newsId }, locale] = await Promise.all([props.params, getLocale() as Promise<LocaleType>]);
 	const news = await fetchNewsById(newsId);
-	const locale = await getLocale() as LocaleType;
 	return (
 		<AppLayout>
-			<div className='min-h-screen relative'>
-				<Image objectFit='cover' src={news.thumbnail} alt={'Image'} fill />
-				<HeadText news={news} />
-			</div>
-			<div className={'px-[var(--container-padding)] py-6'}>
-				<div className={'flex flex-col gap-4 content-wrapper'} dangerouslySetInnerHTML={{
-					__html: news[`content_${locale}`]
-				}} />
+			<div>
+				<div className='min-h-screen relative'>
+					<Image objectFit='cover' src={news.thumbnail} alt={'Image'} fill />
+					<HeadText news={news} />
+				</div>
+				<div className={'px-[var(--container-padding)] py-6'}>
+					<div className={'flex flex-col gap-4 content-wrapper'} dangerouslySetInnerHTML={{
+						__html: news[`content_${locale}`]
+					}} />
+				</div>
 			</div>
 		</AppLayout>
 	);

@@ -1,26 +1,45 @@
 {
+  "about_page": {
+    "img_05062025": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/05062025+marame+studio0359.jpg",
+    "img_20200330_162119": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20200330_162119.jpg",
+    "img_20200402_181626": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20200402_181626.jpg",
+    "img_20210907_143829_1": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20210907_143829-1.jpg",
+    "img_20220322_191851": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20220322_191851.jpg",
+    "img_20220723_142304": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20220723_142304.jpg",
+    "img_20230403_161706": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG_20230403_161706.jpg",
+    "img_20230406_wa0020": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG-20230406-WA0020.jpg",
+    "img_20230713_wa0047": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/IMG-20230713-WA0047.jpg",
+    "mb_16_july_cafe_1_2": "https://anauzelac.s3.eu-north-1.amazonaws.com/aboutpage/MB+16+July+Cafe+1-2+.jpg"
+  },
   "home_page": {
-    "main_img": "url od one prve slike",
-    "highlighted_images": [
-      "urlovi od one 3-4 slike sto stoje pored grand opening "
-    ]
+    "img_0080_copy": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0080+copy.jpg",
+    "img_0089": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0089.jpg",
+    "img_0115": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0115.jpg",
+    "img_0224": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0224.jpg",
+    "img_0288": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0288.jpg",
+    "img_0302": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0302.jpg",
+    "img_0336": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0336.jpg",
+    "img_0362": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0362.jpg",
+    "img_0383": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0383.jpg",
+    "img_0392": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio0392.jpg",
+    "img_1041": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1041.jpg",
+    "img_1045_copy_2": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1045+copy+2.jpg",
+    "img_1050_copy": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1050+copy.jpg",
+    "img_1057_copy_2": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1057+copy+2.jpg",
+    "img_1061": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1061.jpg",
+    "img_1066_copy": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1066+copy.jpg",
+    "img_1069": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025+marame+studio1069.jpg",
+    "img_2110_copy": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025 marame studio2110 copy.jpg",
+    "img_2113": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/05062025 marame studio2113.jpg",
+    "img_7620": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/16072023 marame7620.jpg",
+    "img_7777": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/16072023 marame7777.jpg",
+    "img_7840": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/16072023 marame7840.jpg",
+    "img_7872": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/16072023 marame7872.jpg",
+    "img_7935": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/16072023 marame7935.jpg",
+    "ksenija_falling_rabbit_ruins_back": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/Ksenija with Falling Rabbit in the ruins back view.jpg",
+    "zvezdana_moon_rabbits_ruins_1": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/Zvezdana with Moon Rabbits in the ruins 1.jpg"
   },
   "logo": {
     "logo_png": "https://anauzelac.s3.eu-north-1.amazonaws.com/homepage/Untitled+design(2).png"
-  },
-  "about_page": {
-    "main_img": "Ona prva slika",
-    "ana_uzelac_img": "url",
-    "moodboard_img": "url",
-    "work_in_progress_img": "url",
-    "why_it_matters_img": "url",
-    "different_kind_of_luxury": {
-      "main_img": "url",
-      "other_img": [
-        "urls"
-      ]
-    },
-    "art_that_finds_you_img": "url"
-  },
-  "bottom_img": "url od poslednje slike (vidim da se koristi i na about i na home)"
+  }
 }
