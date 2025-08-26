@@ -1,7 +1,7 @@
 import * as querystring from 'querystring';
 
 interface Options {
-	params: Record<string, string | number>,
+	params: Record<string, any>,
 	headers: Record<string, string | number>,
 }
 
@@ -17,6 +17,7 @@ export const ApiClient = {
 					...options?.headers,
 					['x-api-key']: process.env.API_KEY || ''
 				},
+				cache: 'no-cache',
 				method: 'GET'
 
 			});

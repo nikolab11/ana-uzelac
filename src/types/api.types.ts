@@ -43,6 +43,7 @@ export interface Product {
 	name_fr: string;
 	price: number;
 	currency: string;
+	collection_id?: number;
 	description_eng: string;
 	description_fr: string;
 	sizes: string[],
@@ -69,4 +70,40 @@ export interface BaseNews {
 export interface News extends BaseNews {
 	content_eng: string;
 	content_fr: string;
+}
+
+export interface ProductFilter {
+	price_min: number;
+	price_max: number;
+	sizes: string[];
+	collection_ids: number[];
+}
+
+export interface ProductFilterRaw {
+	price_min: string;
+	price_max: string;
+	sizes: string[] | string;
+	collection_ids: string[] | string;
+}
+
+export function parseFilters(rawFilters: Partial<ProductFilterRaw>): Partial<ProductFilter> {
+	const result: Partial<ProductFilter> = {};
+
+	if (rawFilters.price_min) {
+		result.price_min = Number(rawFilters.price_min);
+	}
+
+	if (rawFilters.price_max) {
+		result.price_max = Number(rawFilters.price_max);
+	}
+	if (rawFilters.sizes) {
+		result.sizes = Array.isArray(rawFilters.sizes) ? [...new Set(rawFilters.sizes)] : [rawFilters.sizes];
+	}
+	if (rawFilters.collection_ids) {
+		result.collection_ids = Array.isArray(rawFilters.collection_ids) ?
+			[...new Set(rawFilters.collection_ids.map(val => Number(val)))]
+			: [Number(rawFilters.collection_ids)];
+	}
+
+	return result;
 }

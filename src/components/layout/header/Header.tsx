@@ -12,12 +12,14 @@ import { CollectionsView } from '@/components/layout/header/CollectionView';
 import { LocaleType } from '@/types/routing';
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import { SearchInput } from '@/components/layout/header/SearchInput';
+import { ReactNode } from 'react';
 
 interface Props {
 	logo: string;
 	productsImage: string;
 	mode: HeaderMode;
 	collections: Collection[];
+	additionalContent?: ReactNode;
 }
 
 export function Header(props: Props) {
@@ -57,6 +59,7 @@ export function Header(props: Props) {
 				</div>
 
 			</div>
+			{props.additionalContent}
 			<CollectionViewContainer>
 				<CollectionsView collections={props.collections} image={props.productsImage} />
 			</CollectionViewContainer>
