@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { LocaleType } from '@/types/routing';
 import { calculatePrices, filterProducts } from '@/utils/product.utils';
 import { ShopHeader } from '@/app/[locale]/shop/ShopHeader';
+import { Grid } from '@mui/material';
 
 export default async function ShopPage(props: { searchParams: Promise<Partial<ProductFilterRaw>> }) {
 	const params = parseFilters(await props.searchParams);
@@ -22,6 +23,7 @@ export default async function ShopPage(props: { searchParams: Promise<Partial<Pr
 			<AppLayout headerContent={<ShopHeader
 				usedFilters={usedFilters}
 				totalProducts={products.length + additionalProducts.length}
+				filters={params}
 				minPrice={prices.min}
 				maxPrice={prices.max}
 			/>}>
@@ -51,17 +53,17 @@ function InnerPage({ collections, params, products, additionalProducts }: PagePr
 						</div>
 					)
 				}
-				<div className='flex flex-col pt-6 md:flex-row flex-wrap justify-between gap-8'>
+				<Grid spacing={2} container className='pt-6'>
 					{
 						products.map(product => {
 							return (
-								<div key={product.product_id} className={'pb-8 basis-xs'}>
+								<Grid key={product.product_id} size={{ xs: 12, sm: 6, md: 4 }} className={'pb-8'}>
 									<ProductItem product={product} />
-								</div>
+								</Grid>
 							);
 						})
 					}
-				</div>
+				</Grid>
 			</div>
 			{additionalProducts.length > 0 &&
 				<LoadMoreProductsWrapper text={t('shop_page.load_more_items')}>

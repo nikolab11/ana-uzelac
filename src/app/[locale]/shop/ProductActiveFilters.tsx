@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 import { XIcon } from '@/components/icons/XIcon';
 import { useRouter } from 'next/navigation';
 import * as querystring from 'node:querystring';
+import { EUR_SYMBOL } from '@/utils/constants';
 
 interface Props {
 	params: Partial<ProductFilter>;
@@ -13,20 +14,17 @@ interface Props {
 	collections: Collection[];
 }
 
-const EUR_SYMBOL = '€';
-
 export function ProductActiveFilters({ params, collections, locale }: Props) {
 	const router = useRouter();
 
 	const updateParams = (updateParams: (old: Partial<ProductFilter>) => Partial<ProductFilter>) => {
 		const updatedParams = updateParams(params);
 		const stringified = querystring.stringify(updatedParams);
-		console.log(stringified);
 		if (stringified) {
-			router.push(`/shop?${stringified}`);
+			router.replace(`/shop?${stringified}`);
 			return;
 		}
-		router.push('/shop');
+		router.replace('/shop');
 	};
 
 	return (

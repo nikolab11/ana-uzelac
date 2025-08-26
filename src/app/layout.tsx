@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { CartContextProvider } from '@/context/cart/cart.context-provider';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 const playfair = Playfair_Display({
 	subsets: ['latin'],
@@ -25,9 +26,11 @@ export default async function RootLayout({
 		<html>
 		<body className={playfair.variable}>
 		<NextIntlClientProvider>
-			<CartContextProvider>
-				{children}
-			</CartContextProvider>
+			<AppRouterCacheProvider>
+				<CartContextProvider>
+					{children}
+				</CartContextProvider>
+			</AppRouterCacheProvider>
 		</NextIntlClientProvider>
 		</body>
 		</html>

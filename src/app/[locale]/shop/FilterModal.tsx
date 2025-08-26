@@ -1,48 +1,229 @@
 'use client';
 
-import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+	Checkbox,
+	Drawer,
+	FormControlLabel,
+	Slider
+} from '@mui/material';
 import { XIcon } from '@/components/icons/XIcon';
-import { Section } from '@/components/common/Section';
+import { ArrowDropdown } from '@/components/icons/ArrowDropdown';
+import { CSSProperties, ReactNode, useEffect, useMemo, useState } from 'react';
+import { EUR_SYMBOL, PRODUCT_SIZES } from '@/utils/constants';
+import { Collection, ProductFilter } from '@/types/api.types';
+import { LocaleType } from '@/types/routing';
+import { useRouter } from 'next/navigation';
+import querystring from 'node:querystring';
 
 interface Props {
 	open: boolean;
 	onClose: () => void;
+	collections: Collection[];
+	minPrice: number;
+	maxPrice: number;
+	filters: Partial<ProductFilter>;
 }
 
+const containerStyle: CSSProperties = {
+	msOverflowStyle: 'none',
+	scrollbarWidth: 'none'
+};
+
+const initalFilters: ProductFilter = {
+	sizes: [],
+	collection_ids: [],
+	price_min: 0,
+	price_max: 0
+};
+
 export function FilterModal(props: Props) {
-	const [mounted, setMounted] = useState(false);
 	const t = useTranslations('filter_and_sort');
+	const locale = useLocale() as LocaleType;
+	const router = useRouter();
+	const [currentFilters, setCurrentFilters] = useState({
+		...initalFilters,
+		price_min: props.minPrice,
+		price_max: props.maxPrice,
+		...props.filters
+	});
+	const sliderValue = useMemo(() => {
+		return [currentFilters.price_min, currentFilters.price_max];
+	}, [currentFilters.price_max, currentFilters.price_min]);
 	useEffect(() => {
-		setMounted(true);
-	}, []);
+		setCurrentFilters({
+				...initalFilters,
+				price_min: props.minPrice,
+				price_max: props.maxPrice,
+				...props.filters
+			}
+		);
+	}, [props.filters, props.minPrice, props.maxPrice]);
+	const handleClear = () => {
+		setCurrentFilters({ ...initalFilters, price_min: props.minPrice, price_max: props.maxPrice });
+	};
+	const isEmptyForm = currentFilters.price_min === props.minPrice
+		&& currentFilters.price_max === props.maxPrice
+		&& currentFilters.collection_ids.length === 0
+		&& currentFilters.sizes.length === 0;
+	const handleSubmit = () => {
+		const stringified = querystring.stringify(currentFilters);
+		router.replace(`/shop?${stringified}`);
+	};
+	return (
+		<Drawer anchor={'right'} onClose={props.onClose} open={props.open}>
+			<div className={'p-9 w-[35vw] overflow-auto h-full flex flex-col justify-between'}>
+				<div style={containerStyle} className={'overflow-auto grow'}>
+					<div className={'flex justify-between items-center pb-7'}>
+						<h4 className={'text-medium text-base uppercase text-[var(--text-color)]'}>{t('filter_by')}</h4>
+						<div onClick={props.onClose} className={'cursor-pointer'}>
+							<XIcon size={4} />
+						</div>
+					</div>
+					<SearchSection title={t('filter_price')}>
+						<div className={'pt-7'}>
+							<Slider
+								value={sliderValue}
+								min={props.minPrice}
+								onChange={(_, newValue) => setCurrentFilters(prev => {
+									return {
+										...prev,
+										price_min: newValue[0],
+										price_max: newValue[1]
+									};
+								})}
+								sx={{
+									color: 'var(--foreground)'
+								}}
+								slotProps={{
 
-	if (!mounted) {
-		return null;
-	}
-
-	return createPortal(<>
-		<div className={'backdrop'} style={{
-			display: props.open ? 'block' : 'none'
-		}} />
-		<div id={'filter-modal'} className={'pt-9 bg-[#FCF7F1] px-5'} style={{
-			transform: props.open ? 'translateX(0)' : 'translateX(100%)'
-		}}>
-			<div className={'flex justify-between items-center pb-9'}>
-				<h4 className={'uppercase text-base font-medium'}>{t('filter_by')}</h4>
-				<div onClick={props.onClose} className={'cursor-pointer'}>
-					<XIcon />
+									input: {
+										color: 'var(--foreground)'
+									},
+									markLabel: {
+										className: 'text-sm font-normal',
+										style: {
+											color: 'var(--foreground)',
+											top: '-30px'
+										}
+									}
+								}}
+								max={props.maxPrice}
+								marks={[{
+									value: props.minPrice,
+									label: `${props.minPrice}${EUR_SYMBOL}`
+								}, {
+									value: props.maxPrice,
+									label: `${props.maxPrice}${EUR_SYMBOL}`
+								}]}
+							/>
+						</div>
+					</SearchSection>
+					<SearchSection title={'#Collection'}>
+						{
+							props.collections.map(collection => {
+								return (
+									<div key={collection.collection_id}>
+										<FormControlLabel control={<Checkbox
+											checked={currentFilters.collection_ids.includes(collection.collection_id)}
+											onChange={(event, checked) => {
+												setCurrentFilters(prev => {
+													return {
+														...prev,
+														collection_ids: checked ? [...prev.collection_ids, collection.collection_id] : prev.collection_ids.filter(cId => cId !== collection.collection_id)
+													};
+												});
+											}}
+										/>}
+														  label={<div
+															  className='font-normal text-sm text-[var(--text-color)]'>{`${collection[`name_${locale}`]} (${collection.products.length})`}</div>}
+										/>
+									</div>
+								);
+							})
+						}
+					</SearchSection>
+					<SearchSection title={t('filter_size')}>
+						{PRODUCT_SIZES.map(size => {
+							return (
+								<div key={size.value}>
+									<FormControlLabel
+										control={<Checkbox checked={currentFilters.sizes.includes(size.value)}
+														   onChange={(event, checked) => {
+															   setCurrentFilters(prev => {
+																   return {
+																	   ...prev,
+																	   sizes: checked ? [...prev.sizes, size.value] : prev.sizes.filter(s => s !== size.value)
+																   };
+															   });
+														   }} />}
+										label={<div
+											className='font-normal text-sm text-[var(--text-color)]'>{size.label}</div>} />
+								</div>
+							);
+						})}
+					</SearchSection>
+				</div>
+				<div className={'flex gap-2 flex-col md:flex-row'}>
+					{!isEmptyForm && <Button
+						onClick={handleClear}
+						sx={{
+							borderRadius: '0'
+						}}
+						variant={'outlined'}
+						color={'var(--text-color)' as never}
+						className={'grow text-[var(--text-color)]'}>
+						{t('filter_clear')}
+					</Button>}
+					<Button
+						onClick={handleSubmit}
+						variant={'contained'}
+						color={'inherit'}
+						sx={{
+							color: 'white',
+							background: 'var(--foreground)',
+							borderRadius: '0'
+						}}
+						className={'grow'}>
+						{t('filter_apply')}
+					</Button>
 				</div>
 			</div>
-			<div>
-				<Section title={t('filter_price')}>
-					Price
-					sa
-					fsfa
-					
-				</Section>
-			</div>
-		</div>
-	</>, document.body);
+		</Drawer>
+	);
+}
+
+function SearchSection(props: { title: ReactNode, children: ReactNode }) {
+	return (
+		<Accordion
+			defaultExpanded
+			slots={{
+				heading: 'div',
+				root: 'div'
+			}}>
+			<AccordionSummary
+				sx={{
+					color: 'var(--text-color)'
+				}}
+				slotProps={{
+					root: {
+						sx: { p: 0 }
+					}
+				}} expandIcon={<ArrowDropdown
+			/>}>
+				<div className={'uppercase text-sm font-medium text-[var(--text-color)]'}>
+					{props.title}
+				</div>
+			</AccordionSummary>
+			<AccordionDetails>
+				<div className={'px-6'}>
+					{props.children}
+				</div>
+			</AccordionDetails>
+		</Accordion>
+	);
 }

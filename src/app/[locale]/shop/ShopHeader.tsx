@@ -3,15 +3,18 @@
 import { FilterIcon } from '@/components/icons/FilterIcon';
 import { useState } from 'react';
 import { FilterModal } from '@/app/[locale]/shop/FilterModal';
+import { Collection, ProductFilter } from '@/types/api.types';
 
 interface Props {
 	usedFilters: number;
 	totalProducts: number;
 	minPrice: number;
+	filters: Partial<ProductFilter>;
 	maxPrice: number;
+	collections?: Collection[];
 }
 
-export function ShopHeader({ totalProducts, usedFilters }: Props) {
+export function ShopHeader({ totalProducts, usedFilters, minPrice, maxPrice, collections, filters }: Props) {
 	const [openModal, setOpenModal] = useState(false);
 	return (
 		<div className={'flex justify-between items-center '}>
@@ -32,7 +35,13 @@ export function ShopHeader({ totalProducts, usedFilters }: Props) {
 						className={'absolute pl-1 top-[8px] text-[10px] tracking-wider'}>({usedFilters})</span>}</div>
 
 			</div>
-			<FilterModal open={openModal} onClose={() => setOpenModal(prev => false)} />
+			<FilterModal collections={collections || []}
+						 minPrice={minPrice}
+						 filters={filters}
+						 maxPrice={maxPrice}
+						 open={openModal}
+						 onClose={() => setOpenModal(false)}
+			/>
 		</div>
 	);
 }
