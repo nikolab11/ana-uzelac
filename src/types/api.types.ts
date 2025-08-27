@@ -1,3 +1,5 @@
+import { SORT_OPTIONS, SortOption } from '@/utils/constants';
+
 export interface ImagesResponse {
 	about_page: Record<string, string>,
 	home_page: Record<string, string>,
@@ -77,6 +79,7 @@ export interface ProductFilter {
 	price_max: number;
 	sizes: string[];
 	collection_ids: number[];
+	sortOption: SortOption;
 }
 
 export interface ProductFilterRaw {
@@ -84,6 +87,7 @@ export interface ProductFilterRaw {
 	price_max: string;
 	sizes: string[] | string;
 	collection_ids: string[] | string;
+	sortOption: string;
 }
 
 export function parseFilters(rawFilters: Partial<ProductFilterRaw>): Partial<ProductFilter> {
@@ -103,6 +107,9 @@ export function parseFilters(rawFilters: Partial<ProductFilterRaw>): Partial<Pro
 		result.collection_ids = Array.isArray(rawFilters.collection_ids) ?
 			[...new Set(rawFilters.collection_ids.map(val => Number(val)))]
 			: [Number(rawFilters.collection_ids)];
+	}
+	if (rawFilters.sortOption && SORT_OPTIONS.includes(rawFilters.sortOption as SortOption)) {
+		result.sortOption = rawFilters.sortOption as SortOption;
 	}
 
 	return result;

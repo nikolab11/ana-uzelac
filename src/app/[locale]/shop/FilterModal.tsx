@@ -9,16 +9,22 @@ import {
 	Checkbox,
 	Drawer,
 	FormControlLabel,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText,
 	Slider
 } from '@mui/material';
 import { XIcon } from '@/components/icons/XIcon';
 import { ArrowDropdown } from '@/components/icons/ArrowDropdown';
 import { CSSProperties, ReactNode, useEffect, useMemo, useState } from 'react';
-import { EUR_SYMBOL, PRODUCT_SIZES } from '@/utils/constants';
+import { EUR_SYMBOL, PRODUCT_SIZES, SORT_OPTIONS, SORT_OPTIONS_DATA } from '@/utils/constants';
 import { Collection, ProductFilter } from '@/types/api.types';
 import { LocaleType } from '@/types/routing';
 import { useRouter } from 'next/navigation';
-import querystring from 'node:querystring';
+import querystring from 'querystring';
+import { Circle } from '@/components/icons/Circle';
 
 interface Props {
 	open: boolean;
@@ -38,7 +44,8 @@ const initalFilters: ProductFilter = {
 	sizes: [],
 	collection_ids: [],
 	price_min: 0,
-	price_max: 0
+	price_max: 0,
+	sortOption: 'relevance'
 };
 
 export function FilterModal(props: Props) {
@@ -69,7 +76,8 @@ export function FilterModal(props: Props) {
 	const isEmptyForm = currentFilters.price_min === props.minPrice
 		&& currentFilters.price_max === props.maxPrice
 		&& currentFilters.collection_ids.length === 0
-		&& currentFilters.sizes.length === 0;
+		&& currentFilters.sizes.length === 0
+		&& currentFilters.sortOption === 'relevance';
 	const handleSubmit = () => {
 		const stringified = querystring.stringify(currentFilters);
 		router.replace(`/shop?${stringified}`);
@@ -166,6 +174,35 @@ export function FilterModal(props: Props) {
 								</div>
 							);
 						})}
+					</SearchSection>
+					<SearchSection title={t('sort_by')}>
+						<List>
+							{SORT_OPTIONS.map(sortOption => {
+								return (
+									<ListItem className={'pb-2'} disablePadding key={sortOption}>
+										<ListItemIcon sx={{
+											minWidth: '24px'
+										}}>
+											{
+												currentFilters.sortOption === sortOption && (
+													<Circle fill={'var(--foreground)'} size={3} />
+												)
+											}
+										</ListItemIcon>
+										<ListItemButton onClick={() => {
+											setCurrentFilters(prev => {
+												return {
+													...prev,
+													sortOption: sortOption
+												};
+											});
+										}}>
+											<ListItemText primary={SORT_OPTIONS_DATA[sortOption].translation} />
+										</ListItemButton>
+									</ListItem>
+								);
+							})}
+						</List>
 					</SearchSection>
 				</div>
 				<div className={'flex gap-2 flex-col md:flex-row'}>

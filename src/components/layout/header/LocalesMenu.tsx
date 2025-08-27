@@ -4,6 +4,7 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { routing } from '@/i18n/routing';
+import { MenuItem, Select } from '@mui/material';
 
 interface Props {
 	locale: LocaleType;
@@ -16,7 +17,28 @@ export function LocalesMenu(props: Props) {
 	const [, startTransition] = useTransition();
 	return (
 		<div>
-			<select value={props.locale} className={'text-sm'} onChange={event => {
+			<Select
+				className={'text-sm text-[var(--text-color)] font-normal'}
+				sx={{ border: 'none' }}
+				size={'small'}
+				variant={'standard'}
+				slotProps={{
+					root: {
+						sx: {
+							border: 'none'
+						}
+					},
+					input: {
+						sx: {
+							fontWeight: '400',
+							fontSize: '14px',
+							color: 'var(--text-color)'
+						}
+					}
+
+				}}
+
+				value={props.locale} onChange={event => {
 				const value = event.target.value as LocaleType;
 				startTransition(() => {
 					let newPath = pathname as string;
@@ -35,11 +57,11 @@ export function LocalesMenu(props: Props) {
 				{
 					routing.locales.map(val => {
 						return (
-							<option className={'text-sm'} key={val} value={val}>{val.toLocaleUpperCase()}</option>
+							<MenuItem className={'text-sm'} key={val} value={val}>{val.toLocaleUpperCase()}</MenuItem>
 						);
 					})
 				}
-			</select>
+			</Select>
 		</div>
 	);
 }
