@@ -12,6 +12,7 @@ interface Props {
 export function Footer(props: Props) {
 	const t = useTranslations('footer');
 	const locale = useLocale() as LocaleType;
+	const headerT = useTranslations('header');
 	return (
 		<div className={'pt-[48px]'}>
 			<div className={'flex justify-between relative py-7 px-[var(--container-padding)]'}>
@@ -20,7 +21,7 @@ export function Footer(props: Props) {
 				</div>
 				<div className={'flex justify-between gap-9'}>
 					<FooterList title={'Collections'} items={[{
-						name: 'Shop',
+						name: headerT('shop'),
 						path: '/shop',
 						type: 'base'
 					}, ...props.collections.map(item => {

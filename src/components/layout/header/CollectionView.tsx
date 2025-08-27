@@ -18,7 +18,7 @@ export function CollectionsView(props: CollectionViewProps) {
 					return (
 						<div className={'basis-[20%]'} key={collection.collection_id}>
 							<div className={'font-medium text-xs uppercase pb-2'}>
-								Collection
+								#Collection
 							</div>
 							<div className={'font-bold text-xs uppercase pb-2'}>
 								{name}
