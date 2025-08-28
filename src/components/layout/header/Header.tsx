@@ -35,7 +35,7 @@ export function Header(props: Props) {
 					<SearchIcon />
 					<SearchInput placeholder={t('search')} />
 				</div>
-				<div className='flex flex-1 justify-center items-end gap-[56px]'>
+				<div className='flex flex-1 justify-center items-end gap-[32px]'>
 					<Link className={'text-sm app-link'} href={'/home'}>{t('home')}</Link>
 					<Link className={'text-sm app-link'} href={'/shop'}>{t('shop')}</Link>
 					<div className={'text-sm app-link'}>

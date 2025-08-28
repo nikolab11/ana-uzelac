@@ -18,16 +18,12 @@ export function LocalesMenu(props: Props) {
 	return (
 		<div>
 			<Select
+				disableUnderline
 				className={'text-sm text-[var(--text-color)] font-normal'}
-				sx={{ border: 'none' }}
+				sx={{ border: 'none', paddingBottom: '0', '&>div': { paddingBottom: 0 } }}
 				size={'small'}
 				variant={'standard'}
 				slotProps={{
-					root: {
-						sx: {
-							border: 'none'
-						}
-					},
 					input: {
 						sx: {
 							fontWeight: '400',

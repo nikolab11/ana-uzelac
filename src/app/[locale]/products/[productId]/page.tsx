@@ -1,22 +1,39 @@
 import { fetchSingleProduct } from '@/api/products';
-import { getLocale } from 'next-intl/server';
-import { LocaleType } from '@/types/routing';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { ProductImages } from '@/app/[locale]/products/[productId]/ProductImages';
+import { Collection, Product } from '@/types/api.types';
+import { ProductInfo } from '@/app/[locale]/products/[productId]/ProductInfo';
+import { useLocale } from 'next-intl';
+import { LocaleType } from '@/types/routing';
 
 interface Params {
 	productId: string;
 }
 
 export default async function ProductShowPage(props: { params: Promise<Params> }) {
-	const [{ productId }, locale] = await Promise.all([props.params, getLocale() as Promise<LocaleType>]);
+	const { productId } = await props.params;
 	const product = await fetchSingleProduct(Number(productId));
 
 	return (
 		<AppLayout mode='regular'>
-			<div>
-				<ProductImages product={product} />
-			</div>
+			<InnerPage product={product} />
 		</AppLayout>
+	);
+}
+
+interface Props {
+	product: Product;
+	collections?: Collection[];
+}
+
+function InnerPage({ product, collections }: Props) {
+	const locale = useLocale() as LocaleType;
+	return (
+		<div className={'w-full overflow-hidden'}>
+			<ProductImages product={product} />
+			<div className={'fixed top-[160px] right-[var(--container-padding)]  opacity-80 shadow-2xl '}>
+				<ProductInfo locale={locale} product={product} collections={collections || []} />
+			</div>
+		</div>
 	);
 }

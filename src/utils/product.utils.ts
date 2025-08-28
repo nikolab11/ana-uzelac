@@ -1,8 +1,9 @@
 import { GeAllProductsResponse, Product, ProductFilter } from '@/types/api.types';
+import { SORT_OPTIONS_DATA } from '@/utils/constants';
 
 export function filterProducts(products: Product[], params: Partial<ProductFilter>): Product[] {
 
-	return products.filter(product => {
+	const filtered = products.filter(product => {
 		if (params.price_min && product.price < params.price_min) {
 			return false;
 		}
@@ -15,6 +16,7 @@ export function filterProducts(products: Product[], params: Partial<ProductFilte
 		return !(params.sizes && !params.sizes.some(size => product.sizes.includes(size)));
 
 	});
+	return params.sortOption ? filtered.sort(SORT_OPTIONS_DATA[params.sortOption].comparator) : filtered;
 }
 
 export function calculatePrices(productResponse: GeAllProductsResponse): { min: number, max: number } {
