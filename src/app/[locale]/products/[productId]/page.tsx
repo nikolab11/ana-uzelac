@@ -31,7 +31,7 @@ function InnerPage({ product, collections }: Props) {
 	return (
 		<div className={'w-full overflow-hidden'}>
 			<ProductImages product={product} />
-			<div className={'fixed top-[160px] right-[var(--container-padding)]  opacity-80 shadow-2xl '}>
+			<div className={'fixed top-[144px] right-[var(--container-padding)]  opacity-80 shadow-2xl '}>
 				<ProductInfo locale={locale} product={product} collections={collections || []} />
 			</div>
 		</div>

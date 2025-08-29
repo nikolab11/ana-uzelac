@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { useState } from 'react';
 import { useCartContext } from '@/context/cart/cart.context';
+import { AddedToCartSnackbar } from '@/app/[locale]/products/[productId]/AddedToCartSnackbar';
 
 interface Props {
 	product: Product;
@@ -19,6 +20,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
 	const collection = collections.find(c => c.collection_id === product.collection_id);
 	const [selectedSize, setSelectedSize] = useState('');
 	const [showError, setShowError] = useState(false);
+	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const onSizeSelect = (size: string) => {
 		setSelectedSize(size);
 		setShowError(false);
@@ -30,17 +32,21 @@ export function ProductInfo({ product, locale, collections }: Props) {
 			return;
 		}
 		addItem(product, selectedSize);
+		setOpenSnackbar(true);
+		setSelectedSize('');
 	};
 	const t = useTranslations('shop_page');
 	return (
 		<div className={'py-4 bg-[#FFFCF7E6]'}>
+			<AddedToCartSnackbar product={product} size={selectedSize} open={openSnackbar}
+								 onClose={() => setOpenSnackbar(false)} />
 			<div className={'px-6 py-4 border-white border-b'}>
 				<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
 				<p className={'text-sm font-light'}>{`${product.product_id} ${product.currency}`}</p>
 			</div>
 			{
 				collection && (
-					<div className={'px-6 py-4 border-white border-b flex justify-between gap-[120px] text-sm font-normal'}>
+					<div className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
 						<p>
 							#Collection
 						</p>

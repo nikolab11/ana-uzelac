@@ -26,7 +26,7 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
 	return (
 		<>
 			<div className='h-full relative'>
-				<Image objectFit='cover' src={images.home_page.img_0089} alt={'Image'} fill />
+				<Image objectFit='cover' src={images.home_page.night_sky_2} alt={'Image'} fill />
 				<HeadText title={t('journal_page.the_journal')} buttonLabel={t('about_page.view_more')}
 						  scrollElementId={SCROLL_ELEMENT_ID} />
 			</div>

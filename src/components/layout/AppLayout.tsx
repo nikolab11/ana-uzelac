@@ -24,7 +24,7 @@ export async function AppLayout({
 	return (
 		<div
 			className={`antialiased relative flex flex-col h-screen bg-[#F6F1EB]`}>
-			<Header mode={mode || 'regular'} productsImage={images.home_page.img_1050_copy}
+			<Header mode={mode || 'regular'} productsImage={images.home_page.rooftops_in_paris}
 					collections={collections.collections}
 					additionalContent={headerContent && cloneElement(headerContent, {
 						images,

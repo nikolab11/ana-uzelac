@@ -1,5 +1,6 @@
 import { ImagesResponse } from '@/types/api.types';
 import { useTranslations } from 'next-intl';
+import { ImageList } from '@mui/material';
 
 interface Props {
 	images: ImagesResponse;
@@ -20,36 +21,27 @@ export function DifferentKindOfLuxurySection(props: Props) {
 					<p>{t('a_different_kind_of_luxury_description_1')}</p>
 					<p>{t('a_different_kind_of_luxury_description_2')}</p>
 					<p>{t('a_different_kind_of_luxury_description_3')}</p>
-					<p>{t('a_different_kind_of_luxury_description_4')}</p>
 				</div>
 				<div className={'relative basis-sm  grow'}>
-					<img src={props.images.about_page.img_20200330_162119} alt={t('a_different_kind_of_luxury')}
+					<img src={props.images.about_page.a_different_kind_of_luxury} alt={t('a_different_kind_of_luxury')}
 						 width={'100%'} height={'auto'} />
 				</div>
 
 			</div>
-			<div className={'pt-[80px]'}>
-				<div className={'flex flex-col md:flex-row gap-9 pb-9 justify-between'}>
-					<div>
-						<img src={props.images.about_page.img_20200330_162119} alt={t('a_different_kind_of_luxury')}
-							 width={'100%'} height={'auto'} />
-					</div>
-					<div>
-						<img src={props.images.about_page.img_20200330_162119} alt={t('a_different_kind_of_luxury')}
-							 width={'100%'} height={'auto'} />
-					</div>
-				</div>
-				<div className={'flex flex-col md:flex-row gap-9 justify-between'}>
-					<div>
-						<img src={props.images.about_page.img_20200330_162119} alt={t('a_different_kind_of_luxury')}
-							 width={'100%'} height={'auto'} />
-					</div>
-					<div>
-						<img src={props.images.about_page.img_20200330_162119} alt={t('a_different_kind_of_luxury')}
-							 width={'100%'} height={'auto'} />
-					</div>
-				</div>
-			</div>
+			<ImageList variant={'masonry'} className={'pt-[80px]'} cols={2} gap={8}>
+				<img className={'pt-2'} src={props.images.about_page.about_page_4}
+					 alt={t('a_different_kind_of_luxury')}
+					 loading={'lazy'} />
+				<img className={'pt-2'} src={props.images.about_page.about_page_6}
+					 alt={t('a_different_kind_of_luxury')}
+					 loading={'lazy'} />
+				<img className={'pt-2'} src={props.images.about_page.about_page_5}
+					 alt={t('a_different_kind_of_luxury')}
+					 loading={'lazy'} />
+				<img className={'pt-2'} src={props.images.about_page.ana}
+					 alt={t('a_different_kind_of_luxury')}
+					 loading={'lazy'} />
+			</ImageList>
 		</div>
 	)
 		;

@@ -25,6 +25,7 @@ interface Props {
 export function Header(props: Props) {
 	const t = useTranslations('header');
 	const locale = useLocale() as LocaleType;
+	console.log(props.logo);
 	return (
 		<HeaderWrapper mode={props.mode}>
 			<div className='flex justify-center pb-4'>

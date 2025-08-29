@@ -26,15 +26,16 @@ async function InnerPage({ images, collections }: PageProps) {
 	return (
 		<>
 			<div className='min-h-screen relative'>
-				<Image objectFit='cover' src={images?.home_page.img_0089} alt={'Image'} fill />
+				<Image objectFit='cover' src={images.home_page.header_hp} alt={'Image'} fill />
 				<HeadText />
 			</div>
-			<GrandOpeningSection />
+			<GrandOpeningSection
+				images={[images.home_page.grand_opening_1, images.home_page.grand_opening_2, images.home_page.grand_opening_3]} />
 			<div className={'px-[var(--container-padding)] py-6'}>
 				<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
 			</div>
 			<CollectionsSection collections={collections} />
-			<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
+			<FooterImage img={images.home_page.wearing_the_moment} />
 		</>
 	);
 }

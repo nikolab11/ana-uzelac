@@ -1,12 +1,18 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CountdownTimer } from '@/app/[locale]/home/CountdownTimer';
+import { Button } from '@mui/material';
+import Image from 'next/image';
 
-export function GrandOpeningSection() {
+interface Props {
+	images: string[];
+}
+
+export function GrandOpeningSection(props: Props) {
 	const t = useTranslations('home_page');
 	return (
 		<div
-			className='flex flex-wrap gap-6 items-center justify-between pt-[64px] pb-[64px] px-[var(--container-padding)]'>
+			className='flex gap-8 relative justify-between pt-[64px] pb-[64px] px-[var(--container-padding)]'>
 			<div className={'basis-sm'}>
 				<h3 className={'text-4xl font-bold pb-5 text-[#444444]'}>
 					{t('grand_opening')}
@@ -15,14 +21,30 @@ export function GrandOpeningSection() {
 					{t('grand_opening_description')}
 				</p>
 				<Link href={'/shop'}>
-					<button className={'text-white py-4 px-8 bg-[#DBAC50] cursor-pointer hover:shadow-lg transition'}>
+					<Button variant={'contained'} color={'secondary'}
+							sx={{
+								color: 'white',
+								borderRadius: 0,
+								padding: '16px 32px'
+							}}>
 						{t('pre_order_now')}
-					</button>
+					</Button>
 				</Link>
 				<div className={'pt-6'}>
 					<h3 className='text-[#444444] text-2xl font-semibold'>{t('countdown_to_launch')}</h3>
 					<CountdownTimer labels={t('countdown_labels').split(', ')} />
 				</div>
+			</div>
+			<div className={'grow flex gap-6 overflow-auto'}>
+				{
+					props.images.map(image => {
+						return (
+							<div className={'grow relative'} key={image}>
+								<Image objectFit={'cover'} src={image} width={250} height={300} alt={'Grand opening'} />
+							</div>
+						);
+					})
+				}
 			</div>
 		</div>
 	);

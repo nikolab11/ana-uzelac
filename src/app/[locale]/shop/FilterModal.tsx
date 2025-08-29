@@ -158,19 +158,19 @@ export function FilterModal(props: Props) {
 					<SearchSection title={t('filter_size')}>
 						{PRODUCT_SIZES.map(size => {
 							return (
-								<div key={size.value}>
+								<div key={size}>
 									<FormControlLabel
-										control={<Checkbox checked={currentFilters.sizes.includes(size.value)}
+										control={<Checkbox checked={currentFilters.sizes.includes(size)}
 														   onChange={(event, checked) => {
 															   setCurrentFilters(prev => {
 																   return {
 																	   ...prev,
-																	   sizes: checked ? [...prev.sizes, size.value] : prev.sizes.filter(s => s !== size.value)
+																	   sizes: checked ? [...prev.sizes, size] : prev.sizes.filter(s => s !== size)
 																   };
 															   });
 														   }} />}
 										label={<div
-											className='font-normal text-sm text-[var(--text-color)]'>{size.label}</div>} />
+											className='font-normal text-sm text-[var(--text-color)]'>{size}</div>} />
 								</div>
 							);
 						})}

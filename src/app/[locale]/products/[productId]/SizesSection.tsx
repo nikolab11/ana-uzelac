@@ -48,15 +48,15 @@ export function SizesSection(props: Props) {
 								</div>
 							)
 						}
-						<Grid container spacing={2}>
+						<Grid container spacing={1}>
 							{
 								props.options.map((option) => {
 									return (
-										<Grid sx={{ padding: 0, textAlign: 'center' }} key={option} className={'p-4'}
+										<Grid sx={{ padding: 0, textAlign: 'center' }} key={option}
 											  size={{ md: 6, sm: 12 }}>
 											<div
 												onClick={() => props.onChange(option)}
-												className={'text-sm font-normal border-[var(--foreground)] border py-4 px-6 cursor-pointer hover:shadow-lg transition'}
+												className={'text-sm font-normal border-[var(--foreground)] border py-3 px-4 cursor-pointer hover:shadow-lg transition'}
 												style={{
 													color: props.selected === option ? 'white' : undefined,
 													background: props.selected === option ? '#DBAC50' : undefined,

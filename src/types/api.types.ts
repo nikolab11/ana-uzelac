@@ -1,8 +1,44 @@
 import { SORT_OPTIONS, SortOption } from '@/utils/constants';
 
 export interface ImagesResponse {
-	about_page: Record<string, string>,
-	home_page: Record<string, string>,
+	about_page: {
+		about_page_1: string;
+		about_page_2: string;
+		about_page_3: string;
+		about_page_4: string;
+		about_page_5: string;
+		about_page_6: string;
+		about_page_7: string;
+		about_page_8: string;
+		a_different_kind_of_luxury: string;
+		ana: string;
+		header_about: string;
+		why_it_matters: string;
+	},
+	home_page: {
+		elephants: string;
+		falling_rabbit: string;
+		falling_rabbit_2: string;
+		garden_day_and_night: string;
+		grand_opening_1: string;
+		grand_opening_2: string;
+		grand_opening_3: string;
+		header_hp: string;
+		lioness_2: string;
+		lioness: string;
+		moon_rabbits: string;
+		night_sky_2: string;
+		night_sky: string;
+		prva_slika: string;
+		rooftops_in_paris: string;
+		sky_mountains: string;
+		the_magical_south: string;
+		the_moon_rabbit_collection: string;
+		tropical_grasslands: string;
+		wearing_the_moment: string;
+		wushu_nanquan: string;
+
+	},
 	logo: {
 		logo_png: string
 	}

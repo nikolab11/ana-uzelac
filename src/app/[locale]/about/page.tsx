@@ -29,15 +29,15 @@ function InnerPage({ images }: PageProps) {
 	return (
 		<>
 			<div className='h-full relative'>
-				<Image objectFit='cover' src={images.about_page.img_20230713_wa0047} alt={'Image'} fill />
+				<Image objectFit='cover' src={images.about_page.header_about} alt={'Image'} fill />
 				<HeadText title={t('founder_story')} buttonLabel={t('view_more')} scrollElementId={ABOUT_ELEMENT_ID} />
 			</div>
 			<AboutDescription />
 			<MainImages images={images} />
-			<WhyItMattersSection image={images.about_page.img_20230406_wa0020} />
+			<WhyItMattersSection image={images.about_page.why_it_matters} />
 			<DifferentKindOfLuxurySection images={images} />
-			<ArtThatFindsYouSection image={images.about_page.img_20200330_162119} />
-			<FooterImage img={images.home_page['ksenija_falling_rabbit_ruins_back']} />
+			<ArtThatFindsYouSection image={images.about_page.about_page_8} />
+			<FooterImage img={images.home_page.wearing_the_moment} />
 		</>
 	);
 }
@@ -69,15 +69,15 @@ function MainImages({ images }: { images: ImagesResponse }) {
 		<div
 			className={'px-[var(--container-padding)] h-full py-[64px] flex justify-between gap-6 text-base font-normal text-[#FCF7F1] uppercase'}>
 			<div className={'relative grow'}>
-				<Image objectFit='cover' src={images.about_page.img_20230713_wa0047} alt={t('ana_uzelac')} fill />
+				<Image objectFit='cover' src={images.about_page.about_page_1} alt={t('ana_uzelac')} fill />
 				<HeadText position={'end'}>{t('ana_uzelac')} </HeadText>
 			</div>
 			<div className={'relative grow '}>
-				<Image objectFit='cover' src={images.about_page.img_20230713_wa0047} alt={t('moodboard')} fill />
+				<Image objectFit='cover' src={images.about_page.about_page_2} alt={t('moodboard')} fill />
 				<HeadText position={'end'}>{t('moodboard')}</HeadText>
 			</div>
 			<div className={'relative grow'}>
-				<Image objectFit='cover' src={images.about_page.img_20230713_wa0047} alt={t('work_in_progress')}
+				<Image objectFit='cover' src={images.about_page.about_page_3} alt={t('work_in_progress')}
 					   fill />
 				<HeadText position={'end'}>
 					{t('work_in_progress')}
