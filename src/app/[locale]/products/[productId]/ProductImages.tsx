@@ -1,7 +1,10 @@
 'use client';
 
 import { Product } from '@/types/api.types';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ImageCarousel } from '@/components/common/ImageCarousel';
+import { ProductImagesView } from '@/app/[locale]/products/[productId]/ProductImagesView';
+import { createPortal } from 'react-dom';
 
 interface Props {
 	product: Product;
@@ -17,9 +20,17 @@ export function ProductImages({ product }: Props) {
 		const imageWidth = totalWidth / (product.images.length + 0.8);
 		ref.current.scrollTo({ behavior: 'smooth', left: Math.max(0, imageWidth * (activeIndex - 0.2)) });
 	}, [activeIndex, product.images.length]);
+	const [mounted, setMounted] = useState(false);
 
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) return null;
 	return (
 		<div className={'relative overflow-hidden w-full'}>
+			{createPortal(<ProductImagesView images={product.images} open={open}
+											 onClose={() => setOpen(false)} />, document.body)}
 			<div ref={ref} className={'h-full overflow-hidden w-full'}>
 				<div className={`flex`} style={{
 					width: `${product.images.length * 50 + 40}%`
@@ -35,24 +46,7 @@ export function ProductImages({ product }: Props) {
 
 			</div>
 			<div className={'absolute bottom-[64px] left-[80px]'}>
-				<div className={'relative p-1 bg-white'}>
-					<div className={`flex gap-1`}>
-						{
-							product.images.map((image, index) => (
-								<img key={index} src={image} alt={'Image'} width={`30px`}
-									 height={'auto'}
-									 className={'cursor-pointer pb-1'}
-									 onClick={() => setActiveIndex(index)} />
-							))
-						}
-					</div>
-					<div
-						className={`absolute bottom-[2px] transition-all border-b-[2px] w-[26px] duration-500`} style={{
-						left: `${6 + activeIndex * 34}px`
-					}}>
-
-					</div>
-				</div>
+				<ImageCarousel images={product.images} activeIndex={activeIndex} onChange={setActiveIndex} />
 			</div>
 		</div>
 	);
