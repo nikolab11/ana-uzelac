@@ -85,6 +85,9 @@ h3 {
 
 .collection-menu {
     overflow: hidden;
+    position: absolute;
+    background-color: #fcf7f1;
+    z-index: 1;
     transition: max-height 0.5s linear;
     max-height: 0;
     overflow-x: auto;

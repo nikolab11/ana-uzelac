@@ -11,7 +11,7 @@ export function CollectionsView(props: CollectionViewProps) {
 	const locale = useLocale() as LocaleType;
 	return (
 		<div
-			className={`flex gap-9  items-end py-9 `}>
+			className={`flex gap-9 pl-6 items-end py-9 `}>
 			{
 				props.collections.map((collection) => {
 					const name = collection[`name_${locale}`];

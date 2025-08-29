@@ -28,42 +28,46 @@ export function Header(props: Props) {
 	console.log(props.logo);
 	return (
 		<HeaderWrapper mode={props.mode}>
-			<div className='flex justify-center pb-4'>
-				<Image src={props.logo} alt={'Logo'} width={80} height={55} />
-			</div>
-			<div className='flex justify-between pb-4 overflow-x-auto items-end'>
-				<div className={'flex gap-3 items-center'}>
-					<SearchIcon />
-					<SearchInput placeholder={t('search')} />
+			<div className={'relative'}>
+				<div className='flex justify-center pb-4'>
+					<Image src={props.logo} alt={'Logo'} width={80} height={55} />
 				</div>
-				<div className='flex flex-1 justify-center items-end gap-[32px]'>
-					<Link className={'text-sm app-link'} href={'/home'}>{t('home')}</Link>
-					<Link className={'text-sm app-link'} href={'/shop'}>{t('shop')}</Link>
-					<div className={'text-sm app-link'}>
-						<CollectionMenuItem
-							collections={props.collections} />
+				<div className='flex justify-between pb-4 overflow-x-auto items-end'>
+					<div className={'flex gap-3 items-center'}>
+						<SearchIcon />
+						<SearchInput placeholder={t('search')} />
 					</div>
-					<Link className={'text-sm app-link'} href={'/news'}>{t('news')}</Link>
-					<Link className={'text-sm app-link'} href={'/about'}>{t('about')}</Link>
-				</div>
-				<div className='flex gap-9 justify-end items-center'>
-					<div>
+					<div className='flex flex-1 justify-center items-end gap-[32px]'>
+						<Link className={'text-sm app-link'} href={'/home'}>{t('home')}</Link>
+						<Link className={'text-sm app-link'} href={'/shop'}>{t('shop')}</Link>
+						<div className={'text-sm app-link'}>
+							<CollectionMenuItem
+								collections={props.collections} />
+						</div>
+						<Link className={'text-sm app-link'} href={'/news'}>{t('news')}</Link>
+						<Link className={'text-sm app-link'} href={'/about'}>{t('about')}</Link>
+					</div>
+					<div className='flex gap-9 justify-end items-center'>
+						<div>
+							<div className='flex gap-2 items-center justify-end cursor-pointer'>
+								<GlobeIcon size={5} />
+								<LocalesMenu locale={locale} />
+							</div>
+						</div>
 						<div className='flex gap-2 items-center justify-end cursor-pointer'>
-							<GlobeIcon size={5} />
-							<LocalesMenu locale={locale} />
+							<ShoppingBag size={5} />
+							<span className={'text-sm'}>{t('cart')}</span>
 						</div>
 					</div>
-					<div className='flex gap-2 items-center justify-end cursor-pointer'>
-						<ShoppingBag size={5} />
-						<span className={'text-sm'}>{t('cart')}</span>
-					</div>
-				</div>
 
+				</div>
+				<CollectionViewContainer>
+					<CollectionsView collections={props.collections} image={props.productsImage} />
+				</CollectionViewContainer>
 			</div>
 			{props.additionalContent}
-			<CollectionViewContainer>
-				<CollectionsView collections={props.collections} image={props.productsImage} />
-			</CollectionViewContainer>
+
+
 		</HeaderWrapper>
 	);
 }

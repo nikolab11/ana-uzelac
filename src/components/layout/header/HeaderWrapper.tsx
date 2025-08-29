@@ -10,7 +10,7 @@ interface Props {
 	mode: HeaderMode;
 }
 
-const baseClassName = 'px-[var(--container-padding)] bg-[#FCF7F1] z-1 w-full hover:opacity-100 transition-all';
+const baseClassName = 'px-[var(--container-padding)] bg-[#FCF7F1] z-1000 w-full hover:opacity-100 transition-all';
 
 export function HeaderWrapper(props: Props) {
 	const [scrolled, setScrolled] = useState(false);
@@ -25,7 +25,6 @@ export function HeaderWrapper(props: Props) {
 				return;
 			}
 			const scrollTop = element.scrollTop;
-			console.log(scrollTop);
 			setScrolled(scrollTop > 0);
 
 		};
