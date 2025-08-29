@@ -144,6 +144,7 @@ export function parseFilters(rawFilters: Partial<ProductFilterRaw>): Partial<Pro
 			[...new Set(rawFilters.collection_ids.map(val => Number(val)))]
 			: [Number(rawFilters.collection_ids)];
 	}
+	console.log(rawFilters.sortOption);
 	if (rawFilters.sortOption && SORT_OPTIONS.includes(rawFilters.sortOption as SortOption)) {
 		result.sortOption = rawFilters.sortOption as SortOption;
 	}

@@ -15,8 +15,9 @@ export default async function ShopPage(props: { searchParams: Promise<Partial<Pr
 	const params = parseFilters(await props.searchParams);
 	const productsResponse = await fetchAllProducts();
 	const usedFilters = (params.sizes?.length || 0) + (params.collection_ids?.length || 0);
-	const products = usedFilters > 0 ? filterProducts([...productsResponse.products.collection_products, ...productsResponse.products.original_products], params) : productsResponse.products.collection_products;
-	const additionalProducts = usedFilters > 0 ? [] : productsResponse.products.original_products;
+	const totalParams = Object.keys(params).length;
+	const products = totalParams > 0 ? filterProducts([...productsResponse.products.collection_products, ...productsResponse.products.original_products], params) : productsResponse.products.collection_products;
+	const additionalProducts = totalParams > 0 ? [] : productsResponse.products.original_products;
 	const prices = calculatePrices(productsResponse);
 	return (
 		<div>

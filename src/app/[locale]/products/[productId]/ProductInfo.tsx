@@ -33,45 +33,47 @@ export function ProductInfo({ product, locale, collections }: Props) {
 		}
 		addItem(product, selectedSize);
 		setOpenSnackbar(true);
-		setSelectedSize('');
 	};
 	const t = useTranslations('shop_page');
 	return (
-		<div className={'py-4 bg-[#FFFCF7E6]'}>
+		<div>
 			<AddedToCartSnackbar product={product} size={selectedSize} open={openSnackbar}
 								 onClose={() => setOpenSnackbar(false)} />
-			<div className={'px-6 py-4 border-white border-b'}>
-				<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
-				<p className={'text-sm font-light'}>{`${product.product_id} ${product.currency}`}</p>
-			</div>
-			{
-				collection && (
-					<div className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
-						<p>
-							#Collection
-						</p>
-						<p>
-							{collection[`name_${locale}`]}
-						</p>
-					</div>
-				)
-			}
-			<SizesSection error={showError ? '#Please choose a size' : undefined} selected={selectedSize}
-						  onChange={onSizeSelect}
-						  options={product.sizes} />
-			<div className={'px-6 py-4 border-white border-b'}>
-				<Button className={'w-full'}
-						sx={{
-							borderRadius: 0
-						}}
-						onClick={onSubmit}
-						startIcon={<ShoppingBag stroke={'white'} size={4} />}
-						color={'primary'} variant={'contained'}>{t('add_to_cart')}</Button>
-			</div>
-			<div className={'px-6 py-4'}>
-				<div dangerouslySetInnerHTML={{
-					__html: product[`description_${locale}`]
-				}} />
+			<div className={'py-4 bg-[#FFFCF7E6] opacity-80 '}>
+				<div className={'px-6 py-4 border-white border-b'}>
+					<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
+					<p className={'text-sm font-light'}>{`${product.product_id} ${product.currency}`}</p>
+				</div>
+				{
+					collection && (
+						<div
+							className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
+							<p>
+								#Collection
+							</p>
+							<p>
+								{collection[`name_${locale}`]}
+							</p>
+						</div>
+					)
+				}
+				<SizesSection error={showError ? '#Please choose a size' : undefined} selected={selectedSize}
+							  onChange={onSizeSelect}
+							  options={product.sizes} />
+				<div className={'px-6 py-4 border-white border-b'}>
+					<Button className={'w-full'}
+							sx={{
+								borderRadius: 0
+							}}
+							onClick={onSubmit}
+							startIcon={<ShoppingBag stroke={'white'} size={4} />}
+							color={'primary'} variant={'contained'}>{t('add_to_cart')}</Button>
+				</div>
+				<div className={'px-6 py-4'}>
+					<div dangerouslySetInnerHTML={{
+						__html: product[`description_${locale}`]
+					}} />
+				</div>
 			</div>
 		</div>
 	);
