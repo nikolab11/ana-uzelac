@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { HeaderMode, HeaderWrapper } from '@/components/layout/header/HeaderWrapper';
 import { Collection } from '@/types/api.types';
 import { CollectionMenuItem } from '@/components/layout/header/CollectionsMenuItem';
-import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { GlobeIcon } from '@/components/icons/GlobeIcon';
 import { LocalesMenu } from '@/components/layout/header/LocalesMenu';
 import { CollectionViewContainer } from '@/components/layout/header/CollectionViewContainer';
@@ -13,6 +12,7 @@ import { LocaleType } from '@/types/routing';
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import { SearchInput } from '@/components/layout/header/SearchInput';
 import { ReactNode } from 'react';
+import { CartButton } from '@/components/layout/header/CartButton';
 
 interface Props {
 	logo: string;
@@ -25,7 +25,6 @@ interface Props {
 export function Header(props: Props) {
 	const t = useTranslations('header');
 	const locale = useLocale() as LocaleType;
-	console.log(props.logo);
 	return (
 		<HeaderWrapper mode={props.mode}>
 			<div className={'relative'}>
@@ -54,10 +53,7 @@ export function Header(props: Props) {
 								<LocalesMenu locale={locale} />
 							</div>
 						</div>
-						<div className='flex gap-2 items-center justify-end cursor-pointer'>
-							<ShoppingBag size={5} />
-							<span className={'text-sm'}>{t('cart')}</span>
-						</div>
+						<CartButton label={t('cart')} />
 					</div>
 
 				</div>

@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { ImageCarousel } from '@/components/common/ImageCarousel';
 import { XIcon } from '@/components/icons/XIcon';
 import { IconButton } from '@mui/material';
+import Image from 'next/image';
 
 interface Props {
 	images: string[];
@@ -58,8 +59,8 @@ export function ProductImagesView(props: Props) {
 					props.images.map((image, index) => {
 						return (
 							<div key={index} className={'w-screen px-9'}>
-								<img src={image} width={`100%`} height={'auto'}
-									 key={image}
+								<Image src={image} width={600} height={700} alt={'asfas'}
+									   key={image}
 
 								/>
 							</div>
