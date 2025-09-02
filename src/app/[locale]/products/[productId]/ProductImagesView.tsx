@@ -44,7 +44,7 @@ export function ProductImagesView(props: Props) {
 			 }}
 		>
 			<div
-				className={'fixed top-[60px] bg-white p-2 right-[80px] rounded-full'}>
+				className={'fixed top-[60px] z-1 bg-white p-2 right-[80px] rounded-full'}>
 				<IconButton onClick={props.onClose}>
 					<XIcon strokeWidth={1} size={3} />
 				</IconButton>

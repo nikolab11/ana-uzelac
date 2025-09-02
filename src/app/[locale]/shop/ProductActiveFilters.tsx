@@ -44,6 +44,19 @@ export function ProductActiveFilters({ params, collections, locale }: Props) {
 				)
 			}
 			{
+				params.search && (
+					<FilterItem content={params.search} onDelete={() => {
+
+						updateParams(prev => {
+							return {
+								...prev,
+								search: undefined
+							};
+						});
+					}} />
+				)
+			}
+			{
 				params.collection_ids?.map(collectionId => {
 					const collection = collections.find((collection) => collection.collection_id === collectionId);
 					if (!collection) {

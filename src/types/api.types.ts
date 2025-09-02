@@ -128,6 +128,7 @@ export interface ProductFilter {
 	price_max: number;
 	sizes: string[];
 	collection_ids: number[];
+	search: string;
 	sortOption: SortOption;
 }
 
@@ -135,6 +136,7 @@ export interface ProductFilterRaw {
 	price_min: string;
 	price_max: string;
 	sizes: string[] | string;
+	search: string;
 	collection_ids: string[] | string;
 	sortOption: string;
 }
@@ -157,7 +159,9 @@ export function parseFilters(rawFilters: Partial<ProductFilterRaw>): Partial<Pro
 			[...new Set(rawFilters.collection_ids.map(val => Number(val)))]
 			: [Number(rawFilters.collection_ids)];
 	}
-	console.log(rawFilters.sortOption);
+	if (rawFilters.search) {
+		result.search = rawFilters.search;
+	}
 	if (rawFilters.sortOption && SORT_OPTIONS.includes(rawFilters.sortOption as SortOption)) {
 		result.sortOption = rawFilters.sortOption as SortOption;
 	}

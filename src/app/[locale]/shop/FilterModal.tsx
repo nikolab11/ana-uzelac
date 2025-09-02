@@ -148,7 +148,7 @@ export function FilterModal(props: Props) {
 											}}
 										/>}
 														  label={<div
-															  className='font-normal text-sm text-[var(--text-color)]'>{`${collection[`name_${locale}`]} (${collection.products.length})`}</div>}
+															  className='font-normal text-sm text-[var(--text-color)]'>{`${collection.title[locale]} (${collection.products.length})`}</div>}
 										/>
 									</div>
 								);
