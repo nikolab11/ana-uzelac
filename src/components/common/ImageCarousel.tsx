@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface Props {
 	images: string[];
 	activeIndex: number;
@@ -10,10 +12,18 @@ export function ImageCarousel(props: Props) {
 			<div className={`flex gap-1`}>
 				{
 					props.images.map((image, index) => (
-						<img key={index} src={image} alt={'Image'} width={`30px`}
-							 height={'auto'}
-							 className={'cursor-pointer pb-1'}
-							 onClick={() => props.onChange(index)} />
+						<div key={index} style={{
+							width: '30px',
+							height: '40px',
+							position: 'relative'
+						}}>
+							<Image src={image} alt={'Image'} fill
+								   style={{
+									   objectFit: 'cover'
+								   }}
+								   className={'cursor-pointer pb-1'}
+								   onClick={() => props.onChange(index)} />
+						</div>
 					))
 				}
 			</div>

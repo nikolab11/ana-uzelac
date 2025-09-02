@@ -5,6 +5,7 @@ import { fetchAllCollections } from '@/api/products';
 import { cloneElement, CSSProperties, ReactElement } from 'react';
 import { HeaderMode } from '@/components/layout/header/HeaderWrapper';
 import { PageProps } from '@/types/pages.types';
+import { notFound } from 'next/navigation';
 
 const containerStyle: CSSProperties = {
 	msOverflowStyle: 'none',
@@ -21,6 +22,9 @@ export async function AppLayout({
 	headerContent?: ReactElement<PageProps>;
 }>) {
 	const [images, collections] = await Promise.all([fetchImages(), fetchAllCollections()]);
+	if (!collections || !images) {
+		return notFound();
+	}
 	return (
 		<div
 			className={`antialiased relative flex flex-col h-screen bg-[#F6F1EB]`}>

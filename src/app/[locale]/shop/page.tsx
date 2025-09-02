@@ -10,10 +10,14 @@ import { LocaleType } from '@/types/routing';
 import { calculatePrices, filterProducts } from '@/utils/product.utils';
 import { ShopHeader } from '@/app/[locale]/shop/ShopHeader';
 import { Grid } from '@mui/material';
+import { notFound } from 'next/navigation';
 
 export default async function ShopPage(props: { searchParams: Promise<Partial<ProductFilterRaw>> }) {
 	const params = parseFilters(await props.searchParams);
 	const productsResponse = await fetchAllProducts();
+	if (!productsResponse) {
+		return notFound();
+	}
 	const usedFilters = (params.sizes?.length || 0) + (params.collection_ids?.length || 0);
 	const totalParams = Object.keys(params).length;
 	const products = totalParams > 0 ? filterProducts([...productsResponse.products.collection_products, ...productsResponse.products.original_products], params) : productsResponse.products.collection_products;

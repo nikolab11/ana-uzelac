@@ -20,13 +20,15 @@ export default async function Home() {
 
 async function InnerPage({ images, collections }: PageProps) {
 	const products = await fetchAllProducts();
-	if (!images || !collections) {
+	if (!images || !collections || !products) {
 		throw new Error('Missing images and collections');
 	}
 	return (
 		<>
 			<div className='min-h-screen relative'>
-				<Image objectFit='cover' src={images.home_page.header_hp} alt={'Image'} fill />
+				<Image style={{
+					objectFit: 'cover'
+				}} src={images.home_page.header_hp} alt={'Image'} fill />
 				<HeadText />
 			</div>
 			<GrandOpeningSection

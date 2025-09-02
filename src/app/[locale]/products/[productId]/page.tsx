@@ -5,6 +5,7 @@ import { Collection, Product } from '@/types/api.types';
 import { ProductInfo } from '@/app/[locale]/products/[productId]/ProductInfo';
 import { useLocale } from 'next-intl';
 import { LocaleType } from '@/types/routing';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	productId: string;
@@ -13,7 +14,9 @@ interface Params {
 export default async function ProductShowPage(props: { params: Promise<Params> }) {
 	const { productId } = await props.params;
 	const product = await fetchSingleProduct(Number(productId));
-
+	if (!product) {
+		return notFound();
+	}
 	return (
 		<AppLayout mode='regular'>
 			<InnerPage product={product} />
@@ -29,7 +32,7 @@ interface Props {
 function InnerPage({ product, collections }: Props) {
 	const locale = useLocale() as LocaleType;
 	return (
-		<div className={'w-full overflow-hidden'}>
+		<div className={'w-full overflow-hidden h-full'}>
 			<ProductImages product={product} />
 			<div className={'fixed top-[144px] z-1200 right-[var(--container-padding)] shadow-2xl '}>
 				<ProductInfo locale={locale} product={product} collections={collections || []} />

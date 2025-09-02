@@ -4,6 +4,7 @@ import { Product } from '@/types/api.types';
 import { useState } from 'react';
 import { ChevronLeft } from '@/components/icons/ChevronLeft';
 import { ChevronRight } from '@/components/icons/ChevronRight';
+import Image from 'next/image';
 
 interface Props {
 	product: Product;
@@ -15,7 +16,15 @@ export function ProductItemImages(props: Props) {
 	const [activeIndex, setActiveIndex] = useState(0);
 	return (
 		<div className='relative transition-all'>
-			<img width={'100%'} height={'auto'} src={props.product.images[activeIndex]} alt={props.product.name_eng} />
+			<div className={'relative'} style={{
+				width: '100%',
+				height: '500px'
+			}}>
+				<Image fill style={{
+					objectFit:'cover'
+				}}  src={props.product.images[activeIndex]}
+					   alt={props.product.name_eng} />
+			</div>
 			<div className='group z-2 top-[0] absolute flex items-center justify-between h-full w-full p-4'>
 				<div>
 					{activeIndex > 0 && (

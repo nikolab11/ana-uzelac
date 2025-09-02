@@ -1,3 +1,4 @@
+'use client';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { ImageCarousel } from '@/components/common/ImageCarousel';
 import { XIcon } from '@/components/icons/XIcon';
@@ -17,7 +18,6 @@ export function ProductImagesView(props: Props) {
 	const ref = useRef<HTMLImageElement>(null);
 	const [zoom, setZoom] = useState(3);
 	useLayoutEffect(() => {
-		console.log(active);
 		if (!props.open || !ref.current) {
 			return;
 		}
@@ -35,15 +35,12 @@ export function ProductImagesView(props: Props) {
 	}
 
 	return (
-		<div ref={ref} className={'fixed flex z-1001 bg-black'}
+		<div ref={ref} className={'fixed flex z-1201 bg-black'}
 			 style={{
 				 width: `100vw`,
 				 height: '100vh',
 				 top: 0,
-				 overflow: 'auto',
-				 overflowX: 'hidden',
-				 msOverflowStyle: 'none',
-				 scrollbarWidth: 'none'
+				 overflow: 'hidden'
 			 }}
 		>
 			<div
@@ -53,16 +50,17 @@ export function ProductImagesView(props: Props) {
 				</IconButton>
 			</div>
 			<div className={'flex'} style={{
-				width: `${100 * props.images.length}%`
+				width: `${100 * props.images.length}%`,
+				height: '100%',
+				position: 'relative'
 			}}>
 				{
 					props.images.map((image, index) => {
 						return (
-							<div key={index} className={'w-screen px-9'}>
-								<Image src={image} width={600} height={700} alt={'asfas'}
-									   key={image}
-
-								/>
+							<div key={index} className={'w-screen h-full relative px-9'}>
+								<Image src={image} fill style={{
+									objectFit: 'contain'
+								}} alt={'asfas'} />
 							</div>
 						);
 					})

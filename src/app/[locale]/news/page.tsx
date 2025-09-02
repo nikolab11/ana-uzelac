@@ -11,7 +11,7 @@ export default async function NewsPage() {
 	const news = await fetchNews();
 	return (
 		<AppLayout>
-			<InnerPage news={news.news} />
+			<InnerPage news={news?.news || []} />
 		</AppLayout>
 	);
 }
@@ -26,7 +26,9 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
 	return (
 		<>
 			<div className='h-full relative'>
-				<Image objectFit='cover' src={images.home_page.night_sky_2} alt={'Image'} fill />
+				<Image style={{
+					objectFit: 'cover'
+				}} src={images.home_page.night_sky_2} alt={'Image'} fill />
 				<HeadText title={t('journal_page.the_journal')} buttonLabel={t('about_page.view_more')}
 						  scrollElementId={SCROLL_ELEMENT_ID} />
 			</div>

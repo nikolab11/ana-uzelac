@@ -40,7 +40,9 @@ export function GrandOpeningSection(props: Props) {
 					props.images.map(image => {
 						return (
 							<div className={'grow relative'} key={image}>
-								<Image objectFit={'cover'} src={image} width={250} height={300} alt={'Grand opening'} />
+								<Image style={{
+									objectFit:'cover'
+								}}  src={image} width={250} height={300} alt={'Grand opening'} />
 							</div>
 						);
 					})

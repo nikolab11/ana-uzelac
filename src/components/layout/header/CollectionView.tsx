@@ -1,6 +1,8 @@
 import { Collection } from '@/types/api.types';
 import { useLocale } from 'next-intl';
 import { LocaleType } from '@/types/routing';
+import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 interface CollectionViewProps {
 	collections: Collection[];
@@ -14,28 +16,29 @@ export function CollectionsView(props: CollectionViewProps) {
 			className={`flex gap-9 pl-6 items-end py-9 `}>
 			{
 				props.collections.map((collection) => {
-					const name = collection[`name_${locale}`];
+					const name = collection.title[locale];
 					return (
-						<div className={'basis-[20%]'} key={collection.collection_id}>
-							<div className={'font-medium text-xs uppercase pb-2'}>
-								#Collection
+						<Link key={collection.collection_id} href={{
+							pathname: '/collections/[collectionId]',
+							params: {
+								collectionId: collection.collection_id
+							}
+						}}>
+							<div className={'basis-[20%]'}>
+								<div className={'font-medium text-xs uppercase pb-2'}>
+									#Collection
+								</div>
+								<div className={'font-bold text-xs uppercase pb-2'}>
+									{name}
+								</div>
+								<div className={'relative'}>
+									<Image src={collection.images[0]} alt={name} width={300} height={500} />
+								</div>
 							</div>
-							<div className={'font-bold text-xs uppercase pb-2'}>
-								{name}
-							</div>
-							<div>
-								<img src={collection.images[0]} alt={name} width={'100%'} height={'auto'} />
-							</div>
-						</div>
+						</Link>
 					);
 				})
 			}
-			<div className={'basis-[20%]'}>
-				<div className={'font-bold text-xs uppercase pb-2'}>ORIGINAL PIECES</div>
-				<div>
-					<img src={props.image} alt={'Original pieces'} width={'100%'} height={'auto'} />
-				</div>
-			</div>
 		</div>
 	);
 }

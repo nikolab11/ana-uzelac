@@ -31,13 +31,16 @@ function CollectionItem(props: { collection: Collection }) {
 	return (
 		<div>
 			<div key={props.collection.collection_id} className='relative h-[70vh]'>
-				<Image fill src={props.collection.images[0]} alt={name} objectFit='cover' />
-				<div className='absolute w-full h-full flex justify-center gap-5 flex-col pl-[98px]'>
+				<Image fill src={props.collection.images[0]} alt={name} style={{
+					objectFit: 'cover'
+				}} />
+				<div
+					className='absolute w-full h-full flex justify-center gap-5 flex-col px-[var(--container-padding)]'>
 					<h3 className={'text-white font-bold text-7xl'}>
 						{name}
 					</h3>
 					<div className={'text-white text-base'}>
-						{props.collection.description[locale]}
+						{props.collection.subtitle[locale]}
 					</div>
 					<Link href={{
 						pathname: '/collections/[collectionId]',

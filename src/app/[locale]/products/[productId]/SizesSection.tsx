@@ -14,10 +14,13 @@ interface Props {
 
 export function SizesSection(props: Props) {
 	const t = useTranslations('shop_page');
+
 	return (
 		<div className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
 			<Accordion
 				defaultExpanded
+				// @ts-ignore
+				square={+false}
 				disableGutters
 				className={'w-full'}
 				slots={{

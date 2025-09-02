@@ -50,7 +50,7 @@ export function ProductActiveFilters({ params, collections, locale }: Props) {
 						return null;
 					}
 					return (
-						<FilterItem content={collection[`name_${locale}`]} key={collectionId} onDelete={() => {
+						<FilterItem content={collection.title[locale]} key={collectionId} onDelete={() => {
 							updateParams(prev => {
 								return {
 									...prev,
