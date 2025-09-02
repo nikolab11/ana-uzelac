@@ -1,6 +1,6 @@
 'use client';
 
-import { Collection, Product } from '@/types/api.types';
+import { Collection, Product, ProductOption } from '@/types/api.types';
 import { LocaleType } from '@/types/routing';
 import { SizesSection } from '@/app/[locale]/products/[productId]/SizesSection';
 import { Button } from '@mui/material';
@@ -18,31 +18,32 @@ interface Props {
 
 export function ProductInfo({ product, locale, collections }: Props) {
 	const collection = collections.find(c => c.collection_id === product.collection_id);
-	const [selectedSize, setSelectedSize] = useState('');
+	const [selectedOption, setSelectedOption] = useState<ProductOption | undefined>(undefined);
 	const [showError, setShowError] = useState(false);
 	const [openSnackbar, setOpenSnackbar] = useState(false);
-	const onSizeSelect = (size: string) => {
-		setSelectedSize(size);
+	const onOptionSelect = (opt: ProductOption) => {
+		setSelectedOption(opt);
 		setShowError(false);
 	};
 	const { addItem } = useCartContext();
 	const onSubmit = () => {
-		if (!selectedSize) {
+		if (!selectedOption) {
 			setShowError(true);
 			return;
 		}
-		addItem(product, selectedSize);
+		addItem(product, selectedOption);
 		setOpenSnackbar(true);
 	};
 	const t = useTranslations('shop_page');
 	return (
 		<div>
-			<AddedToCartSnackbar product={product} size={selectedSize} open={openSnackbar}
+			<AddedToCartSnackbar product={product} option={selectedOption} open={openSnackbar}
 								 onClose={() => setOpenSnackbar(false)} />
 			<div className={'py-4 bg-[#FFFCF7E6] opacity-80'}>
 				<div className={'px-6 py-4 border-white border-b'}>
 					<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
-					<p className={'text-sm font-light'}>{`${product.product_id} ${product.currency}`}</p>
+					{selectedOption &&
+						<p className={'text-sm font-light'}>{`${selectedOption.price} ${product.currency}`}</p>}
 				</div>
 				{
 					collection && (
@@ -52,14 +53,14 @@ export function ProductInfo({ product, locale, collections }: Props) {
 								#Collection
 							</p>
 							<p>
-								{collection[`name_${locale}`]}
+								{collection.title[locale]}
 							</p>
 						</div>
 					)
 				}
-				<SizesSection error={showError ? '#Please choose a size' : undefined} selected={selectedSize}
-							  onChange={onSizeSelect}
-							  options={product.sizes} />
+				<SizesSection error={showError ? '#Please choose a size' : undefined} selected={selectedOption}
+							  onChange={onOptionSelect}
+							  options={product.options} />
 				<div className={'px-6 py-4 border-white border-b'}>
 					<Button className={'w-full'}
 							sx={{

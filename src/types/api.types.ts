@@ -88,17 +88,21 @@ export interface Collection {
 	sections: CollectionSection[];
 }
 
+export interface ProductOption {
+	size: string;
+	price: number;
+}
+
 export interface Product {
 	product_id: number;
 	name_eng: string;
 	name_fr: string;
-	price: number;
 	currency: string;
 	collection_id?: number;
 	description_eng: string;
 	description_fr: string;
-	sizes: string[],
-	images: string[]
+	options: ProductOption[];
+	images: string[];
 }
 
 export interface GeAllProductsResponse {

@@ -8,10 +8,10 @@ interface Props {
 }
 
 export function CartButton(props: Props) {
-	const { items } = useCartContext();
+	const { items, onOpenChange } = useCartContext();
 	const count = Object.keys(items).length;
 	return (
-		<div className='flex gap-2 items-center justify-end cursor-pointer'>
+		<div onClick={() => onOpenChange(true)} className='flex gap-2 items-center justify-end cursor-pointer'>
 			<div className={'relative'}>
 				<ShoppingBag size={5} />
 				{

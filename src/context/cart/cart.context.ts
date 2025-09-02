@@ -1,14 +1,16 @@
 'use client';
 import { createContext, useContext } from 'react';
-import { Product } from '@/types/api.types';
+import { Product, ProductOption } from '@/types/api.types';
 
-export type CartItems = Record<number, Record<string, { product: Product, count: number }>>
+export type CartItems = Record<number, Record<string, { product: Product, count: number, option: ProductOption }>>
 
 interface CartContextType {
 	items: CartItems;
-	addItem: (item: Product, size: string) => void;
-	updateItem: (item: Product, size: string, count: number) => void;
-	removeItem: (item: Product, size: string) => void;
+	addItem: (item: Product, option: ProductOption) => void;
+	updateItem: (item: Product, option: ProductOption, count: number) => void;
+	removeItem: (item: Product, option: ProductOption) => void;
+	open: boolean;
+	onOpenChange: (val: boolean) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);

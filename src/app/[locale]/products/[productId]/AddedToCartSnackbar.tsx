@@ -1,4 +1,4 @@
-import { Product } from '@/types/api.types';
+import { Product, ProductOption } from '@/types/api.types';
 import { Button, Snackbar } from '@mui/material';
 import { XIcon } from '@/components/icons/XIcon';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import { LocaleType } from '@/types/routing';
 
 interface Props {
 	product: Product;
-	size: string;
+	option?: ProductOption;
 	open: boolean;
 	onClose: () => void;
 }
@@ -38,7 +38,7 @@ export function AddedToCartSnackbar(props: Props) {
 					<div>
 						<h4 className={'font-semibold text-sm pb-2'}>{props.product[`name_${locale}`]}</h4>
 						<p className={'text-sm font-light'}>
-							{`${t('size')}: ${props.size}`}
+							{`${t('size')}: ${props.option?.size}`}
 						</p>
 					</div>
 				</div>

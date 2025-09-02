@@ -4,11 +4,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid } from '@mui/materi
 import { ArrowDropdown } from '@/components/icons/ArrowDropdown';
 import { useTranslations } from 'next-intl';
 import { AlertIcon } from '@/components/icons/AlertIcon';
+import { ProductOption } from '@/types/api.types';
 
 interface Props {
-	options: string[];
-	selected: string;
-	onChange: (val: string) => void;
+	options: ProductOption[];
+	selected?: ProductOption;
+	onChange: (val: ProductOption) => void;
 	error?: string;
 }
 
@@ -19,7 +20,7 @@ export function SizesSection(props: Props) {
 		<div className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
 			<Accordion
 				defaultExpanded
-				// @ts-ignore
+				// @ts-expect-error safasfsafssafasfasf
 				square={+false}
 				disableGutters
 				className={'w-full'}
@@ -55,7 +56,7 @@ export function SizesSection(props: Props) {
 							{
 								props.options.map((option) => {
 									return (
-										<Grid sx={{ padding: 0, textAlign: 'center' }} key={option}
+										<Grid sx={{ padding: 0, textAlign: 'center' }} key={option.size}
 											  size={{ md: 6, sm: 12 }}>
 											<div
 												onClick={() => props.onChange(option)}
@@ -66,7 +67,7 @@ export function SizesSection(props: Props) {
 													borderColor: props.selected === option ? '#DBAC50' : undefined
 												}}
 											>
-												{option}
+												{option.size}
 											</div>
 										</Grid>
 									);

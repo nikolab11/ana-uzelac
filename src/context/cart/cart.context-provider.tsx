@@ -1,7 +1,8 @@
 'use client';
 import { ReactNode, useCallback, useState } from 'react';
 import { CartContext, CartItems } from '@/context/cart/cart.context';
-import { Product } from '@/types/api.types';
+import { Product, ProductOption } from '@/types/api.types';
+import { CartMain } from '@/components/cart/CartMain';
 
 interface Props {
 	children: ReactNode;
@@ -9,23 +10,23 @@ interface Props {
 
 export function CartContextProvider(props: Props) {
 	const [items, setItems] = useState<CartItems>({});
-
-	const addItem = useCallback((product: Product, size: string) => {
+	const [open, setOpen] = useState(false);
+	const addItem = useCallback((product: Product, option: ProductOption) => {
 		setItems(prev => {
 			const newState = { ...prev };
 			if (!newState[product.product_id]) {
 				newState[product.product_id] = {};
 			}
-			const currentCount = newState[product.product_id][size]?.count || 0;
+			const currentCount = newState[product.product_id][option.size]?.count || 0;
 			newState[product.product_id] = {
 				...newState[product.product_id],
-				[size]: { product, count: currentCount + 1 }
+				[option.size]: { product, count: currentCount + 1, option }
 			};
 			return newState;
 		});
 	}, []);
 
-	const updateItem = useCallback((product: Product, size: string, count: number) => {
+	const updateItem = useCallback((product: Product, option: ProductOption, count: number) => {
 		setItems(prev => {
 			const newState = { ...prev };
 			if (!newState[product.product_id]) {
@@ -33,19 +34,19 @@ export function CartContextProvider(props: Props) {
 			}
 			newState[product.product_id] = {
 				...newState[product.product_id],
-				[size]: { product, count }
+				[option.size]: { product, count, option }
 			};
 			return newState;
 		});
 	}, []);
-	const removeItem = useCallback((product: Product, size: string) => {
+	const removeItem = useCallback((product: Product, option: ProductOption) => {
 		setItems(prev => {
-			if (!prev[product.product_id]?.[size]) {
+			if (!prev[product.product_id]?.[option.size]) {
 				return prev;
 			}
 			const newState = { ...prev };
 			newState[product.product_id] = Object.fromEntries(Object.entries(newState[product.product_id])
-				.filter(([key]) => key !== size));
+				.filter(([key]) => key !== option.size));
 			return newState;
 		});
 	}, []);
@@ -54,9 +55,12 @@ export function CartContextProvider(props: Props) {
 			items,
 			addItem,
 			updateItem,
-			removeItem
+			removeItem,
+			open,
+			onOpenChange: setOpen
 		}}>
 			{props.children}
+			<CartMain />
 		</CartContext.Provider>
 	);
 }

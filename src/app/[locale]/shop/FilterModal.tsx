@@ -45,6 +45,7 @@ const initalFilters: ProductFilter = {
 	collection_ids: [],
 	price_min: 0,
 	price_max: 0,
+	search: '',
 	sortOption: 'relevance'
 };
 

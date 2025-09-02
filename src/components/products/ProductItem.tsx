@@ -4,6 +4,8 @@ import { Link } from '@/i18n/navigation';
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { ProductItemImages } from '@/components/products/ProductItemImages';
 import { LocaleType } from '@/types/routing';
+import { IconButton } from '@mui/material';
+import { getMinProductPrice } from '@/utils/product.utils';
 
 interface Props {
 	product: Product;
@@ -22,7 +24,7 @@ export function ProductItem(props: Props) {
 						{name}
 					</div>
 					<div className={'pb-2  text-sm font-light'}>
-						{`${props.product.price}${props.product.currency}`}
+						{`${getMinProductPrice(props.product)}${props.product.currency}`}
 					</div>
 				</div>
 				<div>
@@ -30,8 +32,10 @@ export function ProductItem(props: Props) {
 						pathname: '/products/[productId]',
 						params: { productId: props.product.product_id }
 					}}>
-						<div className={`border ${props.dark ? 'border-white' : 'border-[#444444]'} p-2 rounded-full`}>
-							<ShoppingBag stroke={props.dark ? 'white' : '#444444'} />
+						<div className={`border ${props.dark ? 'border-white' : 'border-[#444444]'} rounded-full`}>
+							<IconButton>
+								<ShoppingBag stroke={props.dark ? 'white' : '#444444'} />
+							</IconButton>
 						</div>
 					</Link>
 				</div>
