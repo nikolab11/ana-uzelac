@@ -24,7 +24,7 @@ export function CollectionsView(props: CollectionViewProps) {
 								{name}
 							</div>
 							<div>
-								<img src={collection.images.smisleno_ime_1} alt={name} width={'100%'} height={'auto'} />
+								<img src={collection.images[0]} alt={name} width={'100%'} height={'auto'} />
 							</div>
 						</div>
 					);

@@ -66,13 +66,26 @@ export interface CollectionResponse {
 	collections: Collection[];
 }
 
+export type TranslatedText = Record<'eng' | 'fr', string>;
+
+export interface CollectionSection {
+	title: TranslatedText;
+	description: TranslatedText;
+	content: TranslatedText;
+	contentTitle: TranslatedText;
+	mainImages: string[];
+	sideImages: string[];
+
+}
+
 export interface Collection {
 	collection_id: number;
-	name_eng: string;
-	name_fr: string;
-	images: Record<string, string>,
-	description: string;
+	title: TranslatedText;
+	subtitle: TranslatedText;
+	images: string[],
+	description: TranslatedText;
 	products: Product[];
+	sections: CollectionSection[];
 }
 
 export interface Product {

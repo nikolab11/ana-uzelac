@@ -27,7 +27,7 @@ export function Footer(props: Props) {
 					}, ...props.collections.map(item => {
 						return {
 							type: 'dynamic',
-							name: item[`name_${locale}`],
+							name: item.title[locale],
 							path: '/collections/[collectionId]',
 							params: { collectionId: item.collection_id }
 						} as const;
