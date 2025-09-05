@@ -1,9 +1,11 @@
+'use client';
 import { Product, ProductOption } from '@/types/api.types';
 import { Button, Snackbar } from '@mui/material';
 import { XIcon } from '@/components/icons/XIcon';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { LocaleType } from '@/types/routing';
+import { useCartContext } from '@/context/cart/cart.context';
 
 interface Props {
 	product: Product;
@@ -14,6 +16,7 @@ interface Props {
 
 export function AddedToCartSnackbar(props: Props) {
 	const locale = useLocale() as LocaleType;
+	const { onOpenChange } = useCartContext();
 	const t = useTranslations('shop_page');
 	return (
 		<Snackbar
@@ -44,10 +47,12 @@ export function AddedToCartSnackbar(props: Props) {
 				</div>
 				<div className={'flex items-center gap-2 justify-between'}>
 					<button
+						onClick={() => onOpenChange(true)}
 						className={'grow px-4 py-2 hover:bg-[var(--secondary-color)] hover:text-white transition-all cursor-pointer'}>
 						#View cart
 					</button>
-					<Button className={'grow'} variant={'contained'} color={'primary'}
+					<Button onClick={() => onOpenChange(true, 'checkout')} className={'grow'} variant={'contained'}
+							color={'primary'}
 							sx={{
 								padding: '8px 16px',
 								borderRadius: 0

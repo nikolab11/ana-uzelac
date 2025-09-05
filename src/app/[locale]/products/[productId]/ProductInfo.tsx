@@ -9,6 +9,7 @@ import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { useState } from 'react';
 import { useCartContext } from '@/context/cart/cart.context';
 import { AddedToCartSnackbar } from '@/app/[locale]/products/[productId]/AddedToCartSnackbar';
+import { formatNumber } from '@/utils/product.utils';
 
 interface Props {
 	product: Product;
@@ -43,7 +44,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
 				<div className={'px-6 py-4 border-white border-b'}>
 					<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
 					{selectedOption &&
-						<p className={'text-sm font-light'}>{`${selectedOption.price} ${product.currency}`}</p>}
+						<p className={'text-sm font-light'}>{`${formatNumber(selectedOption.price)} ${product.currency}`}</p>}
 				</div>
 				{
 					collection && (

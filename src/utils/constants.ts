@@ -4,6 +4,8 @@ export const PRODUCT_SIZES = ['112 cm x 112 cm', '112 cm x 120.6 cm', '135 cm x 
 
 export const EUR_SYMBOL = '€';
 
+export const SHIPPING_PRICE = 0;
+
 export const SORT_OPTIONS = ['relevance', 'price-min', 'price-max'] as const;
 
 export type SortOption = typeof SORT_OPTIONS[number];
@@ -18,11 +20,11 @@ export const SORT_OPTIONS_DATA: Record<SortOption, {
 	},
 	'price-min': {
 		translation: '#Price-min',
-		comparator: (a, b) => a.price - b.price
+		comparator: (a, b) => Math.min(...a.options.map(val => val.price)) - Math.min(...b.options.map(val => val.price))
 	},
 	'price-max': {
 		translation: '#Price-max',
-		comparator: (a, b) => b.price - a.price
+		comparator: (a, b) => Math.max(...b.options.map(val => val.price)) - Math.max(...a.options.map(val => val.price))
 	}
 
 };

@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode, useCallback, useState } from 'react';
-import { CartContext, CartItems } from '@/context/cart/cart.context';
+import { CartContext, CartItems, CartStep } from '@/context/cart/cart.context';
 import { Product, ProductOption } from '@/types/api.types';
 import { CartMain } from '@/components/cart/CartMain';
 
@@ -11,6 +11,7 @@ interface Props {
 export function CartContextProvider(props: Props) {
 	const [items, setItems] = useState<CartItems>({});
 	const [open, setOpen] = useState(false);
+	const [step, setStep] = useState<CartStep | undefined>(undefined);
 	const addItem = useCallback((product: Product, option: ProductOption) => {
 		setItems(prev => {
 			const newState = { ...prev };
@@ -57,7 +58,11 @@ export function CartContextProvider(props: Props) {
 			updateItem,
 			removeItem,
 			open,
-			onOpenChange: setOpen
+			step,
+			onOpenChange: (val: boolean, st: CartStep = 'cart') => {
+				setOpen(val);
+				setStep(val ? st : undefined);
+			}
 		}}>
 			{props.children}
 			<CartMain />

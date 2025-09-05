@@ -9,7 +9,7 @@ interface Props {
 
 export function CartButton(props: Props) {
 	const { items, onOpenChange } = useCartContext();
-	const count = Object.keys(items).length;
+	const count = Object.values(items).flatMap(val => Object.keys(val)).length;
 	return (
 		<div onClick={() => onOpenChange(true)} className='flex gap-2 items-center justify-end cursor-pointer'>
 			<div className={'relative'}>

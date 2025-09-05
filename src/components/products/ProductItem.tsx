@@ -5,7 +5,7 @@ import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { ProductItemImages } from '@/components/products/ProductItemImages';
 import { LocaleType } from '@/types/routing';
 import { IconButton } from '@mui/material';
-import { getMinProductPrice } from '@/utils/product.utils';
+import { formatNumber, getMinProductPrice } from '@/utils/product.utils';
 
 interface Props {
 	product: Product;
@@ -24,7 +24,7 @@ export function ProductItem(props: Props) {
 						{name}
 					</div>
 					<div className={'pb-2  text-sm font-light'}>
-						{`${getMinProductPrice(props.product)}${props.product.currency}`}
+						{`${formatNumber(getMinProductPrice(props.product))}${props.product.currency}`}
 					</div>
 				</div>
 				<div>
