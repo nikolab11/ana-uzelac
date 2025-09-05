@@ -72,7 +72,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
 				</div>
 				<div className={'px-6 py-4'}>
 					<div dangerouslySetInnerHTML={{
-						__html: product[`description_${locale}`]
+						__html: product[`inspiration_${locale}`]
 					}} />
 				</div>
 			</div>

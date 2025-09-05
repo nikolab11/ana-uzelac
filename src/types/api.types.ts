@@ -101,8 +101,11 @@ export interface Product {
 	collection_id?: number;
 	description_eng: string;
 	description_fr: string;
+	inspiration_eng: string;
+	inspiration_fr: string;
 	options: ProductOption[];
 	images: string[];
+	images_down?: string[];
 }
 
 export interface GeAllProductsResponse {

@@ -15,11 +15,13 @@ const containerStyle: CSSProperties = {
 export async function AppLayout({
 									children,
 									mode,
-									headerContent
+									headerContent,
+									omitFooter
 								}: Readonly<{
 	children: ReactElement<PageProps>;
 	mode?: HeaderMode;
 	headerContent?: ReactElement<PageProps>;
+	omitFooter?: boolean
 }>) {
 	const [images, collections] = await Promise.all([fetchImages(), fetchAllCollections()]);
 	if (!collections || !images) {
@@ -37,7 +39,7 @@ export async function AppLayout({
 					logo={images.logo.logo_png} />
 			<div id={'app-container'} style={containerStyle} className={'flex-1 overflow-y-auto relative'}>
 				{cloneElement(children, { images, collections: collections.collections })}
-				<Footer collections={collections.collections} logo={images.logo.logo_png} />
+				{!omitFooter && <Footer collections={collections.collections} logo={images.logo.logo_png} />}
 			</div>
 		</div>
 	);
