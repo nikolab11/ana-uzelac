@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '../globals.css';
 import { ReactNode } from 'react';
 import { Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
@@ -21,8 +21,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
 											 children
+
 										 }: Readonly<{
 	children: ReactNode;
+
 }>) {
 	return (
 		<html>

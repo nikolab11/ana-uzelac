@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
+import { Button } from '@mui/material';
 
 interface Props {
 	children: ReactNode;
@@ -16,8 +17,13 @@ export function LoadMoreProductsWrapper(props: Props) {
 
 	return (
 		<div className={'flex justify-center'}>
-			<button className={'border border-[var(--foreground)] px-3 py-2 cursor-pointer hover:shadow-lg transition'}
-					onClick={() => setOpen(true)}>{props.text}</button>
+			<Button className={'border border-[var(--foreground)]'}
+					color={'primary'} variant={'outlined'}
+					sx={{
+						borderRadius: 0,
+						padding: '8px 12px'
+					}}
+					onClick={() => setOpen(true)}>{props.text}</Button>
 		</div>
 	);
 }
