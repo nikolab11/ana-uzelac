@@ -48,11 +48,13 @@ const initalFilters: ProductFilter = {
 	search: '',
 	sortOption: 'relevance'
 };
+type SeactionName = 'price' | 'collection' | 'size' | 'sort'
 
 export function FilterModal(props: Props) {
 	const t = useTranslations('filter_and_sort');
 	const locale = useLocale() as LocaleType;
 	const router = useRouter();
+	const [openSection, setOpenSection] = useState<SeactionName | undefined>('collection');
 	const [currentFilters, setCurrentFilters] = useState({
 		...initalFilters,
 		price_min: props.minPrice,
@@ -83,6 +85,14 @@ export function FilterModal(props: Props) {
 		const stringified = querystring.stringify(currentFilters);
 		router.replace(`/shop?${stringified}`);
 	};
+	const onOpenChange = (name: SeactionName) => () => {
+		setOpenSection(prev => {
+			if (prev === name) {
+				return undefined;
+			}
+			return name;
+		});
+	};
 	return (
 		<Drawer anchor={'right'} onClose={props.onClose} open={props.open}>
 			<div className={'p-9 w-[35vw] overflow-auto h-full flex flex-col justify-between'}>
@@ -93,7 +103,8 @@ export function FilterModal(props: Props) {
 							<XIcon size={4} />
 						</div>
 					</div>
-					<SearchSection title={t('filter_price')}>
+					<SearchSection open={openSection === 'price'} onChange={onOpenChange('price')}
+								   title={t('filter_price')}>
 						<div className={'pt-7'}>
 							<Slider
 								value={sliderValue}
@@ -132,7 +143,8 @@ export function FilterModal(props: Props) {
 							/>
 						</div>
 					</SearchSection>
-					<SearchSection title={'#Collection'}>
+					<SearchSection open={openSection === 'collection'} onChange={onOpenChange('collection')}
+								   title={'#Collection'}>
 						{
 							props.collections.map(collection => {
 								return (
@@ -156,7 +168,8 @@ export function FilterModal(props: Props) {
 							})
 						}
 					</SearchSection>
-					<SearchSection title={t('filter_size')}>
+					<SearchSection open={openSection === 'size'} onChange={onOpenChange('size')}
+								   title={t('filter_size')}>
 						{PRODUCT_SIZES.map(size => {
 							return (
 								<div key={size}>
@@ -176,7 +189,7 @@ export function FilterModal(props: Props) {
 							);
 						})}
 					</SearchSection>
-					<SearchSection title={t('sort_by')}>
+					<SearchSection open={openSection === 'sort'} onChange={onOpenChange('sort')} title={t('sort_by')}>
 						<List>
 							{SORT_OPTIONS.map(sortOption => {
 								return (
@@ -235,10 +248,11 @@ export function FilterModal(props: Props) {
 	);
 }
 
-function SearchSection(props: { title: ReactNode, children: ReactNode }) {
+function SearchSection(props: { title: ReactNode, children: ReactNode, open: boolean, onChange: () => void }) {
 	return (
 		<Accordion
-			defaultExpanded
+			expanded={props.open}
+			onChange={props.onChange}
 			slots={{
 				heading: 'div',
 				root: 'div'
