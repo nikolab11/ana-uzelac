@@ -7,12 +7,15 @@ import { AddressDetails } from '@/components/cart/steps/checkout/AddressDetails'
 import { ItemsDrawer } from '@/components/cart/steps/checkout/ItemsDrawer';
 import { BackButton } from '@/components/common/BackButton';
 import { useCartContext } from '@/context/cart/cart.context';
+import axios from 'axios';
+import { useRouter } from '@/i18n/navigation';
 
 export type CheckoutStep = 'person' | 'address'
 
 export function CheckoutStep() {
 	const t = useTranslations('shop_page');
-	const { onOpenChange } = useCartContext();
+	const { onOpenChange, items, onClear } = useCartContext();
+	const router = useRouter;
 	const [activeStep, setActiveStep] = useState<CheckoutStep>('person');
 	const [formState, setFormState] = useState<CheckoutDetails>({
 		email: '',
@@ -40,7 +43,11 @@ export function CheckoutStep() {
 			inline: 'nearest'
 		});
 	}, [activeStep]);
-
+	const onSubmit = async () => {
+		const result = await axios.post('/order', { ...formState, items });
+		onClear();
+		router().push('/shop');
+	};
 	return (
 		<div className={'h-full py-9  bg-[#FCF7F1] pl-9 relative'}>
 			<BackButton label={'#Back to cart'} onClick={() => onOpenChange(true, 'cart')} />
@@ -51,7 +58,7 @@ export function CheckoutStep() {
 				<div className={'grow h-full overflow-hidden'}>
 					<PersonDetails formState={formState} onProceed={() => setActiveStep('address')}
 								   onChange={onChange} />
-					<AddressDetails formState={formState} onProceed={() => setActiveStep('person')}
+					<AddressDetails formState={formState} onProceed={onSubmit}
 									onChange={onChange} />
 				</div>
 			</div>

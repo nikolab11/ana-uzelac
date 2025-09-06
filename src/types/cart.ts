@@ -22,5 +22,5 @@ export interface PlaceOrderBody {
 	state: string,
 	country_code: string,
 	phone_number: string
-	ordered_items: Record<string, { quantity: number, size: string }>
+	ordered_items: { quantity: number, size: string, productId: number }[]
 }

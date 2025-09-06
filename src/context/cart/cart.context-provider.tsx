@@ -55,6 +55,11 @@ export function CartContextProvider(props: Props) {
 	const subtotal = flatted.reduce((acc, value) => {
 		return acc + value.count * value.option.price;
 	}, 0);
+	const onClear = () => {
+		setItems({});
+		setOpen(false);
+		setStep(undefined);
+	};
 	return (
 		<CartContext.Provider value={{
 			items,
@@ -63,6 +68,7 @@ export function CartContextProvider(props: Props) {
 			totalItems: flatted.length,
 			updateItem,
 			removeItem,
+			onClear,
 			open,
 			step,
 			onOpenChange: (val: boolean, st: CartStep = 'cart') => {

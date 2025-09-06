@@ -15,6 +15,7 @@ interface CartContextType {
 	step?: CartStep;
 	totalItems: number;
 	totalPrice: number;
+	onClear: () => void;
 	onOpenChange: (val: boolean, step?: CartStep) => void;
 }
 
