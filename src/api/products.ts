@@ -1,5 +1,6 @@
 import { ApiClient } from '@/api/api-client';
 import { Collection, CollectionResponse, GeAllProductsResponse, Product } from '@/types/api.types';
+import { PlaceOrderBody } from '@/types/cart';
 
 export async function fetchAllProducts() {
 	return await ApiClient.get<GeAllProductsResponse>('/au_all_products');
@@ -22,4 +23,8 @@ export async function fetchSingleProduct(productId: number) {
 
 	return (await ApiClient.get<Product>('/au_get_single_product', { params: { product_id: productId } }));
 
+}
+
+export async function postOrder(data: PlaceOrderBody) {
+	return await ApiClient.post('/au_place_an_order', data);
 }

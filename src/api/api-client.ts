@@ -28,5 +28,21 @@ export const ApiClient = {
 		} catch (error) {
 			throw error;
 		}
+	},
+
+	post: async <T = object>(url: string, body: object, options?: Partial<Options>): Promise<T | undefined> => {
+		url = `${process.env.API_BASE_URL}${url}`;
+		if (options?.params) {
+			url = `${url}?${querystring.stringify(options.params)}`;
+		}
+		const result = await fetch(url, {
+			headers: {
+				...options?.headers,
+				['x-api-key']: process.env.API_KEY || ''
+			},
+			body: JSON.stringify(body),
+			method: 'POST'
+		});
+		return await result.json();
 	}
 };
