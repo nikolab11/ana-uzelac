@@ -44,9 +44,13 @@ export function CheckoutStep() {
 		});
 	}, [activeStep]);
 	const onSubmit = async () => {
-		const result = await axios.post('/order', { ...formState, items });
-		onClear();
-		router().push('/shop');
+		try {
+			await axios.post('/order', { ...formState, items });
+			onClear();
+			router().push('/shop');
+		} catch (error) {
+			console.error(error);
+		}
 	};
 	return (
 		<div className={'h-full py-9  bg-[#FCF7F1] pl-9 relative'}>
