@@ -105,6 +105,8 @@ export interface Product {
 	inspiration_fr: string;
 	options: ProductOption[];
 	images: string[];
+	short_description_eng?: string;
+	short_description_fr?: string;
 	images_down?: string[];
 }
 

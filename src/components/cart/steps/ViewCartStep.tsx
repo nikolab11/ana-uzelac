@@ -4,28 +4,29 @@ import { CartItemsGrid } from '@/components/cart/CartItemsGrid';
 import { Button, Drawer } from '@mui/material';
 import { EUR_SYMBOL, SHIPPING_PRICE } from '@/utils/constants';
 import { formatNumber } from '@/utils/product.utils';
+import { BackButton } from '@/components/common/BackButton';
 
 export function ViewCartStep() {
-	const { items, onOpenChange } = useCartContext();
-	const flatted = Object.values(items).flatMap(val => Object.values(val));
-	const subtotal = flatted.reduce((acc, value) => {
-		return acc + value.count * value.option.price;
-	}, 0);
+	const { onOpenChange, totalItems, totalPrice } = useCartContext();
+
 	const t = useTranslations('shop_page');
 	return (
-		<div className={'h-full'}>
-			<div className={'px-9 w-[70%] h-full bg-[#FCF7F1]'}>
+		<div className={'h-full bg-[#FCF7F1]'}>
+			<div className={'pl-[var(--container-padding)] relative w-[70vw] h-full pr-9 pt-[64px] '}>
+				<BackButton label={t('back_to_shop')} onClick={() => {
+					onOpenChange(false);
+				}} />
 				<div className='flex pb-9 items-center justify-between'>
 					<h4 className={'uppercase font-medium text-base py-9'}>{t('shopping_cart')}</h4>
 					<h4 className={'uppercase font-medium text-base'}>
-						{`${flatted.length} ${t('item')}`} #Fali mnozina
+						{`${totalItems} ${t('item')}`} #Fali mnozina
 					</h4>
 				</div>
 				<CartItemsGrid />
 			</div>
 			<div>
-				<Drawer elevation={8} variant={'permanent'} anchor={'right'}>
-					<div className={'px-9 py-6 flex flex-col w-[24vw] h-full bg-[#FCF7F1] gap-9'}>
+				<Drawer variant={'permanent'} anchor={'right'}>
+					<div className={'px-9 py-6 flex flex-col w-[30vw] h-full bg-[#FCF7F1] gap-9'}>
 						<div>
 							<h4 className={'uppercase font-medium text-base py-9'}>{t('summary')}</h4>
 						</div>
@@ -35,7 +36,7 @@ export function ViewCartStep() {
 									{t('subtotal')}
 								</div>
 								<div className={'font-bold text-sm'}>
-									{`${formatNumber(subtotal)}${EUR_SYMBOL}`}
+									{`${formatNumber(totalPrice)}${EUR_SYMBOL}`}
 								</div>
 							</div>
 							<div className={'flex justify-between gap-9'}>
@@ -52,7 +53,7 @@ export function ViewCartStep() {
 								{t('total')}
 							</div>
 							<div className={'font-bold text-sm'}>
-								{`${formatNumber(subtotal + SHIPPING_PRICE)}${EUR_SYMBOL}`}
+								{`${formatNumber(totalPrice + SHIPPING_PRICE)}${EUR_SYMBOL}`}
 							</div>
 						</div>
 						<div>

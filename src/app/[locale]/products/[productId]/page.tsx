@@ -33,12 +33,13 @@ interface Props {
 
 function InnerPage({ product, collections, images }: Props & PageProps) {
 	const locale = useLocale() as LocaleType;
+
 	return (
-		<div className={'h-full overflow-y-visible'}>
+		<div className={'h-full overflow-y-visible relative'}>
 			<div className={'w-full overflow-x-hidden h-full'}>
 				<ProductImages product={product} />
-				<div className={'fixed top-[144px] z-1200 right-[var(--container-padding)] shadow-2xl'} style={{
-					maxWidth: '350px',
+				<div className={'fixed top-[144px] z-1200 right-[10%] shadow-2xl'} style={{
+					maxWidth: '400px',
 					overflowX: 'hidden',
 					overflowY: 'auto',
 					maxHeight: '75vh'
@@ -51,7 +52,7 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
 				<div className={'bg-[#FCF7F1] p-6 flex flex-col gap-7 justify-center items-center'}>
 					<h4 className={'font-normal text-xl'}>#The inspiration</h4>
 					<p className={'font-normal text-sm'} dangerouslySetInnerHTML={{
-						__html: product[`inspiration_${locale}`]
+						__html: product[`inspiration_${locale}`] || ''
 					}} />
 				</div>
 				<ProductSideImages images={product.images_down || []} />

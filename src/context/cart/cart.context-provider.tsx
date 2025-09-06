@@ -51,10 +51,16 @@ export function CartContextProvider(props: Props) {
 			return newState;
 		});
 	}, []);
+	const flatted = Object.values(items).flatMap(val => Object.values(val));
+	const subtotal = flatted.reduce((acc, value) => {
+		return acc + value.count * value.option.price;
+	}, 0);
 	return (
 		<CartContext.Provider value={{
 			items,
 			addItem,
+			totalPrice: subtotal,
+			totalItems: flatted.length,
 			updateItem,
 			removeItem,
 			open,

@@ -20,6 +20,6 @@ export async function fetchSingleCollection(collectionId: number) {
 
 export async function fetchSingleProduct(productId: number) {
 
-	return (await ApiClient.get<Product[]>('/au_get_single_product', { params: { product_id: productId } }))?.[0];
+	return (await ApiClient.get<Product>('/au_get_single_product', { params: { product_id: productId } }));
 
 }

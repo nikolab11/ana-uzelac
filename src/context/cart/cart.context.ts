@@ -13,6 +13,8 @@ interface CartContextType {
 	removeItem: (item: Product, option: ProductOption) => void;
 	open: boolean;
 	step?: CartStep;
+	totalItems: number;
+	totalPrice: number;
 	onOpenChange: (val: boolean, step?: CartStep) => void;
 }
 

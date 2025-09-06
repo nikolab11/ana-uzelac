@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { ViewCartStep } from '@/components/cart/steps/ViewCartStep';
+import { CheckoutStep } from '@/components/cart/steps/checkout/CheckoutStep';
 
 const containerStyle: CSSProperties = {
 	msOverflowStyle: 'none',
@@ -23,7 +24,7 @@ export function CartMain() {
 
 		>
 			<div style={{
-				width: hasItems ? '80vw' : '30vw',
+				width: hasItems ? '100vw' : '30vw',
 				height: '100%'
 			}}>
 				{
@@ -39,6 +40,11 @@ export function CartMain() {
 				{
 					hasItems && step === 'cart' && (
 						<ViewCartStep />
+					)
+				}
+				{
+					hasItems && step === 'checkout' && (
+						<CheckoutStep />
 					)
 				}
 			</div>
