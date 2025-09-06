@@ -12,7 +12,7 @@ interface Props {
 export function PersonDetails(props: Props) {
 	const t = useTranslations('shop_page');
 	return (
-		<div className={'h-full w-[60%]'} id={'person-step'}>
+		<div className={'h-full w-[70%]'} id={'person-step'}>
 			<h4 className={'font-medium text-2xl pb-[48px]'}>{t('who_is_ordering')}</h4>
 			<form onSubmit={(e) => {
 				e.preventDefault();

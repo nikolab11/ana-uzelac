@@ -13,7 +13,7 @@ interface Props {
 export function AddressDetails(props: Props) {
 	const t = useTranslations('shop_page');
 	return (
-		<div className={'h-full w-[60%]'} id={'address-step'}>
+		<div className={'h-full w-[70%]'} id={'address-step'}>
 			<h4 className={'font-medium text-2xl pb-[48px]'}>{t('proceed_to_payment')}</h4>
 			<form onSubmit={(e) => {
 				e.preventDefault();
@@ -26,12 +26,12 @@ export function AddressDetails(props: Props) {
 					<div className={'grow-[7]'}>
 						<TextField required fullWidth variant={'standard'} name={'city'}
 								   onChange={props.onChange}
-								   value={props.formState.city} placeholder={t('city')} />
+								   value={props.formState.city} label={t('city')} />
 					</div>
 					<div className={'grow'}>
 						<TextField required fullWidth variant={'standard'} name={'zipCode'}
 								   onChange={props.onChange}
-								   value={props.formState.zipCode} placeholder={t('zip_code')} />
+								   value={props.formState.zipCode} label={t('zip_code')} />
 					</div>
 				</div>
 				<div className={'pt-9'}>
@@ -65,7 +65,7 @@ export function AddressDetails(props: Props) {
 					<div className={'grow-[2]'}>
 						<TextField required fullWidth variant={'standard'} name={'phoneNumber'}
 								   onChange={props.onChange}
-								   value={props.formState.phoneNumber} placeholder={t('phone_number')} />
+								   value={props.formState.phoneNumber} label={t('phone_number')} />
 					</div>
 				</div>
 				<div className={'pt-9'}>
