@@ -54,7 +54,7 @@ export function CheckoutStep() {
 	};
 	return (
 		<div className={'h-full py-9  bg-[#FCF7F1] pl-9 relative'}>
-			<BackButton label={'#Back to cart'} onClick={() => onOpenChange(true, 'cart')} />
+			<BackButton label={'#Back to cart'} onClick={() => onOpenChange(submitState === 'pending', 'cart')} />
 			<div className={'px-9 w-[70vw] h-full flex gap-9 pt-[64px] pr-9'}>
 				<h4 className={'uppercase text-base font-medium'}>
 					{t('checkout')}

@@ -20,8 +20,8 @@ export default async function ShopPage(props: { searchParams: Promise<Partial<Pr
 	}
 	const usedFilters = (params.sizes?.length || 0) + (params.collection_ids?.length || 0);
 	const totalParams = Object.keys(params).length;
-	const products = totalParams > 0 ? filterProducts([...productsResponse.products.collection_products, ...productsResponse.products.original_products], params) : productsResponse.products.collection_products;
-	const additionalProducts = totalParams > 0 ? [] : productsResponse.products.original_products;
+	const products = totalParams > 0 ? filterProducts(productsResponse.products.collection_products, params) : productsResponse.products.collection_products;
+	const additionalProducts = totalParams > 0 ? filterProducts(productsResponse.products.original_products, params) : productsResponse.products.original_products;
 	const prices = calculatePrices(productsResponse);
 	return (
 		<div>
@@ -82,7 +82,7 @@ function InnerPage({ collections, params, products, additionalProducts }: PagePr
 								additionalProducts.map(product => {
 									return (
 										<div key={product.product_id} className={'pb-8 basis-xs'}>
-											<ProductItem dark product={product} />
+											<ProductItem original dark product={product} />
 										</div>
 									);
 								})
