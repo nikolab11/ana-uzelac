@@ -45,8 +45,8 @@ export function CheckoutStep() {
 	const onSubmit = async () => {
 		try {
 			await axios.post('/order', { ...formState, items });
-			onClear();
 			setSubmitState('success');
+			onClear();
 		} catch (error) {
 			console.error(error);
 			setSubmitState('error');
@@ -66,7 +66,7 @@ export function CheckoutStep() {
 									onChange={onChange} />
 				</div>
 			</div>
-			<ItemsDrawer />
+			{submitState === 'pending' && <ItemsDrawer />}
 		</div>
 	);
 }

@@ -11,7 +11,7 @@ export function ViewCartStep() {
 
 	const t = useTranslations('shop_page');
 	return (
-		<div className={'h-full bg-[#FCF7F1]'}>
+		<div className={'h-full relative bg-[#FCF7F1]'}>
 			<div className={'pl-[var(--container-padding)] relative w-[70vw] h-full pr-9 pt-[64px] '}>
 				<BackButton label={t('back_to_shop')} onClick={() => {
 					onOpenChange(false);
@@ -23,6 +23,10 @@ export function ViewCartStep() {
 					</h4>
 				</div>
 				<CartItemsGrid />
+				<div
+					className={'absolute left-[var(--container-padding)] bottom-[64px] text-[#838383] text-xs font-normal'}>
+					#Free shipping for all orders
+				</div>
 			</div>
 			<div>
 				<Drawer variant={'permanent'} anchor={'right'}>

@@ -24,7 +24,7 @@ export function CartMain() {
 
 		>
 			<div style={{
-				width: hasItems ? '100vw' : '30vw',
+				width: (hasItems || step === 'checkout') ? '100vw' : '30vw',
 				height: '100%'
 			}}>
 				{
