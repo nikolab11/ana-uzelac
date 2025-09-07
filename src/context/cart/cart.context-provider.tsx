@@ -57,8 +57,6 @@ export function CartContextProvider(props: Props) {
 	}, 0);
 	const onClear = () => {
 		setItems({});
-		setOpen(false);
-		setStep(undefined);
 	};
 	return (
 		<CartContext.Provider value={{

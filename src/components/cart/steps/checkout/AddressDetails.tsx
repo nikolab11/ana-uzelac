@@ -4,10 +4,13 @@ import { useTranslations } from 'next-intl';
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { COUNTRY_CODES } from '@/utils/country-codes';
 
+export type SubmitState = 'pending' | 'success' | 'error'
+
 interface Props {
 	formState: CheckoutDetails,
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void,
 	onProceed: () => void;
+	submitState: SubmitState
 }
 
 export function AddressDetails(props: Props) {
@@ -69,12 +72,23 @@ export function AddressDetails(props: Props) {
 					</div>
 				</div>
 				<div className={'pt-9'}>
-					<Button className={'uppercase'} type={'submit'} color={'primary'}
-							sx={{
-								borderRadius: 0,
-								padding: '12px 24px'
-							}}
-							variant={'contained'}>{t('proceed_to_payment')}</Button>
+					{props.submitState === 'pending' &&
+						<Button className={'uppercase'} type={'submit'} color={'primary'}
+								sx={{
+									borderRadius: 0,
+									padding: '12px 24px'
+								}}
+								variant={'contained'}>{t('proceed_to_payment')}</Button>}
+					{
+						props.submitState === 'success' && (
+							<div>#You have successfully created an order</div>
+						)
+					}
+					{
+						props.submitState === 'error' && (
+							<div>#There was an error creating an orderr</div>
+						)
+					}
 				</div>
 			</form>
 		</div>

@@ -28,7 +28,7 @@ export function CartMain() {
 				height: '100%'
 			}}>
 				{
-					!hasItems && (
+					!hasItems && step !== 'checkout' && (
 						<EmptyCart onClose={() => {
 							onClose();
 							if (!pathname.endsWith('/shop')) {
@@ -43,7 +43,7 @@ export function CartMain() {
 					)
 				}
 				{
-					hasItems && step === 'checkout' && (
+					step === 'checkout' && (
 						<CheckoutStep />
 					)
 				}

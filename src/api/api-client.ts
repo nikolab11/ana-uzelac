@@ -30,7 +30,10 @@ export const ApiClient = {
 		}
 	},
 
-	post: async <T = object>(url: string, body: object, options?: Partial<Options>): Promise<T | undefined> => {
+	post: async <T = object>(url: string, body: object, options?: Partial<Options>): Promise<{
+		status: number,
+		data: T
+	}> => {
 		url = `${process.env.API_BASE_URL}${url}`;
 		if (options?.params) {
 			url = `${url}?${querystring.stringify(options.params)}`;
@@ -43,6 +46,10 @@ export const ApiClient = {
 			body: JSON.stringify(body),
 			method: 'POST'
 		});
-		return await result.json();
+		const response = await result.json();
+		return {
+			data: response,
+			status: result.status
+		};
 	}
 };

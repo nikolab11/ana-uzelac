@@ -3,19 +3,18 @@ import { useTranslations } from 'next-intl';
 import { ChangeEvent, useLayoutEffect, useState } from 'react';
 import { CheckoutDetails } from '@/types/cart';
 import { PersonDetails } from '@/components/cart/steps/checkout/PersonDetails';
-import { AddressDetails } from '@/components/cart/steps/checkout/AddressDetails';
+import { AddressDetails, SubmitState } from '@/components/cart/steps/checkout/AddressDetails';
 import { ItemsDrawer } from '@/components/cart/steps/checkout/ItemsDrawer';
 import { BackButton } from '@/components/common/BackButton';
 import { useCartContext } from '@/context/cart/cart.context';
 import axios from 'axios';
-import { useRouter } from '@/i18n/navigation';
 
-export type CheckoutStep = 'person' | 'address'
+export type CheckoutStep = 'person' | 'address';
 
 export function CheckoutStep() {
 	const t = useTranslations('shop_page');
 	const { onOpenChange, items, onClear } = useCartContext();
-	const router = useRouter;
+	const [submitState, setSubmitState] = useState<SubmitState>('pending');
 	const [activeStep, setActiveStep] = useState<CheckoutStep>('person');
 	const [formState, setFormState] = useState<CheckoutDetails>({
 		email: '',
@@ -47,9 +46,10 @@ export function CheckoutStep() {
 		try {
 			await axios.post('/order', { ...formState, items });
 			onClear();
-			router().push('/shop');
+			setSubmitState('success');
 		} catch (error) {
 			console.error(error);
+			setSubmitState('error');
 		}
 	};
 	return (
@@ -62,7 +62,7 @@ export function CheckoutStep() {
 				<div className={'grow h-full overflow-hidden'}>
 					<PersonDetails formState={formState} onProceed={() => setActiveStep('address')}
 								   onChange={onChange} />
-					<AddressDetails formState={formState} onProceed={onSubmit}
+					<AddressDetails submitState={submitState} formState={formState} onProceed={onSubmit}
 									onChange={onChange} />
 				</div>
 			</div>
