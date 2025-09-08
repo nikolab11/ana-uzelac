@@ -41,8 +41,8 @@ export function GrandOpeningSection(props: Props) {
 						return (
 							<div className={'grow relative'} key={image}>
 								<Image style={{
-									objectFit:'cover'
-								}}  src={image} width={250} height={300} alt={'Grand opening'} />
+									objectFit: 'contain'
+								}} src={image} fill alt={'Grand opening'} />
 							</div>
 						);
 					})

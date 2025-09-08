@@ -18,11 +18,11 @@ export function ProductItemImages(props: Props) {
 		<div className='relative transition-all'>
 			<div className={'relative'} style={{
 				width: '100%',
-				height: '500px'
+				minHeight: '500px'
 			}}>
 				<Image fill style={{
-					objectFit:'cover'
-				}}  src={props.product.images[activeIndex]}
+					objectFit: 'cover'
+				}} src={props.product.images[activeIndex]}
 					   alt={props.product.name_eng} />
 			</div>
 			<div className='group z-2 top-[0] absolute flex items-center justify-between h-full w-full p-4'>

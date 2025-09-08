@@ -4,6 +4,7 @@ import { useCartContext } from '@/context/cart/cart.context';
 import { EUR_SYMBOL } from '@/utils/constants';
 import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
+
 import RemoveIcon from '@mui/icons-material/Remove';
 import { LocaleType } from '@/types/routing';
 import { XIcon } from '@/components/icons/XIcon';

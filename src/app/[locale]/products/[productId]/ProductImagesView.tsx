@@ -2,7 +2,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { ImageCarousel } from '@/components/common/ImageCarousel';
 import { XIcon } from '@/components/icons/XIcon';
-import { IconButton } from '@mui/material';
+import { Button, ButtonGroup, IconButton } from '@mui/material';
 import Image from 'next/image';
 
 interface Props {
@@ -11,12 +11,12 @@ interface Props {
 	onClose: () => void;
 }
 
-const ZOOM_SCALE = 1.1;
+const ZOOM_SCALE_STEP = 1.3;
 
 export function ProductImagesView(props: Props) {
 	const [active, setActive] = useState(0);
 	const ref = useRef<HTMLImageElement>(null);
-	const [zoom, setZoom] = useState(3);
+	const [zoom, setZoom] = useState(1);
 	useLayoutEffect(() => {
 		if (!props.open || !ref.current) {
 			return;
@@ -59,16 +59,35 @@ export function ProductImagesView(props: Props) {
 				{
 					props.images.map((image, index) => {
 						return (
-							<div key={index} className={'w-screen h-full relative px-9'}>
-								<Image src={image} fill style={{
-									objectFit: 'contain'
-								}} alt={'asfas'} />
+							<div key={index} className={'w-screen h-full overflow-auto  px-9 viewImageContainer'}>
+								<div className={'w-full h-full relative viewImageContainer'} style={{
+									transform: `scale(${zoom})`
+
+								}}>
+									<Image src={image} fill style={{
+										objectFit: 'contain'
+									}} alt={'asfas'} />
+								</div>
 							</div>
 						);
 					})
 				}
 			</div>
 			<div className={'fixed bottom-[64px] left-[80px]'}>
+				<div className={'pb-4'}>
+					<ButtonGroup orientation={'vertical'} variant={'outlined'}
+								 color={'primary'} sx={{
+						background: 'white',
+						borderRadius: '30px 30px',
+						border: 'none'
+
+					}}>
+						<Button sx={{ fontSize: '22px', border: 'none' }}
+								onClick={() => setZoom(prev => prev * ZOOM_SCALE_STEP)}>+</Button>
+						<Button sx={{ fontSize: '22px', border: 'none' }}
+								onClick={() => setZoom(prev => prev / ZOOM_SCALE_STEP)}>-</Button>
+					</ButtonGroup>
+				</div>
 				<ImageCarousel images={props.images} activeIndex={active} onChange={setActive} />
 			</div>
 		</div>
