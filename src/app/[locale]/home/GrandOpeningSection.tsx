@@ -25,7 +25,7 @@ export function GrandOpeningSection(props: Props) {
 							sx={{
 								color: 'white',
 								borderRadius: 0,
-								padding: '16px 32px'
+								padding: '12px 24px'
 							}}>
 						{t('pre_order_now')}
 					</Button>
