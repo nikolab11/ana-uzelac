@@ -5,7 +5,7 @@ import { LocaleType } from '@/types/routing';
 import { ReactNode } from 'react';
 import { XIcon } from '@/components/icons/XIcon';
 import { useRouter } from 'next/navigation';
-import * as querystring from 'node:querystring';
+import * as querystring from 'querystring';
 import { EUR_SYMBOL } from '@/utils/constants';
 
 interface Props {

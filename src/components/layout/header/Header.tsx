@@ -34,7 +34,7 @@ export function Header(props: Props) {
 						<Image src={props.logo} alt={'Logo'} width={80} height={55} />
 					</div>
 				</Link>
-				<div className='flex justify-between pb-4 overflow-x-auto items-end'>
+				<div className='flex gap-3 justify-between pb-4 overflow-x-auto items-end'>
 					<div className={'flex gap-3 items-center'}>
 						<SearchIcon />
 						<SearchInput placeholder={t('search')} />
@@ -53,7 +53,7 @@ export function Header(props: Props) {
 						<HeaderLink
 							href={'/about'}>{t('about')}</HeaderLink>
 					</div>
-					<div className='flex gap-9 justify-end items-center'>
+					<div className='flex pl-9 gap-9 justify-end items-center'>
 						<div>
 							<div className='flex gap-2 items-center justify-end cursor-pointer'>
 								<GlobeIcon size={5} />

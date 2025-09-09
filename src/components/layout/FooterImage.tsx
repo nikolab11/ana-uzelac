@@ -8,7 +8,7 @@ interface Props {
 export function FooterImage(props: Props) {
 	const t = useTranslations('wearing_the_moment_section');
 	return (
-		<div className='relative h-[60vh]'>
+		<div className='relative h-[75vh]'>
 			<Image src={props.img} alt={''} fill objectFit={'cover'} />
 			<div
 				className={'absolute top-0 flex justify-center flex-col gap-3 items-center  w-full h-full pl-[25%] pr-[25%]'}>

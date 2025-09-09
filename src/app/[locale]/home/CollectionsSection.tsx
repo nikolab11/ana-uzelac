@@ -12,7 +12,7 @@ interface Props {
 
 export function CollectionsSection(props: Props) {
 	return (
-		<div>
+		<div className={'py-[var(--vertical-padding)]'}>
 			{
 				props.collections.map(collection => {
 					return (
@@ -29,8 +29,8 @@ function CollectionItem(props: { collection: Collection }) {
 	const t = useTranslations('home_page');
 	const name = props.collection.title[locale];
 	return (
-		<div>
-			<div key={props.collection.collection_id} className='relative h-[70vh]'>
+		<div className={'pt-[var(--vertical-padding)]'}>
+			<div className='relative h-[75vh]'>
 				<Image fill src={props.collection.images[0]} alt={name} style={{
 					objectFit: 'cover'
 				}} />

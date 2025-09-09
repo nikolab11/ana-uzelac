@@ -6,6 +6,7 @@
     --hover-bg: rgba(255, 255, 255, 0.1);
     --text-color: #444444;
     --container-padding: 5%;
+    --vertical-padding: 64px;
     --secondary-color: #DBAC50
 }
 
@@ -90,6 +91,9 @@ h3 {
 .collection-menu {
     overflow: hidden;
     position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     background-color: #fcf7f1;
     z-index: 1;
     transition: max-height 0.5s linear;

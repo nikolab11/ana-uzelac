@@ -23,10 +23,7 @@ export function CartMain() {
 		<Drawer anchor={'right'} open={open} onClose={onClose}
 
 		>
-			<div style={{
-				width: (hasItems || step === 'checkout') ? '100vw' : '30vw',
-				height: '100%'
-			}}>
+			<div className={`h-full ${hasItems || step === 'checkout' ? 'w-[100vw]' : 'w-[70vw] md:w-[30vw]'}`}>
 				{
 					!hasItems && step !== 'checkout' && (
 						<EmptyCart onClose={() => {

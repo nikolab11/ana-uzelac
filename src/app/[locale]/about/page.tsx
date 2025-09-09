@@ -69,7 +69,7 @@ function MainImages({ images }: { images: ImagesResponse }) {
 
 	return (
 		<div
-			className={'px-[var(--container-padding)] h-full py-[64px] flex justify-between gap-6 text-base font-normal text-[#FCF7F1] uppercase'}>
+			className={'px-[var(--container-padding)] h-full py-[64px] flex flex-col md:flex-row justify-between gap-6 text-base font-normal text-[#FCF7F1] uppercase'}>
 			<div className={'relative grow'}>
 				<Image style={{
 					objectFit: 'cover'

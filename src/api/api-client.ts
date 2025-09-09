@@ -1,7 +1,7 @@
 import * as querystring from 'querystring';
 
 interface Options {
-	params: Record<string, any>,
+	params: Record<string, string | number>,
 	headers: Record<string, string | number>,
 }
 

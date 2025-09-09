@@ -9,6 +9,7 @@ import { GrandOpeningSection } from '@/app/[locale]/home/GrandOpeningSection';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Link } from '@/i18n/navigation';
 import { PageProps } from '@/types/pages.types';
+import { getTranslations } from 'next-intl/server';
 
 export default async function Home() {
 	return (
@@ -20,6 +21,7 @@ export default async function Home() {
 
 async function InnerPage({ images, collections }: PageProps) {
 	const products = await fetchAllProducts();
+	const t = await getTranslations('home_page');
 	if (!images || !collections || !products) {
 		throw new Error('Missing images and collections');
 	}
@@ -33,8 +35,18 @@ async function InnerPage({ images, collections }: PageProps) {
 			</div>
 			<GrandOpeningSection
 				images={[images.home_page.grand_opening_1, images.home_page.grand_opening_2, images.home_page.grand_opening_3]} />
-			<div className={'px-[var(--container-padding)] py-6'}>
+
+			<div className={'px-[var(--container-padding)] py-[var(--vertical-padding)]'}>
 				<ProductsSection discoverAllButton products={products.products.original_products.slice(0, 3)} />
+			</div>
+			<div
+				className={'flex md:flex-row flex-col justify-between items-center py-[var(--vertical-padding)] px-[var(--container-padding)] gap-9'}>
+				<p className={'text-base font-normal md:basis-lg'}>
+					{t('discover_collections_description')}
+				</p>
+				<h3 className={'text-6xl font-bold text-end'}>
+					{t('discover_collections')}
+				</h3>
 			</div>
 			<CollectionsSection collections={collections} />
 			<FooterImage img={images.home_page.wearing_the_moment} />

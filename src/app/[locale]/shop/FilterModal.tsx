@@ -95,7 +95,7 @@ export function FilterModal(props: Props) {
 	};
 	return (
 		<Drawer anchor={'right'} onClose={props.onClose} open={props.open}>
-			<div className={'p-9 w-[35vw] overflow-auto h-full flex flex-col justify-between'}>
+			<div className={'p-9 md:w-[35vw] w-[100vw] overflow-auto h-full flex flex-col justify-between'}>
 				<div style={containerStyle} className={'overflow-auto grow'}>
 					<div className={'flex justify-between items-center pb-7'}>
 						<h4 className={'text-medium text-base uppercase text-[var(--text-color)]'}>{t('filter_by')}</h4>
