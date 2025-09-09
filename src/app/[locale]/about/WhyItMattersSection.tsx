@@ -13,7 +13,7 @@ export function WhyItMattersSection({ image }: Props) {
 				<img src={image} alt={t('why_it_matters')} width={'100%'} height={'auto'} />
 			</div>
 			<div
-				className={'text-center py-[32px] basis-sm grow flex flex-col justify-center items-center gap-4 text-white'}>
+				className={'text-center py-[32px] basis-sm grow flex flex-col justify-center items-center gap-4 text-[var(--background)]'}>
 				<h3 className={'font-bold text-4xl'}>
 					{t('why_it_matters')}
 				</h3>

@@ -48,7 +48,7 @@ export function AddedToCartSnackbar(props: Props) {
 				<div className={'flex items-center gap-2 justify-between'}>
 					<button
 						onClick={() => onOpenChange(true)}
-						className={'grow px-4 py-2 hover:bg-[var(--secondary-color)] hover:text-white transition-all cursor-pointer'}>
+						className={'grow px-4 py-2 hover:bg-[var(--secondary-color)] hover:text-[var(--background)] transition-all cursor-pointer'}>
 						#View cart
 					</button>
 					<Button onClick={() => onOpenChange(true, 'checkout')} className={'grow'} variant={'contained'}

@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-    --background: #ffffff;
+    --background: #FCF7F1;
     --foreground: #444444;
     --hover-bg: rgba(255, 255, 255, 0.1);
     --text-color: #444444;
-    --container-padding: 15%;
+    --container-padding: 5%;
     --secondary-color: #DBAC50
 }
 
@@ -50,7 +50,7 @@
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+    font-family: "Helvetica Now Display", "Roboto Light", Arial, sans-serif;
 }
 
 h3 {
@@ -77,6 +77,10 @@ h3 {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.2s linear;
+}
+
+.app-link-select::after {
+    transform: scaleX(1);
 }
 
 .app-link:hover::after {

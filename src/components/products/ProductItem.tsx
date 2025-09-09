@@ -18,7 +18,7 @@ export function ProductItem(props: Props) {
 	const locale = useLocale() as LocaleType;
 	const name = props.product[`name_${locale}`];
 	return (
-		<div className={props.dark ? 'text-white' : undefined}>
+		<div className={props.dark ? 'text-[var(--background)]' : undefined}>
 			<ProductItemImages product={props.product} />
 			<div className='py-2 flex justify-between items-center'>
 				<div>
@@ -26,7 +26,7 @@ export function ProductItem(props: Props) {
 						{name}
 					</div>
 					{!props.original && <div className={'pb-2  text-sm font-light'}>
-						{`${formatNumber(getMinProductPrice(props.product))}${props.product.currency}`}
+						{`${formatNumber(getMinProductPrice(props.product), 0)}${props.product.currency}`}
 					</div>}
 				</div>
 				{props.original && <div>

@@ -33,10 +33,10 @@ export function calculatePrices(productResponse: GeAllProductsResponse): { min: 
 	}, { min: products[0]?.options[0]?.price || 0, max: products[0]?.options[0]?.price || 0 });
 }
 
-export function formatNumber(val: number) {
+export function formatNumber(val: number, minDigits: number = 2) {
 	return val.toLocaleString('sr-Latn', {
 		maximumFractionDigits: 2,
-		minimumFractionDigits: 2
+		minimumFractionDigits: minDigits
 	});
 }
 

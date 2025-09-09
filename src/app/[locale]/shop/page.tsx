@@ -73,7 +73,7 @@ function InnerPage({ collections, params, products, additionalProducts }: PagePr
 			{additionalProducts.length > 0 &&
 				<LoadMoreProductsWrapper text={t('shop_page.load_more_items')}>
 					<div className={'px-[var(--container-padding)] py-6 bg-black'}>
-						<h4 className={'uppercase font-medium text-base text-white py-9'}>
+						<h4 className={'uppercase font-medium text-base text-[var(--background)] py-9'}>
 							ORIGINAL PIECES
 						</h4>
 						<div className='flex flex-col md:flex-row flex-wrap justify-between gap-8'>

@@ -20,7 +20,8 @@ export function HoveringButton(props: Props) {
 					{props.icon ||
 						<ChevronRight size={6} stroke={props.mode === 'dark' ? 'var(--foreground)' : 'white'} />}
 				</div>
-				<div className={`text-base ${props.mode === 'dark' ? `text-[var(--foreground)]` : 'text-white'}`}>
+				<div
+					className={`text-base ${props.mode === 'dark' ? `text-[var(--foreground)]` : 'text-[var(--background)]'}`}>
 					{props.label}
 				</div>
 			</div>

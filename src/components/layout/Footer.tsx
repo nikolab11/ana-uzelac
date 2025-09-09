@@ -3,6 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Collection } from '@/types/api.types';
 import { FooterList } from '@/components/layout/FooterList';
 import { LocaleType } from '@/types/routing';
+import { Link } from '@/i18n/navigation';
 
 interface Props {
 	logo: string;
@@ -16,9 +17,11 @@ export function Footer(props: Props) {
 	return (
 		<div className={'pt-[48px]'}>
 			<div className={'flex justify-between relative py-7 px-[var(--container-padding)]'}>
-				<div className={'py-4'}>
-					<Image src={props.logo} alt={'Logo'} height={100} width={100} />
-				</div>
+				<Link href={'/home'}>
+					<div className={'py-4'}>
+						<Image src={props.logo} alt={'Logo'} height={100} width={100} />
+					</div>
+				</Link>
 				<div className={'flex justify-between gap-9'}>
 					<FooterList title={'Collections'} items={[{
 						name: headerT('shop'),

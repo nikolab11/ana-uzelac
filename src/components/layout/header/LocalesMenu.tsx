@@ -4,11 +4,21 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { routing } from '@/i18n/routing';
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem, MenuProps, Select } from '@mui/material';
 
 interface Props {
 	locale: LocaleType;
 }
+
+export const MenuElementProps: Partial<MenuProps> = {
+	slotProps: {
+		paper: {
+			sx: {
+				background: 'var(--background)'
+			}
+		}
+	}
+};
 
 export function LocalesMenu(props: Props) {
 	const router = useRouter();
@@ -19,8 +29,14 @@ export function LocalesMenu(props: Props) {
 		<div>
 			<Select
 				disableUnderline
+				MenuProps={MenuElementProps}
 				className={'text-sm text-[var(--text-color)] font-normal'}
-				sx={{ border: 'none', paddingBottom: '0', '&>div': { paddingBottom: 0 } }}
+				sx={{
+					border: 'none',
+					paddingBottom: '0',
+					'&>div': { paddingBottom: 0, background: 'var(--background)' },
+					background: 'var(--background)'
+				}}
 				size={'small'}
 				variant={'standard'}
 				slotProps={{
@@ -53,7 +69,17 @@ export function LocalesMenu(props: Props) {
 				{
 					routing.locales.map(val => {
 						return (
-							<MenuItem className={'text-sm'} key={val} value={val}>{val.toLocaleUpperCase()}</MenuItem>
+							<MenuItem className={'text-sm'} key={val} sx={{
+								'&.Mui-selected': {
+									backgroundColor: '#F6F1EB' // change this to your desired color
+								},
+								'&.Mui-selected:hover': {
+									backgroundColor: '#F6F1EB' // optional hover color
+								}
+							}}
+									  value={val}>
+								{val.toLocaleUpperCase()}
+							</MenuItem>
 						);
 					})
 				}

@@ -47,8 +47,8 @@ function HeadText() {
 	return (
 		<div className={'absolute w-full h-full flex justify-between pl-[10%] pr-[10%] flex-wrap gap-5 items-center'}>
 			<div className={'basis-xs'}>
-				<h3 className={'text-7xl text-bold text-white pb-3'}>{t('new_scarf_collections')}</h3>
-				<p className={'text-white text-end font-normal text-2xl'}>{t('winter_2026')}</p>
+				<h3 className={'text-7xl text-bold text-[var(--background)] pb-3'}>{t('new_scarf_collections')}</h3>
+				<p className={'text-[var(--background)] text-end font-normal text-2xl'}>{t('winter_2026')}</p>
 			</div>
 			<div>
 				<Link href={'/shop'}>

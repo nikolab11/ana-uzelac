@@ -36,10 +36,10 @@ function CollectionItem(props: { collection: Collection }) {
 				}} />
 				<div
 					className='absolute w-full h-full flex justify-center gap-5 flex-col px-[var(--container-padding)]'>
-					<h3 className={'text-white font-bold text-7xl'}>
+					<h3 className={'text-[var(--background)] font-bold text-7xl'}>
 						{name}
 					</h3>
-					<div className={'text-white text-base'}>
+					<div className={'text-[var(--background)] text-base'}>
 						{props.collection.subtitle[locale]}
 					</div>
 					<Link href={{

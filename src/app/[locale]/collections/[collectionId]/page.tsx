@@ -46,7 +46,7 @@ function InnerPage({ collection, images }: { collection: Collection } & PageProp
 				}} src={collection.images[0]} alt={'Image'} fill />
 				<HeadText title={collection.title[locale]} position={'center'} buttonLabel={'#Explore collection'}
 						  scrollElementId={SCROLL_ELEMENT_ID}>
-					<p className={'text-white text-xl font-light'}>
+					<p className={'text-[var(--background)] text-xl font-light'}>
 						{collection.subtitle[locale]}
 					</p>
 				</HeadText>

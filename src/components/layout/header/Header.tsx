@@ -13,6 +13,7 @@ import { SearchIcon } from '@/components/icons/SearchIcon';
 import { SearchInput } from '@/components/layout/header/SearchInput';
 import { ReactNode } from 'react';
 import { CartButton } from '@/components/layout/header/CartButton';
+import { HeaderLink } from '@/components/layout/header/HeaderLink';
 
 interface Props {
 	logo: string;
@@ -28,23 +29,29 @@ export function Header(props: Props) {
 	return (
 		<HeaderWrapper mode={props.mode}>
 			<div className={'relative'}>
-				<div className='flex justify-center pb-4'>
-					<Image src={props.logo} alt={'Logo'} width={80} height={55} />
-				</div>
+				<Link href={'/home'}>
+					<div className='flex justify-center pb-4'>
+						<Image src={props.logo} alt={'Logo'} width={80} height={55} />
+					</div>
+				</Link>
 				<div className='flex justify-between pb-4 overflow-x-auto items-end'>
 					<div className={'flex gap-3 items-center'}>
 						<SearchIcon />
 						<SearchInput placeholder={t('search')} />
 					</div>
 					<div className='flex flex-1 justify-center items-end gap-[32px]'>
-						<Link className={'text-sm app-link'} href={'/home'}>{t('home')}</Link>
-						<Link className={'text-sm app-link'} href={'/shop'}>{t('shop')}</Link>
+						<HeaderLink
+							href={'/home'}>{t('home')}</HeaderLink>
+						<HeaderLink
+							href={'/shop'}>{t('shop')}</HeaderLink>
 						<div className={'text-sm app-link'}>
 							<CollectionMenuItem
 								collections={props.collections} />
 						</div>
-						<Link className={'text-sm app-link'} href={'/news'}>{t('news')}</Link>
-						<Link className={'text-sm app-link'} href={'/about'}>{t('about')}</Link>
+						<HeaderLink
+							href={'/news'}>{t('news')}</HeaderLink>
+						<HeaderLink
+							href={'/about'}>{t('about')}</HeaderLink>
 					</div>
 					<div className='flex gap-9 justify-end items-center'>
 						<div>
