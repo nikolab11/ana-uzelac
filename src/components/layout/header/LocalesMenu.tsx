@@ -75,6 +75,9 @@ export function LocalesMenu(props: Props) {
 								},
 								'&.Mui-selected:hover': {
 									backgroundColor: '#F6F1EB' // optional hover color
+								},
+								'&.Mui-selected.Mui-focusVisible': {
+									backgroundColor: '#F6F1EB' // optional hover color
 								}
 							}}
 									  value={val}>
