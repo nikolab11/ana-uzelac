@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { routing } from '@/i18n/routing';
 import { MenuItem, MenuProps, Select } from '@mui/material';
+import { LOCALE_IMAGES } from '@/utils/locale-images';
 
 interface Props {
 	locale: LocaleType;
@@ -29,6 +30,7 @@ export function LocalesMenu(props: Props) {
 		<div>
 			<Select
 				disableUnderline
+				renderValue={val => val.toLocaleUpperCase()}
 				MenuProps={MenuElementProps}
 				className={'text-sm text-[var(--text-color)] font-normal'}
 				sx={{
@@ -51,21 +53,21 @@ export function LocalesMenu(props: Props) {
 				}}
 
 				value={props.locale} onChange={event => {
-				const value = event.target.value as LocaleType;
-				startTransition(() => {
-					let newPath = pathname as string;
-					if (newPath.startsWith(`/${props.locale}`)) {
-						newPath = newPath.replace(`/${props.locale}`, '');
-					}
-					router.push(
-						// @ts-expect-error -- TypeScript will validate that only known `params`
-						// are used in combination with a given `pathname`. Since the two will
-						// always match for the current route, we can skip runtime checks.
-						{ pathname: newPath, params },
-						{ locale: value }
-					);
-				});
-			}}>
+					const value = event.target.value as LocaleType;
+					startTransition(() => {
+						let newPath = pathname as string;
+						if (newPath.startsWith(`/${props.locale}`)) {
+							newPath = newPath.replace(`/${props.locale}`, '');
+						}
+						router.push(
+							// @ts-expect-error -- TypeScript will validate that only known `params`
+							// are used in combination with a given `pathname`. Since the two will
+							// always match for the current route, we can skip runtime checks.
+							{ pathname: newPath, params },
+							{ locale: value }
+						);
+					});
+				}}>
 				{
 					routing.locales.map(val => {
 						return (
@@ -80,8 +82,11 @@ export function LocalesMenu(props: Props) {
 									backgroundColor: '#F6F1EB' // optional hover color
 								}
 							}}
-									  value={val}>
-								{val.toLocaleUpperCase()}
+								value={val}>
+								<div className='flex items-center gap-3'>
+									{LOCALE_IMAGES[val]}
+									<p>{val.toLocaleUpperCase()}</p>
+								</div>
 							</MenuItem>
 						);
 					})

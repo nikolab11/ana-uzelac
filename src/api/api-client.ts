@@ -17,7 +17,6 @@ export const ApiClient = {
 					...options?.headers,
 					['x-api-key']: process.env.API_KEY || ''
 				},
-				cache: 'no-cache',
 				method: 'GET'
 
 			});
