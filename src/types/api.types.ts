@@ -85,6 +85,7 @@ export interface Collection {
   description: TranslatedText;
   products: Product[];
   sections: CollectionSection[];
+  homepage_image: string;
 }
 
 export interface ProductOption {

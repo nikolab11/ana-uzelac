@@ -54,7 +54,7 @@ async function InnerPage({ images, collections }: PageProps) {
       <div className={"max-w-screen-xl mx-auto py-[var(--vertical-padding)]"}>
         <ProductsSection
           discoverAllButton
-          products={products.products.original_products.slice(0, 3)}
+          products={products.products.collection_products.slice(0, 3)}
         />
       </div>
       <div

@@ -45,7 +45,7 @@ function CollectionItem(props: {
       <div className="relative h-[50vh] md:h-[75vh]">
         <Image
           fill
-          src={props.collection.images[0]}
+          src={props.collection.homepage_image}
           alt={name}
           style={{
             objectFit: "cover",
