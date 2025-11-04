@@ -1,51 +1,102 @@
-import { CollectionSection } from '@/types/api.types';
-import { useLocale } from 'next-intl';
-import { LocaleType } from '@/types/routing';
-import { SectionImages } from '@/app/[locale]/collections/[collectionId]/SectionImages';
-import Image from 'next/image';
+import { CollectionSection } from "@/types/api.types";
+import { useLocale, useTranslations } from "next-intl";
+import { LocaleType } from "@/types/routing";
+import { SectionImages } from "@/app/[locale]/collections/[collectionId]/SectionImages";
+import Image from "next/image";
+import Link from "next/link";
+import { HoveringButton } from "@/components/common/HoveringButton";
 
 interface Props {
-	section: CollectionSection;
-	inverted: boolean;
+  section: CollectionSection;
+  inverted: boolean;
+  collectionId: number;
 }
 
 export function CollectionSectionView(props: Props) {
-	const locale = useLocale() as LocaleType;
-	return (
-		<div>
-			<div
-				className={`flex ${props.inverted ? 'flex-row-reverse' : 'flew-row'} gap-[72px] items-center justify-between pb-[80px]`}>
-				<h3 className={'grow text-nowrap font-bold text-6xl'}>
-					{props.section.title[locale]}
-				</h3>
-				<p className={'text-base font-normal'}>
-					{props.section.description[locale]}
-				</p>
-			</div>
-			<div
-				className={`flex ${props.inverted ? 'flex-row-reverse' : 'flew-row'} gap-[72px] items-center justify-between`}>
-				<div className={'w-[40%]'}>
-					<h4 className={'pb-4 font-bold text-4xl'}>{props.section.contentTitle[locale]}</h4>
-					<p className={'text-base font-normal'}>
-						{props.section.content[locale]}
-					</p>
-				</div>
-				<div className={'grow'}>
-					<SectionImages section={props.section} />
-				</div>
-			</div>
-			<div className={'flex gap-5 pt-9 overflow-x-auto'} style={{
-				msOverflowStyle: 'none',
-				scrollbarWidth: 'none'
-			}}>
-				{
-					props.section.sideImages.map((image, index) => {
-						return (
-							<Image key={index} alt={'saffs'} src={image} width={250} height={300} />
-						);
-					})
-				}
-			</div>
-		</div>
-	);
+  const locale = useLocale() as LocaleType;
+  const t = useTranslations("home_page");
+
+  console.log(props.section);
+
+  return (
+    <div className="max-w-screen-xl mx-auto">
+      <div
+        className={`flex flex-col md:flex-row py-6 md:py-15 ${
+          props.inverted ? "md:flex-row-reverse" : ""
+        } gap-4 md:gap-[72px] items-start md:items-center justify-between pb-6 md:pb-[80px]`}
+      >
+        <h3 className={"grow text-nowrap font-bold text-3xl md:text-6xl"}>
+          {props.section.title[locale]}
+        </h3>
+        <p
+          className={`text-sm md:text-base font-normal ${
+            props.inverted
+              ? "md:text-left text-left"
+              : "md:text-right text-left"
+          } md:pl-6 pl-0`}
+        >
+          {props.section.description[locale]}
+        </p>
+      </div>
+      <div
+        className={`flex flex-col md:flex-row ${
+          props.inverted ? "md:flex-row-reverse" : ""
+        } gap-6 md:gap-[72px] items-start md:items-center justify-between`}
+      >
+        <div className={"w-full md:w-[40%]"}>
+          <h4
+            className={`pb-3 md:pb-4 font-bold text-2xl md:text-4xl ${
+              props.inverted ? "md:text-right text-left" : "text-left"
+            }`}
+          >
+            {props.section.contentTitle[locale]}
+          </h4>
+          <p
+            className={`text-sm md:text-base font-normal ${
+              props.inverted ? "md:text-right text-left" : "text-left"
+            }`}
+          >
+            {props.section.content[locale]}
+          </p>
+          <div
+            className={`pt-3 md:pt-4 ${
+              props.inverted ? "md:text-right text-left" : "text-left"
+            }`}
+          >
+            <Link href={`/shop?collection_ids=${props.collectionId}`}>
+              <HoveringButton mode="dark" label={t("shop_now")} />
+            </Link>
+          </div>
+        </div>
+        <div className={"w-full md:grow"}>
+          <SectionImages section={props.section} />
+        </div>
+      </div>
+      <div
+        className={
+          "flex flex-col md:flex-row gap-3 md:gap-5 pt-6 md:pt-9 md:overflow-x-auto"
+        }
+        style={{
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        {props.section.sideImages.map((image, index) => {
+          return (
+            <Image
+              key={index}
+              alt={"saffs"}
+              src={image}
+              style={{
+                width: "100%",
+              }}
+              width={250}
+              height={300}
+              className="w-full md:w-auto"
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 }

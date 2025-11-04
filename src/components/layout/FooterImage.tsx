@@ -1,31 +1,48 @@
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Props {
-	img: string;
+  img: string;
 }
 
 export function FooterImage(props: Props) {
-	const t = useTranslations('wearing_the_moment_section');
-	return (
-		<div className='relative h-[75vh]'>
-			<Image src={props.img} alt={''} fill objectFit={'cover'} />
-			<div
-				className={'absolute top-0 flex justify-center flex-col gap-3 items-center  w-full h-full pl-[25%] pr-[25%]'}>
-				<h3 className={'text-[var(--background)] font-bold text-6xl text-center font-["Playfair Display"]'}>
-					{t('wearing_the_moment')}
-				</h3>
-				<div>
-					<div className={'pb-3'}>
-						<p
-							className={'text-[var(--background)] font-medium text-base break-keep text-center'}>{t('wearing_the_moment_description_1')}</p>
-					</div>
-					<div className={'pb-3'}>
-						<p
-							className={'text-[var(--background)] font-medium text-base break-keep text-center'}>{t('wearing_the_moment_description_2')}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+  const t = useTranslations("wearing_the_moment_section");
+  return (
+    <div className="relative h-[50vh] md:h-[75vh]">
+      <Image src={props.img} alt={""} fill objectFit={"cover"} />
+      <div
+        className={
+          "absolute top-0 flex justify-center flex-col gap-3 items-center  w-full h-full pl-[var(--container-padding)] pr-[var(--container-padding)] md:pl-[25%] md:pr-[25%]"
+        }
+      >
+        <h3
+          className={
+            'text-[var(--background)] font-bold text-3xl md:text-6xl text-center font-["Playfair Display"]'
+          }
+        >
+          {t("wearing_the_moment")}
+        </h3>
+        <div>
+          <div className={"pb-3"}>
+            <p
+              className={
+                "text-[var(--background)] font-medium text-sm md:text-base break-keep text-center"
+              }
+            >
+              {t("wearing_the_moment_description_1")}
+            </p>
+          </div>
+          <div className={"pb-3"}>
+            <p
+              className={
+                "text-[var(--background)] font-medium text-sm md:text-base break-keep text-center"
+              }
+            >
+              {t("wearing_the_moment_description_2")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

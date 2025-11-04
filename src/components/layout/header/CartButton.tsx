@@ -5,6 +5,7 @@ import { useCartContext } from '@/context/cart/cart.context';
 
 interface Props {
 	label: string;
+	hideLabel?: boolean;
 }
 
 export function CartButton(props: Props) {
@@ -20,7 +21,7 @@ export function CartButton(props: Props) {
 					)
 				}
 			</div>
-			<span className={'text-sm'}>{props.label}</span>
+			{!props.hideLabel && <span className={'text-sm'}>{props.label}</span>}
 		</div>
 	);
 }

@@ -13,7 +13,7 @@ export function filterProducts(products: Product[], params: Partial<ProductFilte
 		if (params.collection_ids && (product.collection_id === undefined || !params.collection_ids.includes(product.collection_id))) {
 			return false;
 		}
-		if (params.search && !product.name_fr.includes(params.search) && product.name_eng.includes(params.search)) {
+		if (params.search && !product.name_fr.toLowerCase().includes(params.search.toLowerCase()) && !product.name_eng.toLowerCase().includes(params.search.toLowerCase())) {
 			return false;
 		}
 		return !(params.sizes && !params.sizes.some(size => product.options.map(o => o.size).includes(size)));

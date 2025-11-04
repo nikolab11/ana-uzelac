@@ -17,7 +17,8 @@ export const ApiClient = {
 					...options?.headers,
 					['x-api-key']: process.env.API_KEY || ''
 				},
-				method: 'GET'
+				method: 'GET',
+				next: { revalidate: 300 } // 5 minutes
 
 			});
 			if (result.status === 404) {

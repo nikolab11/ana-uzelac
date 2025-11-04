@@ -16,8 +16,8 @@ export function NewsItem(props: Props) {
 	return (
 		<div>
 			<img src={props.news.thumbnail} alt={title} width={'100%'} height={'auto'} />
-			<h3 className={'text-bold text-lg py-4'}>{title}</h3>
-			<p className={'text-sm pb-4'}>{description}</p>
+			<h3 className={'text-bold text-base md:text-lg py-2 md:py-4'}>{title}</h3>
+			<p className={'text-xs md:text-sm pb-3 md:pb-4'}>{description}</p>
 			<Link href={{
 				pathname: '/news/[newsId]',
 				params: {

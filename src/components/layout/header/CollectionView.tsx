@@ -7,13 +7,15 @@ import { Link } from '@/i18n/navigation';
 interface CollectionViewProps {
 	collections: Collection[];
 	image: string;
+	isDrawer?: boolean;
 }
 
 export function CollectionsView(props: CollectionViewProps) {
 	const locale = useLocale() as LocaleType;
+	const isDrawer = props.isDrawer;
 	return (
 		<div
-			className={`flex gap-9 px-6 items-end py-9 `}>
+			className={`flex ${isDrawer ? 'flex-col' : ''} gap-9 ${isDrawer ? 'px-0' : 'px-6'} ${isDrawer ? 'items-start' : 'items-end'} py-9 overflow-y-auto`}>
 			{
 				props.collections.map((collection) => {
 					const name = collection.title[locale];
@@ -24,7 +26,7 @@ export function CollectionsView(props: CollectionViewProps) {
 								collectionId: collection.collection_id
 							}
 						}}>
-							<div className={'basis-[20%]'}>
+							<div className={`${isDrawer ? 'w-full' : 'basis-[20%]'}`}>
 								<div className={'font-medium text-xs uppercase pb-2'}>
 									#Collection
 								</div>
@@ -32,7 +34,13 @@ export function CollectionsView(props: CollectionViewProps) {
 									{name}
 								</div>
 								<div className={'relative'}>
-									<Image src={collection.images[0]} alt={name} width={300} height={500} />
+									<Image 
+										src={collection.images[0]} 
+										alt={name} 
+										width={isDrawer ? 200 : 300} 
+										height={isDrawer ? 333 : 500}
+										className={isDrawer ? 'w-full h-auto' : ''}
+									/>
 								</div>
 							</div>
 						</Link>

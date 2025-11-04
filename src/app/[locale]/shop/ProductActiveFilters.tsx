@@ -28,7 +28,7 @@ export function ProductActiveFilters({ params, collections, locale }: Props) {
 	};
 
 	return (
-		<div className={'flex overflow-x-auto gap-5'}>
+		<div className={'flex overflow-x-auto gap-3 md:gap-5 pb-2 md:pb-0'}>
 			{
 				(params.price_min || params.price_max) && (
 					<FilterItem content={getPriceFilterTitle(params)} onDelete={() => {
@@ -108,9 +108,9 @@ interface FilterItemProps {
 
 function FilterItem(props: FilterItemProps) {
 	return (
-		<div className={'bg-white px-3 py-2 rounded-2xl flex gap-3 justify-between items-center'}>
+		<div className={'bg-white px-2 md:px-3 py-1.5 md:py-2 rounded-2xl flex gap-2 md:gap-3 justify-between items-center whitespace-nowrap'}>
 			<div className='text-xs font-medium'>{props.content}</div>
-			<div onClick={props.onDelete} className={'cursor-pointer'}>
+			<div onClick={props.onDelete} className={'cursor-pointer flex-shrink-0'}>
 				<XIcon />
 			</div>
 		</div>

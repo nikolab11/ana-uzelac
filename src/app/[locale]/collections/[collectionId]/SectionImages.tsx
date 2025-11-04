@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export function SectionImages({ section }: { section: CollectionSection }) {
 	const [activeIndex, setActiveIndex] = useState(0);
-	const ref = useRef<HTMLImageElement>(null);
+	const ref = useRef<HTMLDivElement>(null);
 	useLayoutEffect(() => {
 		if (!ref.current) {
 			return;

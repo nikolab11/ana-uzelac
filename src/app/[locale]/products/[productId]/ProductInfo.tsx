@@ -40,16 +40,16 @@ export function ProductInfo({ product, locale, collections }: Props) {
 		<div>
 			<AddedToCartSnackbar product={product} option={selectedOption} open={openSnackbar}
 								 onClose={() => setOpenSnackbar(false)} />
-			<div className={'py-4 bg-[#FFFCF7E6] opacity-80'}>
-				<div className={'px-6 py-4 border-white border-b'}>
-					<h4 className={'pb-2 text-xl font-normal'}>{product[`name_${locale}`]}</h4>
+			<div className={'py-3 md:py-4 bg-[#FFFCF7E6] md:opacity-80'}>
+				<div className={'px-4 md:px-6 py-3 md:py-4 border-white border-b'}>
+					<h4 className={'pb-2 text-lg md:text-xl font-normal'}>{product[`name_${locale}`]}</h4>
 					{selectedOption &&
-						<p className={'text-sm font-light'}>{`${formatNumber(selectedOption.price)} ${product.currency}`}</p>}
+						<p className={'text-xs md:text-sm font-light'}>{`${formatNumber(selectedOption.price)} ${product.currency}`}</p>}
 				</div>
 				{
 					collection && (
 						<div
-							className={'px-6 py-4 border-white border-b flex justify-between gap-[80px] text-sm font-normal'}>
+							className={'px-4 md:px-6 py-3 md:py-4 border-white border-b flex justify-between gap-4 md:gap-[80px] text-xs md:text-sm font-normal'}>
 							<p>
 								#Collection
 							</p>
@@ -62,7 +62,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
 				<SizesSection error={showError ? '#Please choose a size' : undefined} selected={selectedOption}
 							  onChange={onOptionSelect}
 							  options={product.options} />
-				<div className={'px-6 py-4 border-white border-b'}>
+				<div className={'px-4 md:px-6 py-3 md:py-4 border-white border-b'}>
 					<Button className={'w-full'}
 							sx={{
 								borderRadius: 0
@@ -71,8 +71,8 @@ export function ProductInfo({ product, locale, collections }: Props) {
 							startIcon={<ShoppingBag stroke={'white'} size={4} />}
 							color={'primary'} variant={'contained'}>{t('add_to_cart')}</Button>
 				</div>
-				<div className={'px-6 py-4'}>
-					<div dangerouslySetInnerHTML={{
+				<div className={'px-4 md:px-6 py-3 md:py-4'}>
+					<div className={'text-xs md:text-sm'} dangerouslySetInnerHTML={{
 						__html: product[`short_description_${locale}`] || ''
 					}} />
 				</div>

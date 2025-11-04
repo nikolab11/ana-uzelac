@@ -55,7 +55,7 @@ export function ProductImages({ product }: Props) {
 				</div>
 
 			</div>
-			<div className={'absolute bottom-[64px] left-[80px]'}>
+			<div className={'absolute bottom-4 left-4 md:bottom-[64px] md:left-[80px]'}>
 				<ImageCarousel images={product.images} activeIndex={activeIndex} onChange={setActiveIndex} />
 			</div>
 		</div>
