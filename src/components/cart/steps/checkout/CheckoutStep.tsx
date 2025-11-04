@@ -67,7 +67,7 @@ export function CheckoutStep() {
       {/* Mobile: absolute positioned back button */}
       <div className={"md:hidden"}>
         <BackButton
-          label={"#Back to cart"}
+          label={t("back_to_cart")}
           onClick={() => onOpenChange(submitState === "pending", "cart")}
         />
       </div>
@@ -82,7 +82,7 @@ export function CheckoutStep() {
             {/* Desktop: back button in normal flow */}
             <div className={"hidden md:block mb-4"}>
               <BackButton
-                label={"#Back to cart"}
+                label={t("back_to_cart")}
                 onClick={() => onOpenChange(submitState === "pending", "cart")}
               />
             </div>

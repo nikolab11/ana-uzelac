@@ -8,8 +8,6 @@ interface Props {
 export function DifferentKindOfLuxurySection(props: Props) {
   const t = useTranslations("about_page");
 
-  console.log(props.images);
-
   return (
     <div
       className={"max-w-screen-xl mx-auto py-[40px] md:py-[80px] px-4 md:px-0"}

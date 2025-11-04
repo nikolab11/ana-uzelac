@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { ProductImages } from "@/app/[locale]/products/[productId]/ProductImages";
 import { Product } from "@/types/api.types";
 import { ProductInfo } from "@/app/[locale]/products/[productId]/ProductInfo";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { LocaleType } from "@/types/routing";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
@@ -37,9 +37,7 @@ interface Props {
 
 function InnerPage({ product, collections, images }: Props & PageProps) {
   const locale = useLocale() as LocaleType;
-
-  console.log(product);
-
+  const t = useTranslations("shop_page");
   return (
     <div className={"w-full relative md:h-full"}>
       <div className={"w-full overflow-x-hidden md:h-full"}>
@@ -74,7 +72,9 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
             "bg-[#FCF7F1] w-full p-4 md:p-6 flex flex-col gap-4 md:gap-7 justify-center items-center"
           }
         >
-          <h4 className={"font-normal text-lg md:text-xl"}>#The inspiration</h4>
+          <h4 className={"font-normal text-lg md:text-xl"}>
+            {t("the_inspiration")}
+          </h4>
           <p
             className={"font-normal text-xs md:text-sm text-center"}
             dangerouslySetInnerHTML={{
@@ -88,7 +88,9 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
             "bg-[#FCF7F1] w-full p-4 md:p-6 flex flex-col gap-4 md:gap-7 justify-center items-center"
           }
         >
-          <h4 className={"font-normal text-lg md:text-xl"}>#Description</h4>
+          <h4 className={"font-normal text-lg md:text-xl"}>
+            {t("description")}
+          </h4>
           <p
             className={"font-normal text-xs md:text-sm text-center"}
             dangerouslySetInnerHTML={{

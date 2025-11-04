@@ -2,7 +2,7 @@ import { fetchSingleCollection } from "@/api/products";
 import { notFound } from "next/navigation";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Collection } from "@/types/api.types";
 import { LocaleType } from "@/types/routing";
 import { HeadText } from "@/components/common/HeadText";
@@ -44,7 +44,7 @@ function InnerPage({
   images,
 }: { collection: Collection } & PageProps) {
   const locale = useLocale() as LocaleType;
-
+  const t = useTranslations("shop_page");
   return (
     <div>
       <div className="h-[50vh] md:min-h-screen relative">
@@ -59,7 +59,7 @@ function InnerPage({
         <HeadText
           title={collection.title[locale]}
           position={"center"}
-          buttonLabel={"#Explore collection"}
+          buttonLabel={t("explore_collection")}
           scrollElementId={SCROLL_ELEMENT_ID}
         >
           <p
@@ -104,7 +104,7 @@ function InnerPage({
       >
         <p className={"text-sm md:text-base font-normal"}>#Neki opis</p>
         <Link href={`/shop?collection_ids=${collection.collection_id}`}>
-          <HoveringButton mode={"dark"} label={"#Shop collection"} />
+          <HoveringButton mode={"dark"} label={t("shop_collection")} />
         </Link>
       </div>
       <FooterImage img={images?.home_page.wearing_the_moment || ""} />

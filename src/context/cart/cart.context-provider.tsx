@@ -37,9 +37,19 @@ function saveCartToStorage(items: CartItems): void {
 }
 
 export function CartContextProvider(props: Props) {
-	const [items, setItems] = useState<CartItems>(() => loadCartFromStorage());
+	const [items, setItems] = useState<CartItems>({});
+	const [mounted, setMounted] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState<CartStep | undefined>(undefined);
+
+	// Load cart from localStorage after hydration
+	useEffect(() => {
+		setMounted(true);
+		const loadedItems = loadCartFromStorage();
+		if (Object.keys(loadedItems).length > 0) {
+			setItems(loadedItems);
+		}
+	}, []);
 
 	useEffect(() => {
 		saveCartToStorage(items);

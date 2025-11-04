@@ -10,7 +10,8 @@ declare const messages: {
       "collections": "Collections",
       "about": "About",
       "news": "News",
-      "cart": "Cart"
+      "cart": "Cart",
+      "collection": "Collection"
     },
     "home_page": {
       "new_scarf_collections": "New Scarf Collections",
@@ -39,7 +40,9 @@ declare const messages: {
       "the_magical_south": "The Magical South",
       "the_magical_south_description": "In the heart of southern France, where cicadas sing and warm winds sweep across sun-drenched hills, a quiet magic lingers in the air. This collection captures the effortless beauty of Occitania - earthy tones, soft textures, and a sense of timeless calm woven into every piece.",
       "item_garden_day_night": "Garden Day and Night",
-      "item_sky_mountains": "Sky Mountains"
+      "item_sky_mountains": "Sky Mountains",
+      "explore_collection": "Explore collection",
+      "shop_collection": "Shop collection"
     },
     "wearing_the_moment_section": {
       "wearing_the_moment": "Wearing the Moment",
@@ -84,7 +87,19 @@ declare const messages: {
       "description_100_silk": "Description: 100 % Silk",
       "silk_twill_18_momme": "Silk Twill: 18 momme",
       "made_in_france": "Made in France",
-      "products": "Products"
+      "products": "Products",
+      "filter": "Filter",
+      "collection": "Collection",
+      "continue_shopping": "Continue shopping",
+      "free_shipping_for_all_orders": "Free shipping for all orders",
+      "back_to_cart": "Back to cart",
+      "you_have_successfully_created_an_order": "You have successfully created an order",
+      "there_was_an_error_creating_an_order": "There was an error creating an order",
+      "the_inspiration": "The inspiration",
+      "description": "Description",
+      "added_to_cart": "Added to Cart",
+      "view_cart": "View cart",
+      "please_choose_a_size": "Please choose a size"
     },
     "filter_and_sort": {
       "filter_by": "Filter By",
@@ -193,7 +208,8 @@ declare const messages: {
       "collections": "Collections",
       "about": "À propos",
       "news": "Actualités",
-      "cart": "Panier"
+      "cart": "Panier",
+      "collection": "Collection"
     },
     "home_page": {
       "new_scarf_collections": "Nouvelles collections de foulards",
@@ -222,7 +238,9 @@ declare const messages: {
       "the_magical_south": "Le Sud magique",
       "the_magical_south_description": "Au cœur du sud de la France, où chantent les cigales et où les vents chauds balaient les collines baignées de soleil, une magie discrète flotte dans l’air. Cette collection capture la beauté sans effort de l’Occitanie - des tons terreux, des textures douces et un sentiment de calme intemporel tissé dans chaque pièce.",
       "item_garden_day_night": "Jardin Jour et Nuit",
-      "item_sky_mountains": "Montagnes célestes"
+      "item_sky_mountains": "Montagnes célestes",
+      "explore_collection": "Explorer la collection",
+      "shop_collection": "Acheter la collection"
     },
     "wearing_the_moment_section": {
       "wearing_the_moment": "Porter l’instant",
@@ -267,7 +285,19 @@ declare const messages: {
       "description_100_silk": "Description : 100 % soie",
       "silk_twill_18_momme": "Serge de soie : 18 momme",
       "made_in_france": "Fabriqué en France",
-      "products": "Produits"
+      "products": "Produits",
+      "filter": "Filtrer",
+      "collection": "Collection",
+      "continue_shopping": "Continuer les achats",
+      "free_shipping_for_all_orders": "Livraison gratuite pour toutes les commandes",
+      "back_to_cart": "Retour au panier",
+      "you_have_successfully_created_an_order": "Vous avez créé une commande avec succès",
+      "there_was_an_error_creating_an_order": "Une erreur s'est produite lors de la création de la commande",
+      "the_inspiration": "L'inspiration",
+      "description": "Description",
+      "added_to_cart": "Ajouté au panier",
+      "view_cart": "Voir le panier",
+      "please_choose_a_size": "Veuillez choisir une taille"
     },
     "filter_and_sort": {
       "filter_by": "Filtrer par",

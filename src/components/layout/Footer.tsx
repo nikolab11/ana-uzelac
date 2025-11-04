@@ -30,6 +30,9 @@ export function Footer(props: Props) {
               height={100}
               width={100}
               className="w-20 h-20 md:w-[100px] md:h-[100px]"
+              style={{
+                objectFit: "contain",
+              }}
             />
           </div>
         </Link>
@@ -118,7 +121,7 @@ export function Footer(props: Props) {
         </div>
         <div className="flex items-center gap-3 justify-center md:justify-start">
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/anabyanauzelac?igsh=dTB1cHBhZ3h0Mjhx"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#444444] hover:text-[#8a3ab9] transition-colors text-xl"
@@ -144,7 +147,7 @@ export function Footer(props: Props) {
             aria-hidden="true"
           ></span>
           <a
-            href="mailto:info@example.com"
+            href="mailto:ana@anauzelac.com"
             className="text-[#444444] hover:text-[#c71610] transition-colors text-xl"
             aria-label="Email"
           >

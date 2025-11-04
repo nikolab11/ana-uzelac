@@ -26,7 +26,7 @@ export function AddressDetails(props: Props) {
   return (
     <div className={"w-full md:w-[70%]"} id={"address-step"}>
       <h4 className={"font-medium text-lg md:text-2xl pb-6 md:pb-[48px]"}>
-        {t("proceed_to_payment")}
+        {t("order_details")}
       </h4>
       {props.isMobileForm ? (
         <div>
@@ -346,12 +346,12 @@ export function AddressDetails(props: Props) {
             )}
             {props.submitState === "success" && (
               <div className={"text-sm md:text-base"}>
-                #You have successfully created an order
+                {t("you_have_successfully_created_an_order")}
               </div>
             )}
             {props.submitState === "error" && (
               <div className={"text-sm md:text-base"}>
-                #There was an error creating an orderr
+                {t("there_was_an_error_creating_an_order")}
               </div>
             )}
           </div>
@@ -380,12 +380,12 @@ export function AddressDetails(props: Props) {
           )}
           {props.submitState === "success" && (
             <div className={"text-sm md:text-base"}>
-              #You have successfully created an order
+              {t("you_have_successfully_created_an_order")}
             </div>
           )}
           {props.submitState === "error" && (
             <div className={"text-sm md:text-base"}>
-              #There was an error creating an orderr
+              {t("there_was_an_error_creating_an_order")}
             </div>
           )}
         </div>

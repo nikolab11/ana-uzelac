@@ -1,95 +1,147 @@
-'use client';
-import { useLayoutEffect, useRef, useState } from 'react';
-import { ImageCarousel } from '@/components/common/ImageCarousel';
-import { XIcon } from '@/components/icons/XIcon';
-import { Button, ButtonGroup, IconButton } from '@mui/material';
-import Image from 'next/image';
+"use client";
+import { useLayoutEffect, useRef, useState } from "react";
+import { ImageCarousel } from "@/components/common/ImageCarousel";
+import { XIcon } from "@/components/icons/XIcon";
+import { Button, ButtonGroup, IconButton } from "@mui/material";
+import Image from "next/image";
 
 interface Props {
-	images: string[];
-	open: boolean;
-	onClose: () => void;
+  images: string[];
+  open: boolean;
+  onClose: () => void;
 }
 
 const ZOOM_SCALE_STEP = 1.3;
 
 export function ProductImagesView(props: Props) {
-	const [active, setActive] = useState(0);
-	const ref = useRef<HTMLImageElement>(null);
-	const [zoom, setZoom] = useState(1);
-	useLayoutEffect(() => {
-		if (!props.open || !ref.current) {
-			return;
-		}
-		const scrollWidth = ref.current.scrollWidth;
+  const [active, setActive] = useState(0);
+  const ref = useRef<HTMLImageElement>(null);
+  const [zoom, setZoom] = useState(1);
+  useLayoutEffect(() => {
+    if (!props.open || !ref.current) {
+      return;
+    }
+    const scrollWidth = ref.current.scrollWidth;
 
-		ref.current.scrollTo({
-			behavior: 'smooth',
-			left: active * scrollWidth / props.images.length
-		});
+    ref.current.scrollTo({
+      behavior: "smooth",
+      left: (active * scrollWidth) / props.images.length,
+    });
+  }, [active, props.open, props.images.length]);
 
-	}, [active, props.open, props.images.length]);
+  if (!props.open) {
+    return null;
+  }
 
-	if (!props.open) {
-		return null;
-	}
-
-	return (
-		<div ref={ref} className={'fixed flex z-1201 bg-black'}
-			 style={{
-				 width: `100vw`,
-				 height: '100vh',
-				 top: 0,
-				 overflow: 'hidden'
-			 }}
-		>
-			<div
-				className={'fixed top-[60px] z-1 bg-white right-[80px] rounded-full'}>
-				<IconButton sx={{
-					padding: '12px'
-				}} onClick={props.onClose}>
-					<XIcon strokeWidth={1} size={3} />
-				</IconButton>
-			</div>
-			<div className={'flex'} style={{
-				width: `${100 * props.images.length}%`,
-				height: '100%',
-				position: 'relative'
-			}}>
-				{
-					props.images.map((image, index) => {
-						return (
-							<div key={index} className={'w-screen h-full overflow-auto  px-9 viewImageContainer'}>
-								<div className={'w-full h-full relative viewImageContainer'} style={{
-									transform: `scale(${zoom})`
-
-								}}>
-									<Image src={image} fill style={{
-										objectFit: 'contain'
-									}} alt={'asfas'} />
-								</div>
-							</div>
-						);
-					})
-				}
-			</div>
-			<div className={'fixed bottom-[64px] left-[80px]'}>
-				<div className={'pb-4'}>
-					<ButtonGroup orientation={'vertical'} variant={'outlined'}
-								 color={'primary'} sx={{
-						background: 'white',
-						borderRadius: '30px 30px',
-						border: 'none'
-
-					}}>
-						<Button sx={{ fontSize: '22px', border: 'none' }}
-								onClick={() => setZoom(prev => prev * ZOOM_SCALE_STEP)}>+</Button>
-						<Button sx={{ fontSize: '22px', border: 'none' }}
-								onClick={() => setZoom(prev => prev / ZOOM_SCALE_STEP)}>-</Button>
-					</ButtonGroup>
-				</div>
-				<ImageCarousel images={props.images} activeIndex={active} onChange={setActive} />
-			</div>
-		</div>
-	);
+  return (
+    <div
+      ref={ref}
+      className={"fixed flex z-1201 bg-black"}
+      style={{
+        width: `100vw`,
+        height: "100vh",
+        top: 0,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className={
+          "fixed top-4 md:top-[60px] z-1 bg-white right-4 md:right-[80px] rounded-full"
+        }
+      >
+        <IconButton
+          sx={{
+            padding: { xs: "10px", md: "12px" },
+            minWidth: { xs: "44px", md: "auto" },
+            minHeight: { xs: "44px", md: "auto" },
+          }}
+          onClick={props.onClose}
+          className={"touch-manipulation"}
+        >
+          <XIcon strokeWidth={1} size={3} />
+        </IconButton>
+      </div>
+      <div
+        className={"flex"}
+        style={{
+          width: `${100 * props.images.length}%`,
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        {props.images.map((image, index) => {
+          return (
+            <div
+              key={index}
+              className={
+                "w-screen h-full overflow-auto px-2 md:px-9 viewImageContainer"
+              }
+            >
+              <div
+                className={"w-full h-full relative viewImageContainer"}
+                style={{
+                  transform: `scale(${zoom})`,
+                }}
+              >
+                <Image
+                  src={image}
+                  fill
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  alt={"asfas"}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className={"fixed bottom-4 md:bottom-[64px] left-4 md:left-[80px]"}>
+        <div className={"pb-3 md:pb-4"}>
+          <ButtonGroup
+            orientation={"vertical"}
+            variant={"outlined"}
+            color={"primary"}
+            sx={{
+              background: "white",
+              borderRadius: { xs: "24px 24px", md: "30px 30px" },
+              border: "none",
+            }}
+          >
+            <Button
+              sx={{
+                fontSize: { xs: "18px", md: "22px" },
+                border: "none",
+                minWidth: { xs: "44px", md: "auto" },
+                minHeight: { xs: "44px", md: "auto" },
+                padding: { xs: "8px", md: "auto" },
+              }}
+              onClick={() => setZoom((prev) => prev * ZOOM_SCALE_STEP)}
+              className={"touch-manipulation"}
+            >
+              +
+            </Button>
+            <Button
+              sx={{
+                fontSize: { xs: "18px", md: "22px" },
+                border: "none",
+                minWidth: { xs: "44px", md: "auto" },
+                minHeight: { xs: "44px", md: "auto" },
+                padding: { xs: "8px", md: "auto" },
+              }}
+              onClick={() => setZoom((prev) => prev / ZOOM_SCALE_STEP)}
+              className={"touch-manipulation"}
+            >
+              -
+            </Button>
+          </ButtonGroup>
+        </div>
+        <ImageCarousel
+          images={props.images}
+          activeIndex={active}
+          onChange={setActive}
+        />
+      </div>
+    </div>
+  );
 }

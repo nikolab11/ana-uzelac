@@ -174,7 +174,7 @@ export function FilterModal(props: Props) {
           <SearchSection
             open={openSection === "collection"}
             onChange={onOpenChange("collection")}
-            title={"#Collection"}
+            title={t("collection")}
           >
             {props.collections.map((collection) => {
               return (
@@ -325,7 +325,10 @@ function SearchSection(props: {
     <Accordion
       expanded={props.open}
       onChange={props.onChange}
-      disableGutters
+      slots={{
+        heading: "div",
+        root: "div",
+      }}
     >
       <AccordionSummary
         sx={{

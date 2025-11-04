@@ -29,10 +29,14 @@ export function ShopHeader({
 
   return (
     <div
-      className={"flex justify-between items-center max-w-screen-xl mx-auto px-4 md:px-0"}
+      className={
+        "flex justify-between items-center max-w-screen-xl mx-auto px-4 md:px-0"
+      }
     >
       <div className={"flex justify-between items-center gap-2 py-3"}>
-        <div className={"text-sm md:text-base font-medium"}>{"Products"}</div>
+        <div className={"text-sm md:text-base font-medium"}>
+          {t("products")}
+        </div>
         <div className={"font-medium text-[10px] tracking-wider"}>
           ({totalProducts})
         </div>
@@ -47,7 +51,7 @@ export function ShopHeader({
           <FilterIcon />
         </div>
         <div className={"font-medium text-xs md:text-sm leading-[14px]"}>
-          #Filter{" "}
+          {t("filter")}{" "}
           {usedFilters > 0 && (
             <span
               className={"absolute pl-1 top-[8px] text-[10px] tracking-wider"}

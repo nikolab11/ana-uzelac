@@ -2,6 +2,7 @@
 
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { useCartContext } from '@/context/cart/cart.context';
+import { useEffect, useState } from 'react';
 
 interface Props {
 	label: string;
@@ -10,12 +11,18 @@ interface Props {
 
 export function CartButton(props: Props) {
 	const { onOpenChange, totalItems } = useCartContext();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
 	return (
 		<div onClick={() => onOpenChange(true)} className='flex gap-2 items-center justify-end cursor-pointer'>
 			<div className={'relative'}>
 				<ShoppingBag size={5} />
 				{
-					totalItems > 0 && (
+					mounted && totalItems > 0 && (
 						<div
 							className={'absolute top-[10px] font-normal bg-[#FCF7F1] px-[2px] text-[10px] rounded-full right-[0px]'}>{totalItems}</div>
 					)

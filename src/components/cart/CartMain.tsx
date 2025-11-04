@@ -14,6 +14,7 @@ const containerStyle: CSSProperties = {
 };
 
 export function CartMain() {
+  const t = useTranslations("shop_page");
   const { open, onOpenChange, items, step } = useCartContext();
   const onClose = () => onOpenChange(false);
   const router = useRouter();
@@ -101,7 +102,7 @@ function EmptyCart(props: { onClose: () => void }) {
             variant={"contained"}
             color={"primary"}
           >
-            #Continue shopping
+            {t("continue_shopping")}
           </Button>
         </div>
       </div>

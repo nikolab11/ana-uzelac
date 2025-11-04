@@ -10,6 +10,7 @@ interface Props {
 
 export function GrandOpeningSection(props: Props) {
   const t = useTranslations("home_page");
+
   return (
     <div className="flex flex-col md:flex-row gap-8 relative max-w-screen-xl mx-auto justify-between pt-[var(--vertical-padding)] px-[var(--container-padding)] md:px-0">
       <div className={"basis-sm w-full md:w-auto"}>

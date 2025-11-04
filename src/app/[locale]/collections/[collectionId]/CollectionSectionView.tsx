@@ -16,8 +16,6 @@ export function CollectionSectionView(props: Props) {
   const locale = useLocale() as LocaleType;
   const t = useTranslations("home_page");
 
-  console.log(props.section);
-
   return (
     <div className="max-w-screen-xl mx-auto">
       <div

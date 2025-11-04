@@ -41,7 +41,7 @@ export function AddedToCartSnackbar(props: Props) {
             "flex items-center pb-3 md:pb-4 gap-4 md:gap-[60px] justify-between"
           }
         >
-          <h4 className={"text-sm md:text-base"}>#Added to Cart</h4>
+          <h4 className={"text-sm md:text-base"}>{t("added_to_cart")}</h4>
           <div
             onClick={props.onClose}
             className={"cursor-pointer flex-shrink-0"}
@@ -76,15 +76,21 @@ export function AddedToCartSnackbar(props: Props) {
           }
         >
           <button
-            onClick={() => onOpenChange(true)}
+            onClick={() => {
+              props.onClose();
+              onOpenChange(true);
+            }}
             className={
               "grow px-3 md:px-4 py-2 text-xs md:text-sm hover:bg-[var(--secondary-color)] hover:text-[var(--background)] transition-all cursor-pointer"
             }
           >
-            #View cart
+            {t("view_cart")}
           </button>
           <Button
-            onClick={() => onOpenChange(true, "checkout")}
+            onClick={() => {
+              props.onClose();
+              onOpenChange(true, "checkout");
+            }}
             className={"grow"}
             variant={"contained"}
             color={"primary"}
