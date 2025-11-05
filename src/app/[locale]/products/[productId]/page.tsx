@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { PageProps } from "@/types/pages.types";
 import { ProductSideImages } from "@/app/[locale]/products/[productId]/ProductSideImages";
+import parse from "html-react-parser";
 
 interface Params {
   productId: string;
@@ -75,12 +76,9 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
           <h4 className={"font-normal text-lg md:text-xl"}>
             {t("the_inspiration")}
           </h4>
-          <p
-            className={"font-normal text-xs md:text-sm text-center"}
-            dangerouslySetInnerHTML={{
-              __html: product[`inspiration_${locale}`] || "",
-            }}
-          />
+          <p className={"font-normal text-xs md:text-sm text-center"}>
+            {parse(product[`inspiration_${locale}`] || "")}
+          </p>
         </div>
         <ProductSideImages images={product.images_down || []} />
         <div
@@ -91,12 +89,9 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
           <h4 className={"font-normal text-lg md:text-xl"}>
             {t("description")}
           </h4>
-          <p
-            className={"font-normal text-xs md:text-sm text-center"}
-            dangerouslySetInnerHTML={{
-              __html: product[`description_${locale}`],
-            }}
-          />
+          <p className={"font-normal text-xs md:text-sm text-center"}>
+            {parse(product[`description_${locale}`])}
+          </p>
         </div>
       </div>
       <Footer

@@ -10,6 +10,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Link } from "@/i18n/navigation";
 import { PageProps } from "@/types/pages.types";
 import { getTranslations } from "next-intl/server";
+import parse from "html-react-parser";
 
 export const revalidate = 300; // 5 minutes
 
@@ -21,12 +22,52 @@ export default async function Home() {
   );
 }
 
+/**
+ * Reorders images for specific products based on product_id
+ * - product_id 6: last image comes first
+ * - product_id 8: 2nd image (index 1) comes first
+ */
+function reorderProductImages(product: any): any {
+  if (!product.images || product.images.length === 0) {
+    return product;
+  }
+
+  const reorderedProduct = { ...product };
+  const images = [...product.images];
+
+  if (product.product_id === 6 && images.length > 0) {
+    // Move last image to first position
+    const lastImage = images[images.length - 1];
+    const otherImages = images.slice(0, images.length - 1);
+    reorderedProduct.images = [lastImage, ...otherImages];
+  } else if (product.product_id === 8 && images.length >= 2) {
+    // Move 2nd image (index 1) to first position
+    const secondImage = images[1];
+    const otherImages = images.filter((_, index) => index !== 1);
+    reorderedProduct.images = [secondImage, ...otherImages];
+  }
+
+  return reorderedProduct;
+}
+
 async function InnerPage({ images, collections }: PageProps) {
   const products = await fetchAllProducts();
   const t = await getTranslations("home_page");
   if (!images || !collections || !products) {
     throw new Error("Missing images and collections");
   }
+
+  console.log(products.products);
+
+  // Filter and reorder images for specific products
+  const filteredProducts = products.products.collection_products
+    .filter(
+      (product: any) =>
+        product.product_id === 1 ||
+        product.product_id === 6 ||
+        product.product_id === 8
+    )
+    .map(reorderProductImages);
 
   return (
     <>
@@ -41,6 +82,8 @@ async function InnerPage({ images, collections }: PageProps) {
           priority
           quality={90}
         />
+        {/* Dark overlay for mobile to improve text visibility */}
+        <div className="md:hidden absolute inset-0 bg-black/20 z-0" />
         <HeadText />
       </div>
       <GrandOpeningSection
@@ -52,14 +95,11 @@ async function InnerPage({ images, collections }: PageProps) {
       />
 
       <div className={"max-w-screen-xl mx-auto py-[var(--vertical-padding)]"}>
-        <ProductsSection
-          discoverAllButton
-          products={products.products.collection_products.slice(0, 3)}
-        />
+        <ProductsSection discoverAllButton products={filteredProducts} />
       </div>
       <div
         className={
-          "flex md:flex-row flex-col justify-between items-center md:py-[var(--vertical-padding)] py-0 max-w-screen-xl mx-auto gap-9 px-[var(--container-padding)] md:px-0"
+          "flex md:flex-row flex-col-reverse md:flex-row justify-between items-center md:py-[var(--vertical-padding)] py-0 max-w-screen-xl mx-auto gap-9 px-[var(--container-padding)] md:px-0"
         }
       >
         <p
@@ -67,12 +107,14 @@ async function InnerPage({ images, collections }: PageProps) {
             "text-base font-normal md:basis-xl text-center md:text-left"
           }
         >
-          {t("discover_collections_description")}
+          {parse(t("discover_collections_description"))}
         </p>
         <h3
-          className={"text-3xl md:text-6xl font-bold text-center md:text-end"}
+          className={
+            "text-3xl md:text-6xl md:basis-3xl font-bold text-center md:text-end"
+          }
         >
-          {t("discover_collections")}
+          {parse(t("discover_collections"))}
         </h3>
       </div>
       <CollectionsSection collections={collections} />
@@ -86,7 +128,7 @@ function HeadText() {
   return (
     <div
       className={
-        "absolute w-full h-full flex flex-col md:flex-row justify-center md:justify-between max-w-screen-xl mx-auto flex-wrap gap-3 md:gap-5 items-center px-[var(--container-padding)] md:px-0"
+        "absolute w-full h-full flex flex-col md:flex-row justify-center md:justify-between max-w-screen-xl mx-auto flex-wrap gap-3 md:gap-5 items-center px-[var(--container-padding)] md:px-0 z-10"
       }
       style={{
         left: "50%",

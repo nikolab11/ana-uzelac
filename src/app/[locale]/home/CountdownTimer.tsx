@@ -12,7 +12,7 @@ interface Props {
   labels: string[];
 }
 
-const targetDate = parseISO("2025-12-03");
+const targetDate = parseISO("2026-03-01");
 
 export function CountdownTimer(props: Props) {
   const [difference, setDifference] = useState([0, 0, 0, 0] as [
@@ -51,7 +51,9 @@ export function CountdownTimer(props: Props) {
             >
               {value}
             </div>
-            <div className={"text-center pt-2 text-[#444444] text-xs md:text-sm"}>
+            <div
+              className={"text-center pt-2 text-[#444444] text-xs md:text-sm"}
+            >
               {props.labels[index]}
             </div>
           </div>

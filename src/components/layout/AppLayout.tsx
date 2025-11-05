@@ -32,7 +32,7 @@ export async function AppLayout({
 						collections: collections.collections
 					})}
 					logo={images.logo.logo_png} />
-			<div id={'app-container'} className={'flex-1 overflow-y-auto relative'}>
+			<div id={'app-container'} className={'flex-1 overflow-y-auto relative'} style={{ scrollbarGutter: 'stable' }}>
 				{cloneElement(children, { images, collections: collections.collections })}
 				{!omitFooter && <Footer collections={collections.collections} logo={images.logo.logo_png} />}
 			</div>

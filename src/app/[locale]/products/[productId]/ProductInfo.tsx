@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useCartContext } from "@/context/cart/cart.context";
 import { AddedToCartSnackbar } from "@/app/[locale]/products/[productId]/AddedToCartSnackbar";
 import { formatNumber } from "@/utils/product.utils";
+import parse from "html-react-parser";
 
 interface Props {
   product: Product;
@@ -90,12 +91,9 @@ export function ProductInfo({ product, locale, collections }: Props) {
           </Button>
         </div>
         <div className={"px-4 md:px-6 py-3 md:py-4"}>
-          <div
-            className={"text-xs md:text-sm"}
-            dangerouslySetInnerHTML={{
-              __html: product[`short_description_${locale}`] || "",
-            }}
-          />
+          <div className={"text-xs md:text-sm"}>
+            {parse(product[`short_description_${locale}`] || "")}
+          </div>
         </div>
       </div>
     </div>

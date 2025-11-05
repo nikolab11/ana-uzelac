@@ -75,11 +75,9 @@ function AboutDescription() {
           {t("ana_uzelac_description_2")}
         </p>
         <p className={"font-normal text-sm md:text-base"}>
-          {t("ana_uzelac_description_3")}
+          {t("ana_uzelac_description_5")}
         </p>
-        <p className={"font-normal text-sm md:text-base"}>
-          {t("ana_uzelac_description_4")}
-        </p>
+
         <Link href={"/shop"}>
           <HoveringButton label={t("explore_collections")} />
         </Link>

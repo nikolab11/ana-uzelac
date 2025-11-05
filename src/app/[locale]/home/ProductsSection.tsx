@@ -13,7 +13,11 @@ interface Props {
 export function ProductsSection(props: Props) {
   const t = useTranslations("home_page");
   return (
-    <div className="px-[var(--container-padding)] md:px-0">
+    <div
+      className={`${
+        props.discoverAllButton ? "px-[var(--container-padding)]" : ""
+      } md:px-0`}
+    >
       {props.discoverAllButton && (
         <div className="flex justify-end">
           <Link href={"/shop"}>
@@ -26,13 +30,19 @@ export function ProductsSection(props: Props) {
           </Link>
         </div>
       )}
-      <div className="pt-9 flex flex-col md:flex-row gap-[36px] w-full">
+      <div
+        className={`${props.discoverAllButton ? "pt-9" : ""} md:pt-9 flex ${
+          props.discoverAllButton ? "flex-col" : "flex-row"
+        } md:flex-row gap-3 md:gap-[36px] w-full`}
+      >
         {props.products.map((product, index) => {
           return (
             <div
               key={product.product_id}
-              className={`w-full md:${
+              className={`${props.discoverAllButton ? "w-full" : "w-1/2"} md:${
                 props.alternative && index % 2 === 1 ? "basis-1/3" : "basis-2/2"
+              } ${
+                !props.discoverAllButton && index >= 2 ? "hidden md:block" : ""
               }`}
             >
               <ProductItem

@@ -23,17 +23,17 @@ export function HoveringButton(props: Props) {
             props.mode === "dark"
               ? `border-[var(--foreground)]`
               : "border-white"
-          } p-2 rounded-full border-2`}
+          } p-1.5 rounded-full border-2 md:w-10 md:h-10 flex items-center justify-center`}
         >
           {props.icon || (
             <ChevronRight
-              size={5}
+              size={3.5}
               stroke={props.mode === "dark" ? "var(--foreground)" : "white"}
             />
           )}
         </div>
         <div
-          className={`text-base font-bold ${
+          className={`text-base font-light ${
             props.mode === "dark"
               ? `text-[var(--foreground)]`
               : "text-[var(--background)]"

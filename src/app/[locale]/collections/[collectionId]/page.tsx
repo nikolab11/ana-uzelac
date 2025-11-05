@@ -11,6 +11,7 @@ import { FooterImage } from "@/components/layout/FooterImage";
 import { PageProps } from "@/types/pages.types";
 import { HoveringButton } from "@/components/common/HoveringButton";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 interface Params {
   collectionId: string;
@@ -73,12 +74,9 @@ function InnerPage({
       </div>
       <div id={SCROLL_ELEMENT_ID} className={"bg-[#F6F1EB]"}>
         <div className={"py-6 md:py-9 px-4 md:px-0 max-w-screen-xl mx-auto"}>
-          <p
-            className={"text-sm md:text-base font-normal text-center"}
-            dangerouslySetInnerHTML={{
-              __html: collection.description[locale],
-            }}
-          />
+          <p className={"text-sm md:text-base font-light text-center"}>
+            {parse(collection.description[locale])}
+          </p>
         </div>
         {collection.sections.map((section, index) => {
           return (

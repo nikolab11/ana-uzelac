@@ -18,14 +18,23 @@ const buttonClasses =
 export function ProductItemImages(props: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="relative transition-all">
+    <div
+      className="relative transition-all"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <div
-        className={"relative"}
+        className={
+          props.original
+            ? "relative"
+            : props.alternative
+            ? "relative min-h-[400px]"
+            : "relative min-h-[400px] md:min-h-[500px]"
+        }
         style={{
           width: "100%",
-          ...(props.original
-            ? {}
-            : { minHeight: props.alternative ? "400px" : "500px" }),
         }}
       >
         {props.original ? (
@@ -55,7 +64,9 @@ export function ProductItemImages(props: Props) {
           {activeIndex > 0 && (
             <button
               className={buttonClasses}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 setActiveIndex((prev) => prev - 1);
               }}
             >
@@ -67,7 +78,9 @@ export function ProductItemImages(props: Props) {
           {activeIndex < props.product.images.length - 1 && (
             <button
               className={buttonClasses}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 setActiveIndex((prev) => prev + 1);
               }}
             >

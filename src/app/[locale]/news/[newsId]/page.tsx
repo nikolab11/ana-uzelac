@@ -6,6 +6,7 @@ import { LocaleType } from "@/types/routing";
 import { getLocale, getTranslations } from "next-intl/server";
 import { HeadText } from "@/components/common/HeadText";
 import { notFound } from "next/navigation";
+import parse from "html-react-parser";
 
 interface Params {
   newsId: string;
@@ -48,14 +49,9 @@ export default async function NewsShowPage(props: { params: Promise<Params> }) {
           id={CONTENT_ID}
           className={"px-4 md:px-[var(--container-padding)] py-6 md:py-12"}
         >
-          <div
-            className={
-              "flex flex-col gap-3 md:gap-4 content-wrapper max-w-screen-xl mx-auto"
-            }
-            dangerouslySetInnerHTML={{
-              __html: news[`content_${locale}`],
-            }}
-          />
+          <div className={"flex flex-col gap-3 md:gap-4 content-wrapper max-w-screen-xl mx-auto"}>
+            {parse(news[`content_${locale}`])}
+          </div>
         </div>
       </div>
     </AppLayout>

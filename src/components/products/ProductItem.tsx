@@ -18,27 +18,50 @@ interface Props {
 export function ProductItem(props: Props) {
   const locale = useLocale() as LocaleType;
   const name = props.product[`name_${locale}`];
+  const productLink = {
+    pathname: "/products/[productId]" as const,
+    params: { productId: props.product.product_id },
+  };
+
   return (
     <div className={props.dark ? "text-[var(--background)]" : undefined}>
-      <ProductItemImages
-        product={props.product}
-        alternative={props.alternative}
-        original={props.original}
-      />
+      {props.original ? (
+        <ProductItemImages
+          product={props.product}
+          alternative={props.alternative}
+          original={props.original}
+        />
+      ) : (
+        <Link href={productLink}>
+          <ProductItemImages
+            product={props.product}
+            alternative={props.alternative}
+            original={props.original}
+          />
+        </Link>
+      )}
       <div className="py-2 flex justify-between items-center">
         <div>
-          <div className={"text-sm font-medium"}>{name}</div>
-          {!props.original && (
-            <div className={"pb-2  text-sm font-light"}>
-              {`${formatNumber(getMinProductPrice(props.product), 0)}${
-                props.product.currency
-              }`}
-            </div>
-          )}
-          {props.original && (
-            <div className={"text-sm font-light text-[var(--secondary-color)]"}>
-              Contact the artist
-            </div>
+          {props.original ? (
+            <>
+              <div className={"text-sm font-light"}>{name}</div>
+              <div
+                className={"text-sm font-light text-[var(--secondary-color)]"}
+              >
+                Contact the artist
+              </div>
+            </>
+          ) : (
+            <Link href={productLink}>
+              <div>
+                <div className={"text-sm font-light"}>{name}</div>
+                <div className={"pb-2  text-sm font-light"}>
+                  {`${formatNumber(getMinProductPrice(props.product), 0)}${
+                    props.product.currency
+                  }`}
+                </div>
+              </div>
+            </Link>
           )}
         </div>
         {props.original && (
@@ -75,8 +98,11 @@ export function ProductItem(props: Props) {
                   props.dark ? "border-white" : "border-[#444444]"
                 } rounded-full`}
               >
-                <IconButton>
-                  <ShoppingBag stroke={props.dark ? "white" : "#444444"} />
+                <IconButton sx={{ width: "32px", height: "32px" }}>
+                  <ShoppingBag
+                    size={3}
+                    stroke={props.dark ? "white" : "#444444"}
+                  />
                 </IconButton>
               </div>
             </Link>

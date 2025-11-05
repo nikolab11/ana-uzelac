@@ -78,7 +78,7 @@ h3 {
   background-color: var(--text-color);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.2s linear;
+  transition: transform 0.3s ease;
 }
 
 .app-link-select::after {
@@ -86,7 +86,7 @@ h3 {
 }
 
 .app-link:hover::after {
-  transform: scaleX(0);
+  transform: scaleX(1);
 }
 
 .collection-menu {
@@ -180,4 +180,13 @@ h3 {
 
 .bodoni {
   font-family: "Bodoni Moda", serif;
+}
+
+.header-transparent {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.header-transparent:hover {
+  opacity: 1 !important;
 }

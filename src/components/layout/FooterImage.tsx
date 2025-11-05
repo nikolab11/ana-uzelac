@@ -12,21 +12,21 @@ export function FooterImage(props: Props) {
       <Image src={props.img} alt={""} fill objectFit={"cover"} />
       <div
         className={
-          "absolute top-0 flex justify-center flex-col gap-3 items-center  w-full h-full pl-[var(--container-padding)] pr-[var(--container-padding)] md:pl-[25%] md:pr-[25%]"
+          "absolute top-0 flex justify-center flex-col gap-3 items-center  w-full h-full pl-[var(--container-padding)] pr-[var(--container-padding)] md:pl-[20%] md:pr-[20%]"
         }
       >
         <h3
           className={
-            'text-[var(--background)] font-bold text-3xl md:text-6xl text-center font-["Playfair Display"]'
+            'text-[var(--background)] font-bold text-3xl md:text-[56px] pb-8 text-center font-["Playfair Display"]'
           }
         >
           {t("wearing_the_moment")}
         </h3>
         <div>
-          <div className={"pb-3"}>
+          <div className={"pb-6"}>
             <p
               className={
-                "text-[var(--background)] font-medium text-sm md:text-base break-keep text-center"
+                "text-[var(--background)] font-light text-sm md:text-base break-keep text-center"
               }
             >
               {t("wearing_the_moment_description_1")}
@@ -35,7 +35,7 @@ export function FooterImage(props: Props) {
           <div className={"pb-3"}>
             <p
               className={
-                "text-[var(--background)] font-medium text-sm md:text-base break-keep text-center"
+                "text-[var(--background)] font-light text-sm md:text-base break-keep text-center"
               }
             >
               {t("wearing_the_moment_description_2")}

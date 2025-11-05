@@ -35,6 +35,7 @@ export function Header(props: Props) {
   const t = useTranslations("header");
   const locale = useLocale() as LocaleType;
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -44,32 +45,65 @@ export function Header(props: Props) {
     setDrawerOpen(false);
   };
 
+  const toggleSearch = () => {
+    setSearchOpen(!searchOpen);
+  };
+
   return (
     <HeaderWrapper mode={props.mode}>
       {/* Mobile Header Bar */}
-      <div key="mobile-header" className="md:hidden flex justify-between items-center py-4">
-        <button
-          onClick={toggleDrawer}
-          className="cursor-pointer p-2"
-          aria-label="Open menu"
+      <div className="md:hidden">
+        <div key="mobile-header" className="flex items-center py-4 relative">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleDrawer}
+              className="cursor-pointer"
+              aria-label="Open menu"
+            >
+              <HamburgerIcon size={7} />
+            </button>
+            <button
+              onClick={toggleSearch}
+              className="cursor-pointer"
+              aria-label="Toggle search"
+            >
+              <SearchIcon />
+            </button>
+          </div>
+          {/* Logo - absolute centered */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <Link href={"/home"}>
+              <Image src={props.logo} alt={"Logo"} width={60} height={41} />
+            </Link>
+          </div>
+          <div className="flex items-center ml-auto">
+            <CartButton label={t("cart")} hideLabel />
+          </div>
+        </div>
+        {/* Animated Search Input - Full Width */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            searchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
-          <HamburgerIcon size={7} />
-        </button>
-        <div className="flex items-center gap-4">
-          <Link href={"/home"}>
-            <Image src={props.logo} alt={"Logo"} width={60} height={41} />
-          </Link>
-          <CartButton label={t("cart")} hideLabel />
+          <div className="px-[var(--container-padding)] pb-4 w-full">
+            <div className="flex gap-3 items-center w-full">
+              <SearchIcon />
+              <div className="flex-1">
+                <SearchInput placeholder={t("search")} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Desktop Header */}
       <div key="desktop-header" className={"hidden md:block relative"}>
-        <Link href={"/home"}>
-          <div className="flex justify-center pb-4 pt-4">
+        <div className="flex justify-center pb-4 pt-4">
+          <Link href={"/home"}>
             <Image src={props.logo} alt={"Logo"} width={80} height={55} />
-          </div>
-        </Link>
+          </Link>
+        </div>
         <div className="flex gap-3 justify-between pb-4 overflow-x-auto items-end max-w-screen-xl mx-auto">
           <div className={"flex gap-3 items-center"}>
             <SearchIcon />
@@ -103,11 +137,18 @@ export function Header(props: Props) {
       </div>
 
       {/* Mobile Drawer */}
-      <Drawer key="mobile-drawer" anchor="left" open={drawerOpen} onClose={closeDrawer}>
+      <Drawer
+        key="mobile-drawer"
+        anchor="left"
+        open={drawerOpen}
+        onClose={closeDrawer}
+      >
         <div className="w-[80vw] max-w-[400px] h-full flex flex-col bg-[#FCF7F1]">
           {/* Drawer Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-[var(--text-color)] uppercase">Menu</h2>
+            <h2 className="text-lg font-medium text-[var(--text-color)] uppercase">
+              Menu
+            </h2>
             <button
               onClick={closeDrawer}
               className="cursor-pointer p-2 -mr-2"
@@ -119,12 +160,6 @@ export function Header(props: Props) {
 
           {/* Drawer Content */}
           <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
-            {/* Search Section */}
-            <div className="flex gap-3 items-center pb-6 border-b border-gray-200">
-              <SearchIcon />
-              <SearchInput placeholder={t("search")} />
-            </div>
-
             {/* Navigation Links */}
             <div className="flex flex-col gap-6">
               <HeaderLink href={"/home"} onClick={closeDrawer}>
@@ -134,8 +169,14 @@ export function Header(props: Props) {
                 {t("shop")}
               </HeaderLink>
               <div className="text-sm app-link">
-                <CollectionMenuItem key="collection-menu-item" collections={props.collections} />
-                <CollectionViewContainer key="collection-view-container" isDrawer>
+                <CollectionMenuItem
+                  key="collection-menu-item"
+                  collections={props.collections}
+                />
+                <CollectionViewContainer
+                  key="collection-view-container"
+                  isDrawer
+                >
                   <CollectionsView
                     collections={props.collections}
                     image={props.productsImage}
@@ -163,9 +204,7 @@ export function Header(props: Props) {
       </Drawer>
 
       {props.additionalContent && (
-        <div key="additional-content">
-          {props.additionalContent}
-        </div>
+        <div key="additional-content">{props.additionalContent}</div>
       )}
     </HeaderWrapper>
   );
