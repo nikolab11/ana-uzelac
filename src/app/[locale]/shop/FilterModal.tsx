@@ -38,6 +38,7 @@ interface Props {
   minPrice: number;
   maxPrice: number;
   filters: Partial<ProductFilter>;
+  originalProductsCount: number;
 }
 
 const containerStyle: CSSProperties = {
@@ -92,9 +93,184 @@ export function FilterModal(props: Props) {
     currentFilters.collection_ids.length === 0 &&
     currentFilters.sizes.length === 0 &&
     currentFilters.sortOption === "relevance";
+
+  // Calculate matching products count for collections section
+  // Sum product counts from selected collections (including original pieces with -1)
+  const getCollectionsMatchingCount = useMemo(() => {
+    if (currentFilters.collection_ids.length === 0) return 0;
+
+    let count = 0;
+
+    // Sum up product counts from selected collections
+    const selectedCollections = props.collections.filter((collection) =>
+      currentFilters.collection_ids.includes(collection.collection_id)
+    );
+
+    // Get all products from selected collections and remove duplicates
+    const allProducts = selectedCollections.flatMap(
+      (collection) => collection.products
+    );
+    const uniqueProducts = Array.from(
+      new Map(
+        allProducts.map((product) => [product.product_id, product])
+      ).values()
+    );
+
+    count += uniqueProducts.length;
+
+    // If -1 (original pieces) is selected, add original products count
+    // Note: We can't filter by sizes/price here without actual products,
+    // so we use the total count. Filtering happens in filterProducts.
+    if (currentFilters.collection_ids.includes(-1)) {
+      count += props.originalProductsCount;
+    }
+
+    return count;
+  }, [
+    currentFilters.collection_ids,
+    props.collections,
+    props.originalProductsCount,
+  ]);
+
+  // Calculate matching products count for sizes section
+  // Count unique products that have any of the selected sizes
+  const getSizesMatchingCount = useMemo(() => {
+    if (currentFilters.sizes.length === 0) return 0;
+
+    // Get all products from all collections
+    const allProducts = props.collections.flatMap(
+      (collection) => collection.products
+    );
+
+    // Remove duplicates
+    const uniqueProducts = Array.from(
+      new Map(
+        allProducts.map((product) => [product.product_id, product])
+      ).values()
+    );
+
+    // Count products that have any of the selected sizes
+    const filtered = uniqueProducts.filter((product) =>
+      currentFilters.sizes.some((size) =>
+        product.options.map((o) => o.size).includes(size)
+      )
+    );
+
+    return filtered.length;
+  }, [currentFilters.sizes, props.collections]);
+
+  // Check if a collection has matching products given current filters
+  const hasCollectionMatchingProducts = useMemo(() => {
+    return (collectionId: number) => {
+      // -1 represents "original pieces"
+      if (collectionId === -1) {
+        // Always enable if there are original products
+        // We can't check sizes/price without actual products, so assume enabled
+        return props.originalProductsCount > 0;
+      }
+
+      const collection = props.collections.find(
+        (c) => c.collection_id === collectionId
+      );
+      if (!collection) return false;
+
+      const products = collection.products.filter((product) => {
+        // Filter by sizes if any are selected
+        if (
+          currentFilters.sizes.length > 0 &&
+          !currentFilters.sizes.some((size) =>
+            product.options.map((o) => o.size).includes(size)
+          )
+        ) {
+          return false;
+        }
+        // Filter by price if changed from default
+        if (
+          currentFilters.price_min !== props.minPrice &&
+          product.options.every((opt) => opt.price < currentFilters.price_min)
+        ) {
+          return false;
+        }
+        if (
+          currentFilters.price_max !== props.maxPrice &&
+          product.options.every((opt) => opt.price > currentFilters.price_max)
+        ) {
+          return false;
+        }
+        return true;
+      });
+
+      return products.length > 0;
+    };
+  }, [
+    currentFilters.sizes,
+    currentFilters.price_min,
+    currentFilters.price_max,
+    props.collections,
+    props.minPrice,
+    props.maxPrice,
+    props.originalProductsCount,
+  ]);
+
+  // Check if a size has matching products given current filters
+  const hasSizeMatchingProducts = useMemo(() => {
+    return (size: string) => {
+      // Get all products from collections (filtered by collection_ids if any)
+      const allProducts = props.collections.flatMap((collection) => {
+        // Filter by collection_ids if any are selected
+        if (
+          currentFilters.collection_ids.length > 0 &&
+          !currentFilters.collection_ids.includes(collection.collection_id)
+        ) {
+          return [];
+        }
+        return collection.products;
+      });
+
+      // Remove duplicates
+      const uniqueProducts = Array.from(
+        new Map(
+          allProducts.map((product) => [product.product_id, product])
+        ).values()
+      );
+
+      // Check if any product has this size and matches other filters
+      const matchingProducts = uniqueProducts.filter((product) => {
+        // Must have this size
+        if (!product.options.map((o) => o.size).includes(size)) {
+          return false;
+        }
+        // Filter by price if changed from default
+        if (
+          currentFilters.price_min !== props.minPrice &&
+          product.options.every((opt) => opt.price < currentFilters.price_min)
+        ) {
+          return false;
+        }
+        if (
+          currentFilters.price_max !== props.maxPrice &&
+          product.options.every((opt) => opt.price > currentFilters.price_max)
+        ) {
+          return false;
+        }
+        return true;
+      });
+
+      return matchingProducts.length > 0;
+    };
+  }, [
+    currentFilters.collection_ids,
+    currentFilters.price_min,
+    currentFilters.price_max,
+    props.collections,
+    props.minPrice,
+    props.maxPrice,
+  ]);
+
   const handleSubmit = () => {
     const stringified = querystring.stringify(currentFilters);
     router.replace(`/shop?${stringified}`);
+    props.onClose();
   };
   const onOpenChange = (name: SeactionName) => () => {
     setOpenSection((prev) => {
@@ -108,8 +284,11 @@ export function FilterModal(props: Props) {
     <Drawer anchor={"right"} onClose={props.onClose} open={props.open}>
       <div
         className={
-          "p-9 md:w-[35vw] w-[100vw] overflow-auto h-full flex flex-col justify-between"
+          "p-9 md:w-[35vw] w-[100vw] max-w-[450px] overflow-auto h-full flex flex-col justify-between"
         }
+        style={{
+          backgroundColor: "#FCF7F1",
+        }}
       >
         <div style={containerStyle} className={"overflow-auto grow"}>
           <div className={"flex justify-between items-center pb-7 "}>
@@ -121,7 +300,7 @@ export function FilterModal(props: Props) {
               {t("filter_by")}
             </h4>
             <div onClick={props.onClose} className={"cursor-pointer"}>
-              <XIcon size={4} />
+              <XIcon size={3} />
             </div>
           </div>
           <SearchSection
@@ -156,8 +335,16 @@ export function FilterModal(props: Props) {
                       top: "-30px",
                     },
                   },
+                  valueLabel: {
+                    className: "text-sm font-normal",
+                    style: {
+                      color: "var(--foreground)",
+                    },
+                  },
                 }}
                 max={props.maxPrice}
+                valueLabelDisplay="on"
+                valueLabelFormat={(value) => `${value}${EUR_SYMBOL}`}
                 marks={[
                   {
                     value: props.minPrice,
@@ -175,6 +362,7 @@ export function FilterModal(props: Props) {
             open={openSection === "collection"}
             onChange={onOpenChange("collection")}
             title={t("collection")}
+            count={getCollectionsMatchingCount}
           >
             {props.collections.map((collection) => {
               return (
@@ -185,6 +373,11 @@ export function FilterModal(props: Props) {
                         checked={currentFilters.collection_ids.includes(
                           collection.collection_id
                         )}
+                        disabled={
+                          !hasCollectionMatchingProducts(
+                            collection.collection_id
+                          )
+                        }
                         onChange={(event, checked) => {
                           setCurrentFilters((prev) => {
                             return {
@@ -200,20 +393,73 @@ export function FilterModal(props: Props) {
                             };
                           });
                         }}
+                        sx={{
+                          "&.Mui-disabled": {
+                            color: "rgba(0, 0, 0, 0.26)",
+                          },
+                        }}
                       />
                     }
                     label={
-                      <div className="font-normal text-sm text-[var(--text-color)]">{`${collection.title[locale]} (${collection.products.length})`}</div>
+                      <div
+                        className={`font-normal text-sm ${
+                          !hasCollectionMatchingProducts(
+                            collection.collection_id
+                          )
+                            ? "text-gray-400"
+                            : "text-[var(--text-color)]"
+                        }`}
+                      >
+                        {`${collection.title[locale]} (${collection.products.length})`}
+                      </div>
                     }
                   />
                 </div>
               );
             })}
+            {/* Original Pieces checkbox - last option */}
+            <div key="original-pieces">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={currentFilters.collection_ids.includes(-1)}
+                    disabled={!hasCollectionMatchingProducts(-1)}
+                    onChange={(event, checked) => {
+                      setCurrentFilters((prev) => {
+                        return {
+                          ...prev,
+                          collection_ids: checked
+                            ? [...prev.collection_ids, -1]
+                            : prev.collection_ids.filter((cId) => cId !== -1),
+                        };
+                      });
+                    }}
+                    sx={{
+                      "&.Mui-disabled": {
+                        color: "rgba(0, 0, 0, 0.26)",
+                      },
+                    }}
+                  />
+                }
+                label={
+                  <div
+                    className={`font-normal text-sm ${
+                      !hasCollectionMatchingProducts(-1)
+                        ? "text-gray-400"
+                        : "text-[var(--text-color)]"
+                    }`}
+                  >
+                    {`Original Pieces (${props.originalProductsCount})`}
+                  </div>
+                }
+              />
+            </div>
           </SearchSection>
           <SearchSection
             open={openSection === "size"}
             onChange={onOpenChange("size")}
             title={t("filter_size")}
+            count={getSizesMatchingCount}
           >
             {PRODUCT_SIZES.map((size) => {
               return (
@@ -222,6 +468,7 @@ export function FilterModal(props: Props) {
                     control={
                       <Checkbox
                         checked={currentFilters.sizes.includes(size)}
+                        disabled={!hasSizeMatchingProducts(size)}
                         onChange={(event, checked) => {
                           setCurrentFilters((prev) => {
                             return {
@@ -232,10 +479,21 @@ export function FilterModal(props: Props) {
                             };
                           });
                         }}
+                        sx={{
+                          "&.Mui-disabled": {
+                            color: "rgba(0, 0, 0, 0.26)",
+                          },
+                        }}
                       />
                     }
                     label={
-                      <div className="font-normal text-sm text-[var(--text-color)]">
+                      <div
+                        className={`font-normal text-sm ${
+                          !hasSizeMatchingProducts(size)
+                            ? "text-gray-400"
+                            : "text-[var(--text-color)]"
+                        }`}
+                      >
                         {size}
                       </div>
                     }
@@ -273,7 +531,9 @@ export function FilterModal(props: Props) {
                       }}
                     >
                       <ListItemText
-                        primary={SORT_OPTIONS_DATA[sortOption].translation}
+                        primary={t(
+                          `${SORT_OPTIONS_DATA[sortOption].translation}`
+                        )}
                       />
                     </ListItemButton>
                   </ListItem>
@@ -291,7 +551,7 @@ export function FilterModal(props: Props) {
               }}
               variant={"outlined"}
               color={"var(--text-color)" as never}
-              className={"grow text-[var(--text-color)]"}
+              className={"grow text-[var(--text-color)] h-[48px]"}
             >
               {t("filter_clear")}
             </Button>
@@ -305,7 +565,7 @@ export function FilterModal(props: Props) {
               background: "var(--foreground)",
               borderRadius: "0",
             }}
-            className={"grow"}
+            className={"grow h-[48px]"}
           >
             {t("filter_apply")}
           </Button>
@@ -320,6 +580,7 @@ function SearchSection(props: {
   children: ReactNode;
   open: boolean;
   onChange: () => void;
+  count?: number;
 }) {
   return (
     <Accordion
@@ -341,11 +602,16 @@ function SearchSection(props: {
         }}
         expandIcon={<ArrowDropdown />}
       >
-        <div
-          className={"uppercase text-sm font-medium text-[var(--text-color)]"}
-        >
-          {props.title}
-        </div>
+        <>
+          <div
+            className={"uppercase text-sm text-[12px] text-[var(--text-color)]"}
+          >
+            {props.title}
+            {props.count !== undefined && props.count > 0 && (
+              <span> ({props.count})</span>
+            )}
+          </div>
+        </>
       </AccordionSummary>
       <AccordionDetails>
         <div className={"px-6"}>{props.children}</div>

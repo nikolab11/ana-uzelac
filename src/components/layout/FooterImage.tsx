@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-
+import parse from "html-react-parser";
 interface Props {
   img: string;
 }
@@ -29,7 +29,7 @@ export function FooterImage(props: Props) {
                 "text-[var(--background)] font-light text-sm md:text-base break-keep text-center"
               }
             >
-              {t("wearing_the_moment_description_1")}
+              {parse(t("wearing_the_moment_description_1"))}
             </p>
           </div>
           <div className={"pb-3"}>
@@ -38,7 +38,7 @@ export function FooterImage(props: Props) {
                 "text-[var(--background)] font-light text-sm md:text-base break-keep text-center"
               }
             >
-              {t("wearing_the_moment_description_2")}
+              {parse(t("wearing_the_moment_description_2"))}
             </p>
           </div>
         </div>

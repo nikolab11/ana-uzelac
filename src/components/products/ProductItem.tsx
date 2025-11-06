@@ -13,6 +13,7 @@ interface Props {
   original?: boolean;
   dark?: boolean;
   alternative?: boolean;
+  discoverAllButton?: boolean;
 }
 
 export function ProductItem(props: Props) {
@@ -37,6 +38,7 @@ export function ProductItem(props: Props) {
             product={props.product}
             alternative={props.alternative}
             original={props.original}
+            discoverAllButton={props.discoverAllButton}
           />
         </Link>
       )}

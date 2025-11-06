@@ -55,17 +55,35 @@ export function LocalesMenu(props: Props) {
 				value={props.locale} onChange={event => {
 					const value = event.target.value as LocaleType;
 					startTransition(() => {
-						let newPath = pathname as string;
-						if (newPath.startsWith(`/${props.locale}`)) {
-							newPath = newPath.replace(`/${props.locale}`, '');
-						}
+						// Preserve current pathname, params, and query string
+						const currentPath = pathname as string;
+						const searchParams = typeof window !== 'undefined' ? window.location.search : '';
+						
+						// Use pathname with params for dynamic routes, preserving query string
 						router.push(
 							// @ts-expect-error -- TypeScript will validate that only known `params`
 							// are used in combination with a given `pathname`. Since the two will
 							// always match for the current route, we can skip runtime checks.
-							{ pathname: newPath, params },
+							{ pathname: currentPath, params },
 							{ locale: value }
 						);
+						
+						// Preserve query string after navigation
+						if (searchParams && typeof window !== 'undefined') {
+							// Wait for next tick to ensure navigation completes
+							setTimeout(() => {
+								const newPathname = window.location.pathname;
+								const currentSearch = window.location.search;
+								// Only update if query string was lost
+								if (currentSearch !== searchParams) {
+									window.history.replaceState(
+										{ ...window.history.state },
+										'',
+										`${newPathname}${searchParams}`
+									);
+								}
+							}, 0);
+						}
 					});
 				}}>
 				{

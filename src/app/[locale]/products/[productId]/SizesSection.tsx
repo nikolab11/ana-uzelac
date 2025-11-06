@@ -22,7 +22,7 @@ export function SizesSection(props: Props) {
   const t = useTranslations("shop_page");
 
   return (
-    <div className="px-4 md:px-6 py-3 md:py-4 border-white border-b text-xs md:text-sm font-normal">
+    <div className="w-full px-4 md:px-6 py-3 md:py-4 border-white border-b text-xs md:text-sm font-normal">
       <Accordion
         defaultExpanded
         disableGutters
@@ -73,7 +73,7 @@ export function SizesSection(props: Props) {
                     <div
                       onClick={() => props.onChange(option)}
                       className={
-                        "text-xs md:text-sm font-normal border-[var(--foreground)] border py-2 md:py-3 px-3 md:px-4 cursor-pointer hover:shadow-lg transition"
+                        "text-sm font-normal border-[var(--foreground)] border py-3 px-3 cursor-pointer hover:shadow-lg transition"
                       }
                       style={{
                         color: props.selected === option ? "white" : undefined,

@@ -5,6 +5,7 @@ import { Button, Drawer } from "@mui/material";
 import { EUR_SYMBOL, SHIPPING_PRICE } from "@/utils/constants";
 import { formatNumber } from "@/utils/product.utils";
 import { BackButton } from "@/components/common/BackButton";
+import { XIcon } from "@/components/icons/XIcon";
 
 export function ViewCartStep() {
   const { onOpenChange, totalItems, totalPrice } = useCartContext();
@@ -12,6 +13,14 @@ export function ViewCartStep() {
   const t = useTranslations("shop_page");
   return (
     <div className={"h-full relative bg-[#FCF7F1] flex flex-col md:flex-row"}>
+      <div
+        onClick={() => onOpenChange(false)}
+        className={
+          "absolute top-4 md:top-[64px] right-4 md:right-9 cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center z-10"
+        }
+      >
+        <XIcon size={4} />
+      </div>
       <div
         className={
           "pl-4 md:pl-[var(--container-padding)] relative w-full md:w-[70vw] h-full pr-4 md:pr-9 pt-16 md:pt-[64px] pb-32 md:pb-0"
@@ -42,7 +51,7 @@ export function ViewCartStep() {
         </div>
         <div
           className={
-            "absolute left-4 md:left-[var(--container-padding)] bottom-20 md:bottom-[64px] text-[#838383] text-[10px] md:text-xs font-normal"
+            "absolute left-4 md:left-[var(--container-padding)] bottom-5 md:bottom-[64px] text-[#838383] text-[10px] md:text-xs font-normal"
           }
         >
           {t("free_shipping_for_all_orders")}
@@ -96,7 +105,7 @@ export function ViewCartStep() {
             </div>
             <div
               className={
-                "flex justify-between gap-4 md:gap-9 pt-2 border-t border-[#E5E5E5] md:border-t-0"
+                "flex justify-between gap-4 md:gap-9 pt-4 md:pt-2 pb-4 md:pb-0 border-t border-[#E5E5E5] md:border-t-0"
               }
             >
               <div className={"font-medium text-sm md:text-sm"}>

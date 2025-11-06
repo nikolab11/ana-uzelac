@@ -135,7 +135,7 @@ function HeadText() {
         transform: "translateX(-50%)",
       }}
     >
-      <div className={"md:basis-xs md:text-left text-center"}>
+      <div className={"md:basis-xl md:text-left text-center"}>
         <h3
           className={
             "text-4xl md:text-7xl text-bold text-[var(--background)] pb-3 playfair"

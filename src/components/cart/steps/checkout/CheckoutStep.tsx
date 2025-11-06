@@ -10,6 +10,7 @@ import {
 import { ItemsDrawer } from "@/components/cart/steps/checkout/ItemsDrawer";
 import { BackButton } from "@/components/common/BackButton";
 import { useCartContext } from "@/context/cart/cart.context";
+import { XIcon } from "@/components/icons/XIcon";
 import axios from "axios";
 
 export type CheckoutStep = "person" | "address";
@@ -64,6 +65,14 @@ export function CheckoutStep() {
         "min-h-full md:h-full bg-[#FCF7F1] relative flex flex-col md:flex-row"
       }
     >
+      <div
+        onClick={() => onOpenChange(false)}
+        className={
+          "absolute top-4 md:top-9 right-4 md:right-9 cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center z-10"
+        }
+      >
+        <XIcon size={4} />
+      </div>
       {/* Mobile: absolute positioned back button */}
       <div className={"md:hidden"}>
         <BackButton

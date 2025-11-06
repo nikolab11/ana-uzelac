@@ -190,3 +190,12 @@ h3 {
 .header-transparent:hover {
   opacity: 1 !important;
 }
+
+.MuiSlider-markLabel {
+  display: none;
+}
+
+.MuiSlider-valueLabel {
+  background: transparent !important;
+  color: var(--foreground) !important;
+}

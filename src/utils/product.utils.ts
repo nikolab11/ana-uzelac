@@ -10,8 +10,21 @@ export function filterProducts(products: Product[], params: Partial<ProductFilte
 		if (params.price_max && product.options.every(opt => opt.price > (params.price_max || 0))) {
 			return false;
 		}
-		if (params.collection_ids && (product.collection_id === undefined || !params.collection_ids.includes(product.collection_id))) {
-			return false;
+		if (params.collection_ids) {
+			// -1 represents "original pieces" (products without collection_id)
+			const isOriginalPiece = product.collection_id === undefined;
+			const includesOriginal = params.collection_ids.includes(-1);
+			const includesCollection = product.collection_id !== undefined && params.collection_ids.includes(product.collection_id);
+			
+			if (!includesOriginal && !includesCollection) {
+				return false;
+			}
+			if (isOriginalPiece && !includesOriginal) {
+				return false;
+			}
+			if (!isOriginalPiece && !includesCollection) {
+				return false;
+			}
 		}
 		if (params.search && !product.name_fr.toLowerCase().includes(params.search.toLowerCase()) && !product.name_eng.toLowerCase().includes(params.search.toLowerCase())) {
 			return false;

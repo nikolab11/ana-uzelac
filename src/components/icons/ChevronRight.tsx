@@ -1,6 +1,7 @@
 interface Props {
   stroke?: string;
   size?: number;
+  className?: string;
 }
 
 export function ChevronRight(props: Props) {
@@ -14,6 +15,7 @@ export function ChevronRight(props: Props) {
       stroke={props.stroke}
       height={size}
       width={size}
+      className={props.className}
     >
       <path
         strokeLinecap="round"

@@ -50,14 +50,24 @@ export function ProductInfo({ product, locale, collections }: Props) {
         onClose={() => setOpenSnackbar(false)}
       />
       <div className={"py-3 md:py-4 bg-[#FFFCF7E6] md:opacity-80"}>
-        <div className={"px-4 md:px-6 py-3 md:py-4 border-white border-b"}>
-          <h4 className={"pb-2 text-lg md:text-xl font-normal"}>
+        <div
+          className={
+            "px-4 md:px-6 py-3 md:py-4 border-white border-b flex flex-col items-center md:items-start"
+          }
+        >
+          <h4
+            className={
+              "pb-2 text-lg md:text-xl font-normal text-center md:text-left"
+            }
+          >
             {product[`name_${locale}`]}
           </h4>
           {selectedOption && (
-            <p className={"text-xs md:text-sm font-light"}>{`${formatNumber(
-              selectedOption.price
-            )} ${product.currency}`}</p>
+            <p
+              className={
+                "text-xs md:text-sm font-light text-center md:text-left"
+              }
+            >{`${formatNumber(selectedOption.price)} ${product.currency}`}</p>
           )}
         </div>
         {collection && (
@@ -70,17 +80,20 @@ export function ProductInfo({ product, locale, collections }: Props) {
             <p>{collection.title[locale]}</p>
           </div>
         )}
-        <SizesSection
-          error={showError ? t("please_choose_a_size") : undefined}
-          selected={selectedOption}
-          onChange={onOptionSelect}
-          options={product.options}
-        />
+        <div className="flex justify-center md:justify-start">
+          <SizesSection
+            error={showError ? t("please_choose_a_size") : undefined}
+            selected={selectedOption}
+            onChange={onOptionSelect}
+            options={product.options}
+          />
+        </div>
         <div className={"px-4 md:px-6 py-3 md:py-4 border-white border-b"}>
           <Button
             className={"w-full"}
             sx={{
               borderRadius: 0,
+              height: { xs: "48px", md: "48px" },
             }}
             onClick={onSubmit}
             startIcon={<ShoppingBag stroke={"white"} size={4} />}
@@ -91,7 +104,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
           </Button>
         </div>
         <div className={"px-4 md:px-6 py-3 md:py-4"}>
-          <div className={"text-xs md:text-sm"}>
+          <div className={"text-xs md:text-sm text-center md:text-left"}>
             {parse(product[`short_description_${locale}`] || "")}
           </div>
         </div>

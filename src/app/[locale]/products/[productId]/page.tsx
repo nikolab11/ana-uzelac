@@ -47,7 +47,7 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
         </div>
         <div
           className={
-            "md:fixed md:top-[144px] md:z-1200 md:right-[5%] md:shadow-2xl relative md:ml-2 w-full md:w-auto"
+            "px-4 md:px-0 md:fixed md:top-[144px] md:z-1200 md:right-[5%] md:shadow-2xl relative md:ml-2 w-full md:w-auto"
           }
           style={{
             maxWidth: "400px",
@@ -73,7 +73,7 @@ function InnerPage({ product, collections, images }: Props & PageProps) {
             "bg-[#FCF7F1] w-full p-4 md:p-6 flex flex-col gap-4 md:gap-7 justify-center items-center"
           }
         >
-          <h4 className={"font-normal text-lg md:text-xl"}>
+          <h4 className={"font-normal text-lg md:text-xl capitalize"}>
             {t("the_inspiration")}
           </h4>
           <p className={"font-normal text-xs md:text-sm text-center"}>

@@ -25,16 +25,23 @@ export function AddedToCartSnackbar(props: Props) {
       onClose={props.onClose}
       sx={{
         "@media (max-width: 768px)": {
-          left: "50% !important",
-          right: "auto !important",
-          transform: "translateX(-50%) !important",
+          top: "0 !important",
+          left: "0 !important",
+          right: "0 !important",
+          transform: "none !important",
+          width: "100vw !important",
+          maxWidth: "100vw !important",
         },
       }}
     >
       <div
         className={
-          "p-4 md:p-5 md:pl-9 bg-white min-w-[280px] md:min-w-[400px] max-w-[calc(100vw-32px)]"
+          "p-4 md:p-5 md:pl-9 bg-white w-full md:w-auto md:min-w-[400px]"
         }
+        style={{
+          boxShadow:
+            "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 10px 20px -5px rgba(0, 0, 0, 0.4)",
+        }}
       >
         <div
           className={

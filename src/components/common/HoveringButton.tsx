@@ -7,6 +7,7 @@ interface Props {
   label: string;
   icon?: ReactNode;
   mode?: "dark" | "light";
+  inverted?: boolean;
 }
 
 export function HoveringButton(props: Props) {
@@ -16,8 +17,19 @@ export function HoveringButton(props: Props) {
         props.mode === "dark" ? "hovering-button-dark" : "hovering-button-light"
       }`}
       onClick={props.onClick}
+      style={
+        props.inverted
+          ? {
+              paddingRight: "0",
+            }
+          : {}
+      }
     >
-      <div className="flex gap-2 md:gap-4 items-center">
+      <div
+        className={`flex gap-2 md:gap-4 items-center ${
+          props.inverted ? "flex-row-reverse" : ""
+        }`}
+      >
         <div
           className={`border ${
             props.mode === "dark"
@@ -29,6 +41,7 @@ export function HoveringButton(props: Props) {
             <ChevronRight
               size={3.5}
               stroke={props.mode === "dark" ? "var(--foreground)" : "white"}
+              className={props.inverted ? "rotate-180" : ""}
             />
           )}
         </div>

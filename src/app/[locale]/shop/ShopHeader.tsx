@@ -13,6 +13,7 @@ interface Props {
   filters: Partial<ProductFilter>;
   maxPrice: number;
   collections?: Collection[];
+  originalProductsCount: number;
 }
 
 export function ShopHeader({
@@ -22,6 +23,7 @@ export function ShopHeader({
   maxPrice,
   collections,
   filters,
+  originalProductsCount,
 }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
@@ -34,7 +36,7 @@ export function ShopHeader({
       }
     >
       <div className={"flex justify-between items-center gap-2 py-3"}>
-        <div className={"text-sm md:text-base font-medium"}>
+        <div className={"text-sm md:text-base font-medium uppercase"}>
           {t("products")}
         </div>
         <div className={"font-medium text-[10px] tracking-wider"}>
@@ -68,6 +70,7 @@ export function ShopHeader({
         maxPrice={maxPrice}
         open={openModal}
         onClose={() => setOpenModal(false)}
+        originalProductsCount={originalProductsCount}
       />
     </div>
   );

@@ -10,6 +10,7 @@ interface Props {
   product: Product;
   alternative?: boolean;
   original?: boolean;
+  discoverAllButton?: boolean;
 }
 
 const buttonClasses =
@@ -20,18 +21,20 @@ export function ProductItemImages(props: Props) {
   return (
     <div
       className="relative transition-all"
-      onClick={(e) => {
+      /*      onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-      }}
+      }} */
     >
       <div
         className={
           props.original
             ? "relative"
             : props.alternative
-            ? "relative min-h-[400px]"
-            : "relative min-h-[400px] md:min-h-[500px]"
+            ? "relative min-h-[250px] md:min-h-[450px]"
+            : props.discoverAllButton
+            ? "relative min-h-[450px] md:min-h-[650px]"
+            : "relative min-h-[250px] md:min-h-[250px] md:min-h-[650px]"
         }
         style={{
           width: "100%",
@@ -52,7 +55,7 @@ export function ProductItemImages(props: Props) {
             fill
             style={{
               objectFit: "cover",
-              objectPosition: props.alternative ? "top" : "center",
+              objectPosition: props.alternative ? "top" : "top",
             }}
             src={props.product.images[activeIndex]}
             alt={props.product.name_eng}

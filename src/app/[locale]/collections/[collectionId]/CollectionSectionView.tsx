@@ -17,20 +17,22 @@ export function CollectionSectionView(props: Props) {
   const t = useTranslations("home_page");
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto flex flex-col gap-8 md:gap-20">
       <div
         className={`flex flex-col md:flex-row py-6 md:py-15 ${
           props.inverted ? "md:flex-row-reverse" : ""
-        } gap-4 md:gap-[72px] items-start md:items-center justify-between pb-6 md:pb-[80px]`}
+        } gap-4 md:gap-[72px] items-center md:items-center justify-between pb-6 md:pb-[80px]`}
       >
-        <h3 className={"grow text-nowrap font-bold text-3xl md:text-6xl"}>
+        <h3
+          className={
+            "grow text-nowrap font-bold text-3xl md:text-6xl text-center md:text-left"
+          }
+        >
           {props.section.title[locale]}
         </h3>
         <p
-          className={`text-sm md:text-base font-normal ${
-            props.inverted
-              ? "md:text-left text-left"
-              : "md:text-right text-left"
+          className={`text-sm md:text-base font-normal text-center ${
+            props.inverted ? "md:text-left" : "md:text-right"
           } md:pl-6 pl-0`}
         >
           {props.section.description[locale]}
@@ -39,30 +41,34 @@ export function CollectionSectionView(props: Props) {
       <div
         className={`flex flex-col md:flex-row ${
           props.inverted ? "md:flex-row-reverse" : ""
-        } gap-6 md:gap-[72px] items-start md:items-center justify-between`}
+        } gap-6 md:gap-[72px] items-center md:items-center justify-between`}
       >
-        <div className={"w-full md:w-[40%]"}>
+        <div className={"w-full md:w-[55%]"}>
           <h4
-            className={`pb-3 md:pb-4 font-bold text-2xl md:text-4xl ${
-              props.inverted ? "md:text-right text-left" : "text-left"
+            className={`pb-3 md:pb-4 font-bold text-2xl md:text-4xl text-center ${
+              props.inverted ? "md:text-right" : "md:text-left"
             }`}
           >
             {props.section.contentTitle[locale]}
           </h4>
           <p
-            className={`text-sm md:text-base font-normal ${
-              props.inverted ? "md:text-right text-left" : "text-left"
+            className={`text-sm md:text-base font-normal text-center ${
+              props.inverted ? "md:text-right" : "md:text-left"
             }`}
           >
             {props.section.content[locale]}
           </p>
           <div
-            className={`pt-3 md:pt-4 ${
-              props.inverted ? "md:text-right text-left" : "text-left"
+            className={`pt-3 md:pt-4 flex justify-center ${
+              props.inverted ? "md:justify-end" : "md:justify-start"
             }`}
           >
             <Link href={`/shop?collection_ids=${props.collectionId}`}>
-              <HoveringButton mode="dark" label={t("shop_now")} />
+              <HoveringButton
+                inverted={props.inverted}
+                mode="dark"
+                label={t("shop_now")}
+              />
             </Link>
           </div>
         </div>

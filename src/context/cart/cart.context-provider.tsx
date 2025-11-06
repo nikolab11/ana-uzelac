@@ -97,6 +97,7 @@ export function CartContextProvider(props: Props) {
 	const subtotal = flatted.reduce((acc, value) => {
 		return acc + value.count * value.option.price;
 	}, 0);
+	const totalItemsCount = flatted.reduce((acc, item) => acc + item.count, 0);
 	const onClear = useCallback(() => {
 		setItems({});
 		if (typeof window !== 'undefined') {
@@ -112,7 +113,7 @@ export function CartContextProvider(props: Props) {
 			items,
 			addItem,
 			totalPrice: subtotal,
-			totalItems: flatted.length,
+			totalItems: totalItemsCount,
 			updateItem,
 			removeItem,
 			onClear,

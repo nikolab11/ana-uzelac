@@ -34,10 +34,26 @@ export default async function ShopPage(props: {
     totalParams > 0
       ? filterProducts(productsResponse.products.collection_products, params)
       : productsResponse.products.collection_products;
-  const additionalProducts =
-    totalParams > 0
+
+  // Original pieces should be shown when:
+  // 1. No collection filter is applied (collection_ids is undefined/empty)
+  // 2. OR -1 (original pieces) is explicitly selected in collection_ids
+  const hasOriginalPiecesSelected =
+    params.collection_ids?.includes(-1) ?? false;
+  const noCollectionFilter =
+    !params.collection_ids || params.collection_ids.length === 0;
+  const shouldShowOriginalPieces =
+    hasOriginalPiecesSelected || noCollectionFilter;
+
+  // When -1 is explicitly selected, show ALL original pieces regardless of other filters
+  // When no collection filter is applied, filter original pieces normally
+  const additionalProducts = shouldShowOriginalPieces
+    ? hasOriginalPiecesSelected
+      ? productsResponse.products.original_products // All original pieces when -1 is selected
+      : totalParams > 0
       ? filterProducts(productsResponse.products.original_products, params)
-      : productsResponse.products.original_products;
+      : productsResponse.products.original_products
+    : [];
   const prices = calculatePrices(productsResponse);
   return (
     <div>
@@ -49,6 +65,9 @@ export default async function ShopPage(props: {
             filters={params}
             minPrice={prices.min}
             maxPrice={prices.max}
+            originalProductsCount={
+              productsResponse.products.original_products.length
+            }
           />
         }
       >
@@ -56,6 +75,8 @@ export default async function ShopPage(props: {
           params={params}
           products={products}
           additionalProducts={additionalProducts}
+          shouldShowOriginalPieces={shouldShowOriginalPieces}
+          hasOriginalPiecesSelected={hasOriginalPiecesSelected}
         />
       </AppLayout>
     </div>
@@ -67,10 +88,14 @@ function InnerPage({
   params,
   products,
   additionalProducts,
+  shouldShowOriginalPieces,
+  hasOriginalPiecesSelected,
 }: PageProps & {
   params: Partial<ProductFilter>;
   products: Product[];
   additionalProducts: Product[];
+  shouldShowOriginalPieces: boolean;
+  hasOriginalPiecesSelected: boolean;
 }) {
   const locale = useLocale() as LocaleType;
   const t = useTranslations();
@@ -103,8 +128,12 @@ function InnerPage({
           })}
         </Grid>
       </div>
-      {additionalProducts.length > 0 && (
-        <LoadMoreProductsWrapper text={t("shop_page.load_more_items")}>
+      {/* Show original pieces section when -1 is selected or no collection filter */}
+      {shouldShowOriginalPieces ? (
+        <LoadMoreProductsWrapper
+          text={t("shop_page.load_more_items")}
+          initialOpen={hasOriginalPiecesSelected}
+        >
           <div
             className={
               "px-4 md:px-[var(--container-padding)] py-4 md:py-6 bg-black"
@@ -117,26 +146,32 @@ function InnerPage({
             >
               ORIGINAL PIECES
             </h4>
-            <Grid
-              spacing={2}
-              container
-              className="pt-4 md:pt-6 max-w-screen-xl mx-auto px-4 md:px-0"
-            >
-              {additionalProducts.map((product) => {
-                return (
-                  <Grid
-                    key={product.product_id}
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    className={"pb-4 md:pb-8"}
-                  >
-                    <ProductItem original dark product={product} />
-                  </Grid>
-                );
-              })}
-            </Grid>
+            {additionalProducts.length > 0 ? (
+              <Grid
+                spacing={2}
+                container
+                className="pt-4 md:pt-6 max-w-screen-xl mx-auto px-4 md:px-0"
+              >
+                {additionalProducts.map((product) => {
+                  return (
+                    <Grid
+                      key={product.product_id}
+                      size={{ xs: 12, sm: 6, md: 4 }}
+                      className={"pb-4 md:pb-8"}
+                    >
+                      <ProductItem original dark product={product} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            ) : (
+              <div className="text-center py-8 text-[var(--background)]">
+                No original pieces match the current filters.
+              </div>
+            )}
           </div>
         </LoadMoreProductsWrapper>
-      )}
+      ) : null}
     </div>
   );
 }

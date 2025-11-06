@@ -86,6 +86,7 @@ export interface Collection {
   products: Product[];
   sections: CollectionSection[];
   homepage_image: string;
+  neki_opis: TranslatedText;
 }
 
 export interface ProductOption {

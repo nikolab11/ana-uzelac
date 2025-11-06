@@ -105,9 +105,8 @@ function CollectionItem(props: {
               {name}
             </h3>
             <div
-              style={{ maxWidth: "50%" }}
               className={
-                "text-[var(--background)] text-sm md:text-base pt-[20px] text-center md:text-left"
+                "text-[var(--background)] text-sm md:text-base pt-[20px] text-center md:text-left md:max-w-[50%]"
               }
             >
               {t(description)}

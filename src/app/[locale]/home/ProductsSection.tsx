@@ -33,14 +33,14 @@ export function ProductsSection(props: Props) {
       <div
         className={`${props.discoverAllButton ? "pt-9" : ""} md:pt-9 flex ${
           props.discoverAllButton ? "flex-col" : "flex-row"
-        } md:flex-row gap-3 md:gap-[36px] w-full`}
+        } md:flex-row gap-3 md:gap-[22vpx] w-full`}
       >
         {props.products.map((product, index) => {
           return (
             <div
               key={product.product_id}
               className={`${props.discoverAllButton ? "w-full" : "w-1/2"} md:${
-                props.alternative && index % 2 === 1 ? "basis-1/3" : "basis-2/2"
+                props.alternative && index % 2 === 1 ? "basis-1/4" : "basis-2/2"
               } ${
                 !props.discoverAllButton && index >= 2 ? "hidden md:block" : ""
               }`}
@@ -48,6 +48,7 @@ export function ProductsSection(props: Props) {
               <ProductItem
                 alternative={props.alternative && index % 2 === 1}
                 product={product}
+                discoverAllButton={props.discoverAllButton}
               />
             </div>
           );

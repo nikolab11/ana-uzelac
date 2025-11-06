@@ -1,17 +1,8 @@
 import { fetchSingleCollection } from "@/api/products";
 import { notFound } from "next/navigation";
 import { AppLayout } from "@/components/layout/AppLayout";
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import { Collection } from "@/types/api.types";
-import { LocaleType } from "@/types/routing";
-import { HeadText } from "@/components/common/HeadText";
-import { CollectionSectionView } from "@/app/[locale]/collections/[collectionId]/CollectionSectionView";
-import { FooterImage } from "@/components/layout/FooterImage";
-import { PageProps } from "@/types/pages.types";
-import { HoveringButton } from "@/components/common/HoveringButton";
-import Link from "next/link";
-import parse from "html-react-parser";
+import { InnerPage } from "./InnerPage";
 
 interface Params {
   collectionId: string;
@@ -35,77 +26,5 @@ export default async function CollectionPage(props: {
     <AppLayout>
       <InnerPage collection={collection} />
     </AppLayout>
-  );
-}
-
-const SCROLL_ELEMENT_ID = "main-collection-section";
-
-function InnerPage({
-  collection,
-  images,
-}: { collection: Collection } & PageProps) {
-  const locale = useLocale() as LocaleType;
-  const t = useTranslations("shop_page");
-  return (
-    <div>
-      <div className="h-[50vh] md:min-h-screen relative">
-        <Image
-          style={{
-            objectFit: "cover",
-          }}
-          src={collection.images[0]}
-          alt={"Image"}
-          fill
-        />
-        <HeadText
-          title={collection.title[locale]}
-          position={"center"}
-          buttonLabel={t("explore_collection")}
-          scrollElementId={SCROLL_ELEMENT_ID}
-        >
-          <p
-            className={
-              "text-[var(--background)] text-base md:text-xl font-light text-center"
-            }
-          >
-            {collection.subtitle[locale]}
-          </p>
-        </HeadText>
-      </div>
-      <div id={SCROLL_ELEMENT_ID} className={"bg-[#F6F1EB]"}>
-        <div className={"py-6 md:py-9 px-4 md:px-0 max-w-screen-xl mx-auto"}>
-          <p className={"text-sm md:text-base font-light text-center"}>
-            {parse(collection.description[locale])}
-          </p>
-        </div>
-        {collection.sections.map((section, index) => {
-          return (
-            <div
-              key={section.title[locale]}
-              className={`px-4 md:px-[var(--container-padding)] py-6 md:py-9 ${
-                index % 2 === 0 ? "bg-[#FCF7F1]" : ""
-              }`}
-            >
-              <CollectionSectionView
-                section={section}
-                inverted={index % 2 === 1}
-                collectionId={collection.collection_id}
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div
-        className={`pb-10 md:pb-[80px] px-4 md:px-0 max-w-screen-xl mx-auto flex flex-col justify-center items-center gap-3 md:gap-4 ${
-          collection.sections.length % 2 === 0 ? "bg-[#FCF7F1]" : ""
-        }`}
-      >
-        <p className={"text-sm md:text-base font-normal"}>#Neki opis</p>
-        <Link href={`/shop?collection_ids=${collection.collection_id}`}>
-          <HoveringButton mode={"dark"} label={t("shop_collection")} />
-        </Link>
-      </div>
-      <FooterImage img={images?.home_page.wearing_the_moment || ""} />
-    </div>
   );
 }

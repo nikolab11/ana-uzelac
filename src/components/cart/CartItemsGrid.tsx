@@ -98,11 +98,25 @@ export function CartItemsGrid() {
                 >
                   <div
                     className={
-                      "flex items-center gap-2 md:gap-2 bg-[#F5F5F5] md:bg-transparent rounded px-2 py-1 md:px-0 md:py-0"
+                      "flex items-center gap-2 md:gap-2  md:bg-transparent rounded px-2 py-1 md:px-0 md:py-0"
                     }
                   >
                     <IconButton
-                      sx={{ ...buttonSx, minWidth: "44px", minHeight: "44px" }}
+                      sx={{
+                        ...buttonSx,
+                        width: "24px",
+                        height: "24px",
+                        minWidth: "24px",
+                        minHeight: "24px",
+                        backgroundColor: "#DEDFDF",
+                        "&:hover": {
+                          backgroundColor: "#DEDFDF",
+                        },
+                        "&.Mui-disabled": {
+                          backgroundColor: "#DEDFDF",
+                          opacity: 0.5,
+                        },
+                      }}
                       disabled={row.count === 1}
                       size={"small"}
                       onClick={() => {
@@ -111,7 +125,7 @@ export function CartItemsGrid() {
                       color={"primary"}
                       className={"touch-manipulation"}
                     >
-                      <RemoveIcon fontSize={"small"} />
+                      <RemoveIcon sx={{ fontSize: "16px" }} />
                     </IconButton>
                     <div
                       className={
@@ -124,12 +138,23 @@ export function CartItemsGrid() {
                       onClick={() => {
                         updateItem(row.product, row.option, row.count + 1);
                       }}
-                      sx={{ ...buttonSx, minWidth: "44px", minHeight: "44px" }}
+                      sx={{
+                        ...buttonSx,
+                        width: "24px",
+                        height: "24px",
+                        minWidth: "24px",
+                        minHeight: "24px",
+                        backgroundColor: "#444444",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "#444444",
+                        },
+                      }}
                       size={"small"}
                       color={"primary"}
                       className={"touch-manipulation"}
                     >
-                      <AddIcon fontSize={"small"} />
+                      <AddIcon sx={{ fontSize: "16px" }} />
                     </IconButton>
                   </div>
                   <div className={"flex items-center gap-3 md:hidden"}>
