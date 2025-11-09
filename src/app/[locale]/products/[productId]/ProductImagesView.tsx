@@ -162,7 +162,7 @@ export function ProductImagesView(props: Props) {
           return (
             <div
               key={index}
-              // @ts-ignore
+              // @ts-expect-error
               ref={(el) => (containerRefs.current[index] = el)}
               className={
                 "w-screen h-full overflow-auto px-2 md:px-9 viewImageContainer"

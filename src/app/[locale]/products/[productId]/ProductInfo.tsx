@@ -21,7 +21,7 @@ interface Props {
 export function ProductInfo({ product, locale, collections }: Props) {
   // Fix logic: properly match the collection by collection_id, handling number/string and fallback
   // Both product.collection_id and c.collection_id *could* be string or number
-  let collection =
+  const collection =
     collections.find(
       (c) => String(c.collection_id) === String(product.collection_id)
     ) ||
