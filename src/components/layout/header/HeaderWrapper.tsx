@@ -8,6 +8,7 @@ export type HeaderMode = "hover" | "regular";
 interface Props {
   children: ReactNode;
   mode: HeaderMode;
+  smallHeader?: boolean;
 }
 
 const baseClassName =
@@ -16,7 +17,7 @@ const baseClassName =
 export function HeaderWrapper(props: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
-  
+
   useLayoutEffect(() => {
     if (props.mode === "regular") {
       return;
@@ -49,25 +50,30 @@ export function HeaderWrapper(props: Props) {
       const scrollbarWidth = element.offsetWidth - element.clientWidth;
       setScrollbarWidth(scrollbarWidth);
     };
-    
+
     calculateScrollbarWidth();
     window.addEventListener("resize", calculateScrollbarWidth);
-    
+
     return () => {
       window.removeEventListener("resize", calculateScrollbarWidth);
     };
   }, [props.mode]);
 
   const shouldBeTransparent = props.mode === "hover" && !scrolled;
-  
+
   return (
     <CollectionSubmenuContextProvider>
       <div
-        className={`${baseClassName} ${shouldBeTransparent ? "header-transparent" : ""}`}
+        className={`${baseClassName} ${
+          shouldBeTransparent ? "header-transparent" : ""
+        }`}
         style={{
           opacity: scrolled || props.mode === "regular" ? "1" : undefined,
           position: props.mode === "hover" ? "absolute" : "relative",
-          width: props.mode === "hover" && scrollbarWidth > 0 ? `calc(100% - ${scrollbarWidth}px)` : undefined,
+          width:
+            props.mode === "hover" && scrollbarWidth > 0
+              ? `calc(100% - ${scrollbarWidth}px)`
+              : undefined,
         }}
       >
         {props.children}

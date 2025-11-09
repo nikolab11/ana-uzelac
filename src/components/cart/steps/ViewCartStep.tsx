@@ -12,7 +12,7 @@ export function ViewCartStep() {
 
   const t = useTranslations("shop_page");
   return (
-    <div className={"h-full relative bg-[#FCF7F1] flex flex-col md:flex-row"}>
+    <div className={"h-full relative bg-[#F6F1EB] flex flex-col md:flex-row"}>
       <div
         onClick={() => onOpenChange(false)}
         className={
@@ -23,10 +23,11 @@ export function ViewCartStep() {
       </div>
       <div
         className={
-          "pl-4 md:pl-[var(--container-padding)] relative w-full md:w-[70vw] h-full pr-4 md:pr-9 pt-16 md:pt-[64px] pb-32 md:pb-0"
+          "pl-4 md:pl-[var(--container-padding)] relative w-full md:w-[70vw] h-full pr-4 md:pr-9 pt-16 md:pt-[24px] pb-32 md:pb-0"
         }
       >
         <BackButton
+          initialExpanded
           label={t("back_to_shop")}
           onClick={() => {
             onOpenChange(false);
@@ -51,7 +52,7 @@ export function ViewCartStep() {
         </div>
         <div
           className={
-            "absolute left-4 md:left-[var(--container-padding)] bottom-5 md:bottom-[64px] text-[#838383] text-[10px] md:text-xs font-normal"
+            "absolute left-4 md:left-[var(--container-padding)] bottom-5 md:bottom-[32px] text-[#838383] text-[10px] md:text-xs font-normal"
           }
         >
           {t("free_shipping_for_all_orders")}
@@ -68,18 +69,34 @@ export function ViewCartStep() {
               height: { xs: "auto", md: "100%" },
               bottom: { xs: 0, md: "auto" },
               top: { xs: "auto", md: 0 },
+              maxWidth: { md: "350px" },
+              overflowX: "hidden",
             },
           }}
         >
           <div
             className={
-              "px-4 md:px-9 py-4 md:py-6 flex flex-col w-full md:w-[30vw] h-full bg-[#FCF7F1] gap-4 md:gap-9 border-t md:border-t-0 border-[#E5E5E5]"
+              "relative md:max-w-[350px] overflow-x-hidden px-4 md:px-9 py-4 md:py-6 flex flex-col w-full md:w-[30vw] h-full bg-[#FCF7F1] gap-4 md:gap-2 border-t md:border-t-0 border-[#E5E5E5]"
             }
+            style={{
+              backgroundColor: "#FCF7F1",
+            }}
           >
+            {/* Summary close button aligned with left back button */}
+            <div
+              onClick={() => onOpenChange(false)}
+              className={
+                "hidden md:flex absolute top-6 right-4 md:right-9 cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] items-center justify-center z-10"
+              }
+              aria-label={t("close")}
+              role="button"
+            >
+              <XIcon size={4} />
+            </div>
             <div>
               <h4
                 className={
-                  "uppercase font-medium text-sm md:text-base py-2 md:py-9"
+                  "uppercase font-medium text-sm md:text-base py-2 md:py-15"
                 }
               >
                 {t("summary")}

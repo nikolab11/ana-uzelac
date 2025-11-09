@@ -6,6 +6,9 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { LocaleType } from "@/types/routing";
 import { useCartContext } from "@/context/cart/cart.context";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
+import { IoCheckmark } from "react-icons/io5";
 
 interface Props {
   product: Product;
@@ -18,12 +21,20 @@ export function AddedToCartSnackbar(props: Props) {
   const locale = useLocale() as LocaleType;
   const { onOpenChange } = useCartContext();
   const t = useTranslations("shop_page");
-  return (
+
+  // Guard for client-only portal
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
+  const content = (
     <Snackbar
       open={props.open}
       anchorOrigin={{ horizontal: "right", vertical: "top" }}
       onClose={props.onClose}
       sx={{
+        top: "144px !important",
+
         "@media (max-width: 768px)": {
           top: "0 !important",
           left: "0 !important",
@@ -41,6 +52,7 @@ export function AddedToCartSnackbar(props: Props) {
         style={{
           boxShadow:
             "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 10px 20px -5px rgba(0, 0, 0, 0.4)",
+          backgroundColor: "#FCF7F1",
         }}
       >
         <div
@@ -48,7 +60,11 @@ export function AddedToCartSnackbar(props: Props) {
             "flex items-center pb-3 md:pb-4 gap-4 md:gap-[60px] justify-between"
           }
         >
-          <h4 className={"text-sm md:text-base"}>{t("added_to_cart")}</h4>
+          <h4
+            className={"text-sm md:text-base uppercase flex items-center gap-2"}
+          >
+            <IoCheckmark size={17} /> {t("added_to_cart")}
+          </h4>
           <div
             onClick={props.onClose}
             className={"cursor-pointer flex-shrink-0"}
@@ -72,9 +88,9 @@ export function AddedToCartSnackbar(props: Props) {
             <h4 className={"font-semibold text-xs md:text-sm pb-1 md:pb-2"}>
               {props.product[`name_${locale}`]}
             </h4>
-            <p className={"text-xs md:text-sm font-light"}>
-              {`${t("size")}: ${props.option?.size}`}
-            </p>
+            <p className={"text-xs md:text-sm font-light"}>{`${t("size")}: ${
+              props.option?.size
+            }`}</p>
           </div>
         </div>
         <div
@@ -88,7 +104,7 @@ export function AddedToCartSnackbar(props: Props) {
               onOpenChange(true);
             }}
             className={
-              "grow px-3 md:px-4 py-2 text-xs md:text-sm hover:bg-[var(--secondary-color)] hover:text-[var(--background)] transition-all cursor-pointer"
+              "uppercase grow px-3 md:px-4 py-2 text-xs md:text-sm hover:bg-[var(--secondary-color)] hover:text-[var(--background)] transition-all cursor-pointer"
             }
           >
             {t("view_cart")}
@@ -113,4 +129,6 @@ export function AddedToCartSnackbar(props: Props) {
       </div>
     </Snackbar>
   );
+
+  return createPortal(content, document.body);
 }

@@ -19,10 +19,10 @@ export function DifferentKindOfLuxurySection(props: Props) {
       >
         <div
           className={
-            "text-center basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--text-color)] py-[24px] md:py-[32px]"
+            "text-center basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--text-color)] py-[24px] md:py-[32px] px-4 md:px-12"
           }
         >
-          <h3 className={"font-bold text-2xl md:text-4xl pb-4 md:pb-8"}>
+          <h3 className={"font-bold text-2xl md:text-4xl pb-4 md:pb-6"}>
             {t("a_different_kind_of_luxury")}
           </h3>
           <p className={"text-sm md:text-base"}>
@@ -42,17 +42,17 @@ export function DifferentKindOfLuxurySection(props: Props) {
             width={"100%"}
             height={"auto"}
             style={{
-              maxHeight: "600px",
+              maxHeight: "680px",
             }}
           />
         </div>
       </div>
       <div
         className={
-          "pt-[40px] md:pt-[80px] grid grid-cols-1 md:grid-cols-2 gap-2"
+          "pt-[40px] md:pt-[80px] grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-4"
         }
       >
-        <div className={"flex flex-col gap-2 h-full"}>
+        <div className={"flex flex-col gap-2 md:gap-4 h-full"}>
           <div className={"relative w-full flex-1 min-h-0"}>
             <img
               className={"w-full h-full object-cover"}
@@ -64,17 +64,17 @@ export function DifferentKindOfLuxurySection(props: Props) {
           <div className={"relative w-full flex-1 min-h-0"}>
             <img
               className={"w-full h-full object-cover"}
-              src={props.images.about_page.about_page_4}
+              src={props.images.about_page.about_page_6}
               alt={t("a_different_kind_of_luxury")}
               loading={"lazy"}
             />
           </div>
         </div>
-        <div className={"flex flex-col gap-2 h-full"}>
+        <div className={"flex flex-col gap-2 md:gap-4 h-full"}>
           <div className={"relative w-full flex-[0.4] min-h-0"}>
             <img
               className={"w-full h-full object-cover"}
-              src={props.images.about_page.about_page_6}
+              src={props.images.about_page.about_page_4}
               alt={t("a_different_kind_of_luxury")}
               loading={"lazy"}
             />

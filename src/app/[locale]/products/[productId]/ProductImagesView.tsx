@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ImageCarousel } from "@/components/common/ImageCarousel";
 import { XIcon } from "@/components/icons/XIcon";
 import { Button, ButtonGroup, IconButton } from "@mui/material";
@@ -15,19 +15,108 @@ const ZOOM_SCALE_STEP = 1.3;
 
 export function ProductImagesView(props: Props) {
   const [active, setActive] = useState(0);
-  const ref = useRef<HTMLImageElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState(1);
+
+  // drag-to-pan state
+  const dragRef = useRef<{
+    isDown: boolean;
+    startX: number;
+    startY: number;
+    scrollLeft: number;
+    scrollTop: number;
+    el: HTMLDivElement | null;
+  }>({
+    isDown: false,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+    el: null,
+  });
+
+  // Refs for each image scroll container
+  const containerRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  // Ensure we reset zoom on open/close transitions
+  useEffect(() => {
+    if (props.open) {
+      setZoom(1);
+    }
+  }, [props.open]);
+
+  // Reset zoom on image change
+  useEffect(() => {
+    setZoom(1);
+  }, [active]);
+
   useLayoutEffect(() => {
-    if (!props.open || !ref.current) {
+    if (!props.open || !viewportRef.current) {
       return;
     }
-    const scrollWidth = ref.current.scrollWidth;
-
-    ref.current.scrollTo({
+    const scrollWidth = viewportRef.current.scrollWidth;
+    viewportRef.current.scrollTo({
       behavior: "smooth",
       left: (active * scrollWidth) / props.images.length,
     });
   }, [active, props.open, props.images.length]);
+
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (zoom <= 1) return;
+    dragRef.current.isDown = true;
+    dragRef.current.el = e.currentTarget;
+    dragRef.current.startX = e.clientX;
+    dragRef.current.startY = e.clientY;
+    dragRef.current.scrollLeft = e.currentTarget.scrollLeft;
+    dragRef.current.scrollTop = e.currentTarget.scrollTop;
+    e.currentTarget.style.cursor = "grabbing";
+    e.preventDefault();
+  };
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragRef.current.isDown || !dragRef.current.el) return;
+    const dx = e.clientX - dragRef.current.startX;
+    const dy = e.clientY - dragRef.current.startY;
+    dragRef.current.el.scrollLeft = dragRef.current.scrollLeft - dx;
+    dragRef.current.el.scrollTop = dragRef.current.scrollTop - dy;
+  };
+  const endDrag = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (dragRef.current.el) {
+      dragRef.current.el.style.cursor = zoom > 1 ? "grab" : "auto";
+    }
+    dragRef.current.isDown = false;
+    dragRef.current.el = null;
+  };
+
+  // Zoom keeping viewport center
+  const zoomTo = (nextZoom: number) => {
+    const prevZoom = zoom;
+    const el = containerRefs.current[active];
+    if (!el) {
+      setZoom(nextZoom);
+      return;
+    }
+    const ratio = nextZoom / prevZoom;
+    const centerX = el.scrollLeft + el.clientWidth / 2;
+    const centerY = el.scrollTop + el.clientHeight / 2;
+    setZoom(nextZoom);
+    requestAnimationFrame(() => {
+      el.scrollLeft = centerX * ratio - el.clientWidth / 2;
+      el.scrollTop = centerY * ratio - el.clientHeight / 2;
+    });
+  };
+
+  const handleZoomIn = () => {
+    zoomTo(zoom * ZOOM_SCALE_STEP);
+  };
+  const handleZoomOut = () => {
+    const next = Math.max(1, zoom / ZOOM_SCALE_STEP);
+    zoomTo(next);
+  };
+
+  const handleClose = () => {
+    setZoom(1);
+    props.onClose();
+  };
 
   if (!props.open) {
     return null;
@@ -35,7 +124,7 @@ export function ProductImagesView(props: Props) {
 
   return (
     <div
-      ref={ref}
+      ref={viewportRef}
       className={"fixed flex z-1201 bg-black"}
       style={{
         width: `100vw`,
@@ -55,7 +144,7 @@ export function ProductImagesView(props: Props) {
             minWidth: { xs: "44px", md: "auto" },
             minHeight: { xs: "44px", md: "auto" },
           }}
-          onClick={props.onClose}
+          onClick={handleClose}
           className={"touch-manipulation"}
         >
           <XIcon strokeWidth={1} size={3} />
@@ -73,23 +162,38 @@ export function ProductImagesView(props: Props) {
           return (
             <div
               key={index}
+              // @ts-ignore
+              ref={(el) => (containerRefs.current[index] = el)}
               className={
                 "w-screen h-full overflow-auto px-2 md:px-9 viewImageContainer"
               }
+              onMouseDown={onMouseDown}
+              onMouseMove={onMouseMove}
+              onMouseUp={endDrag}
+              onMouseLeave={endDrag}
+              style={{
+                cursor: zoom > 1 ? "grab" : "auto",
+                paddingLeft: zoom > 1 ? 0 : undefined,
+                paddingRight: zoom > 1 ? 0 : undefined,
+              }}
             >
               <div
                 className={"w-full h-full relative viewImageContainer"}
                 style={{
-                  transform: `scale(${zoom})`,
+                  width: `${zoom * 100}%`,
+                  height: `${zoom * 100}%`,
                 }}
               >
                 <Image
                   src={image}
                   fill
+                  draggable={false}
                   style={{
                     objectFit: "contain",
+                    userSelect: "none",
+                    pointerEvents: "none",
                   }}
-                  alt={"asfas"}
+                  alt={"Image"}
                 />
               </div>
             </div>
@@ -116,7 +220,7 @@ export function ProductImagesView(props: Props) {
                 minHeight: { xs: "44px", md: "auto" },
                 padding: { xs: "8px", md: "auto" },
               }}
-              onClick={() => setZoom((prev) => prev * ZOOM_SCALE_STEP)}
+              onClick={handleZoomIn}
               className={"touch-manipulation"}
             >
               +
@@ -129,7 +233,7 @@ export function ProductImagesView(props: Props) {
                 minHeight: { xs: "44px", md: "auto" },
                 padding: { xs: "8px", md: "auto" },
               }}
-              onClick={() => setZoom((prev) => prev / ZOOM_SCALE_STEP)}
+              onClick={handleZoomOut}
               className={"touch-manipulation"}
             >
               -

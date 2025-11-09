@@ -54,30 +54,32 @@ export function CartContextProvider(props: Props) {
 	useEffect(() => {
 		saveCartToStorage(items);
 	}, [items]);
-	const addItem = useCallback((product: Product, option: ProductOption) => {
+	const addItem = useCallback((product: Product, option: ProductOption, collectionName?: string) => {
 		setItems(prev => {
-			const newState = { ...prev };
+			const newState = { ...prev } as CartItems;
 			if (!newState[product.product_id]) {
-				newState[product.product_id] = {};
+				newState[product.product_id] = {} as CartItems[number];
 			}
-			const currentCount = newState[product.product_id][option.size]?.count || 0;
+			const current = newState[product.product_id][option.size];
+			const currentCount = current?.count || 0;
 			newState[product.product_id] = {
 				...newState[product.product_id],
-				[option.size]: { product, count: currentCount + 1, option }
+				[option.size]: { product, count: currentCount + 1, option, collection_name: collectionName ?? current?.collection_name }
 			};
 			return newState;
 		});
 	}, []);
 
-	const updateItem = useCallback((product: Product, option: ProductOption, count: number) => {
+	const updateItem = useCallback((product: Product, option: ProductOption, count: number, collectionName?: string) => {
 		setItems(prev => {
-			const newState = { ...prev };
+			const newState = { ...prev } as CartItems;
 			if (!newState[product.product_id]) {
-				newState[product.product_id] = {};
+				newState[product.product_id] = {} as CartItems[number];
 			}
+			const existing = newState[product.product_id][option.size];
 			newState[product.product_id] = {
 				...newState[product.product_id],
-				[option.size]: { product, count, option }
+				[option.size]: { product, count, option, collection_name: collectionName ?? existing?.collection_name }
 			};
 			return newState;
 		});
@@ -87,9 +89,9 @@ export function CartContextProvider(props: Props) {
 			if (!prev[product.product_id]?.[option.size]) {
 				return prev;
 			}
-			const newState = { ...prev };
+			const newState = { ...prev } as CartItems;
 			newState[product.product_id] = Object.fromEntries(Object.entries(newState[product.product_id])
-				.filter(([key]) => key !== option.size));
+				.filter(([key]) => key !== option.size)) as CartItems[number];
 			return newState;
 		});
 	}, []);

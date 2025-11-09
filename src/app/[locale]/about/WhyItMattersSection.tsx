@@ -23,10 +23,10 @@ export function WhyItMattersSection({ image }: Props) {
         </div>
         <div
           className={
-            "text-center py-[24px] md:py-[32px] px-4 md:px-6 basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--background)]"
+            "text-center py-[24px] md:py-[32px] px-4 md:px-12 basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--background)]"
           }
         >
-          <h3 className={"font-bold text-2xl md:text-4xl pb-2 md:pb-4"}>
+          <h3 className={"font-bold text-2xl md:text-4xl pb-2 md:pb-6"}>
             {t("why_it_matters")}
           </h3>
           <p className={"text-sm md:text-base"}>

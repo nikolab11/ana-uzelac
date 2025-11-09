@@ -2,14 +2,14 @@
 import { createContext, useContext } from 'react';
 import { Product, ProductOption } from '@/types/api.types';
 
-export type CartItems = Record<number, Record<string, { product: Product, count: number, option: ProductOption }>>
+export type CartItems = Record<number, Record<string, { product: Product, count: number, option: ProductOption, collection_name?: string }>>
 
 export type CartStep = 'cart' | 'checkout'
 
 interface CartContextType {
 	items: CartItems;
-	addItem: (item: Product, option: ProductOption) => void;
-	updateItem: (item: Product, option: ProductOption, count: number) => void;
+	addItem: (item: Product, option: ProductOption, collectionName?: string) => void;
+	updateItem: (item: Product, option: ProductOption, count: number, collectionName?: string) => void;
 	removeItem: (item: Product, option: ProductOption) => void;
 	open: boolean;
 	step?: CartStep;

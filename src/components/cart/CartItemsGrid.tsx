@@ -31,12 +31,30 @@ export function CartItemsGrid() {
           display: { xs: "none", md: "flex" },
         }}
       >
-        <Grid size={4}>{t("item")}</Grid>
-        <Grid size={2}>{t("size")}</Grid>
-        <Grid size={3}>{t("quantity")}</Grid>
-        <Grid size={2}>{t("price")}</Grid>
+        <Grid
+          size={4}
+          sx={{ fontSize: "12px", fontWeight: 400, color: "#444444" }}
+        >
+          {t("item")}
+        </Grid>
+        <Grid
+          size={2}
+          sx={{ fontSize: "12px", fontWeight: 400, color: "#444444" }}
+        >
+          {t("size")}
+        </Grid>
+        <Grid
+          size={3}
+          sx={{ fontSize: "12px", fontWeight: 400, color: "#444444" }}
+        >
+          {t("quantity")}
+        </Grid>
+        <Grid size={2} sx={{ fontSize: "12px", fontWeight: 400 }}>
+          {t("price")}
+        </Grid>
       </Grid>
       {rows.map((row, index) => {
+        console.log(row);
         const isLast = index === rows.length - 1;
         return (
           <div
@@ -53,10 +71,10 @@ export function CartItemsGrid() {
               spacing={2}
             >
               <Grid size={{ xs: 12, md: 4 }}>
-                <div className={"flex gap-3 md:gap-6 items-center"}>
+                <div className={"flex gap-3 md:gap-6 items-center pb-5"}>
                   <div
                     className={
-                      "flex-shrink-0 relative w-[70px] h-[70px] md:w-[100px] md:h-[100px] rounded overflow-hidden"
+                      "flex-shrink-0 relative w-[70px] h-[70px] md:w-[100px] md:h-[100px] overflow-hidden"
                     }
                   >
                     <Image
@@ -69,10 +87,24 @@ export function CartItemsGrid() {
                   <div className={"flex-1 min-w-0"}>
                     <h4
                       className={
-                        "font-bold text-sm md:text-sm leading-tight mb-1"
+                        "font-medium text-sm md:text-sm leading-tight mb-1"
                       }
                     >
                       {row.product[`name_${locale}`]}
+                    </h4>
+                    <h4
+                      style={{
+                        fontWeight: 400,
+                        fontStyle: "normal",
+                        fontSize: "12px",
+                        lineHeight: "100%",
+                        letterSpacing: "0.05em",
+                        marginBottom: "0.25rem",
+                        color: "#444444",
+                        paddingTop: "2px",
+                      }}
+                    >
+                      {row.collection_name}
                     </h4>
                     <div className={"flex items-center gap-2 md:hidden"}>
                       <span className={"text-xs text-[#838383]"}>
@@ -177,7 +209,7 @@ export function CartItemsGrid() {
               <Grid size={{ xs: 0, md: 2 }} className={"hidden md:block"}>
                 <div className={"flex gap-6 items-center h-full"}>
                   <p className={"font-bold"}>
-                    {formatNumber(row.option.price * row.count) + EUR_SYMBOL}
+                    {formatNumber(row.option.price * row.count, 0) + EUR_SYMBOL}
                   </p>
                 </div>
               </Grid>

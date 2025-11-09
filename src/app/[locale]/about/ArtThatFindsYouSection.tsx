@@ -19,16 +19,16 @@ export function ArtThatFindsYouSection({ image }: Props) {
         </div>
         <div
           className={
-            "text-center py-[24px] md:py-[32px] px-4 md:px-6 basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--background)]"
+            "text-center py-[24px] md:py-[32px] px-4 md:px-12 basis-sm grow flex flex-col justify-center items-center gap-2 md:gap-4 text-[var(--background)]"
           }
         >
-          <h3 className={"font-bold text-2xl md:text-4xl"}>
+          <h3 className={"font-bold text-2xl md:text-4xl pb-2 md:pb-6"}>
             {t("art_that_finds_you")}
           </h3>
-          <p className={"text-sm md:text-base"}>
+          <p className={"text-sm light-text font-light  md:text-base"}>
             {t("art_that_finds_you_description_1")}
           </p>
-          <p className={"text-sm md:text-base"}>
+          <p className={"text-sm light-text font-light  md:text-base"}>
             {t("art_that_finds_you_description_2")}
           </p>
         </div>

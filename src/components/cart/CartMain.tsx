@@ -22,14 +22,18 @@ export function CartMain() {
   const hasItems =
     Object.values(items).flatMap((val) => Object.keys(val)).length > 0;
   return (
-    <Drawer anchor={"right"} open={open} onClose={onClose}>
-      <div
-        className={`h-full ${
-          hasItems || step === "checkout"
-            ? "w-[100vw]"
-            : "w-[100vw] md:w-[70vw] lg:w-[30vw]"
-        }`}
-      >
+    <Drawer
+      anchor={"right"}
+      open={open}
+      onClose={onClose}
+      PaperProps={{
+        sx: {
+          width: { xs: "100vw", md: "90vw" },
+          height: { xs: "100vh", md: "90vh" },
+        },
+      }}
+    >
+      <div className={`h-full w-full`}>
         {!hasItems && step !== "checkout" && (
           <EmptyCart
             onClose={() => {

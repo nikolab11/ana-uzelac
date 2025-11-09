@@ -29,6 +29,7 @@ interface Props {
   mode: HeaderMode;
   collections: Collection[];
   additionalContent?: ReactNode;
+  smallHeader?: boolean;
 }
 
 export function Header(props: Props) {
@@ -50,7 +51,7 @@ export function Header(props: Props) {
   };
 
   return (
-    <HeaderWrapper mode={props.mode}>
+    <HeaderWrapper smallHeader={props.smallHeader} mode={props.mode}>
       {/* Mobile Header Bar */}
       <div className="md:hidden">
         <div key="mobile-header" className="flex items-center py-4 relative">

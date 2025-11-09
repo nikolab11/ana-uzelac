@@ -28,7 +28,7 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
 
   return (
     <>
-      <div className="h-[50vh] md:h-full relative">
+      <div className="h-[50vh]  relative">
         <Image
           style={{
             objectFit: "cover",
@@ -54,7 +54,7 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
             return (
               <div
                 key={element.id}
-                className="basis-full md:basis-xs pb-6 md:pb-9"
+                className="basis-full md:basis-sm pb-6 md:pb-9"
               >
                 <NewsItem news={element} />
               </div>

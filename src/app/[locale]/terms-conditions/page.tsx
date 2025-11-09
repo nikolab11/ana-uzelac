@@ -13,7 +13,22 @@ export default function TermsConditionsPage() {
         }
       >
         <h3 className={"pb-6 text-xl text-center font-bold"}>
-          {t("terms_conditions_header")}
+          {t("terms_conditions_header")
+            .split("&")
+            .reduce<React.ReactNode[]>((acc, part, idx, arr) => {
+              acc.push(part);
+              if (idx < arr.length - 1) {
+                acc.push(
+                  <span
+                    key={idx}
+                    style={{ fontFamily: '"Abhaya Libre", serif' }}
+                  >
+                    &
+                  </span>
+                );
+              }
+              return acc;
+            }, [])}
         </h3>
         <div className={"pb-6"}>
           <span className={"font-light italic"}>

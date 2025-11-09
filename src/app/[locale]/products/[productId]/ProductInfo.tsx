@@ -19,12 +19,25 @@ interface Props {
 }
 
 export function ProductInfo({ product, locale, collections }: Props) {
-  const collection = collections.find(
-    (c) => c.collection_id === product.collection_id
-  );
+  // Fix logic: properly match the collection by collection_id, handling number/string and fallback
+  // Both product.collection_id and c.collection_id *could* be string or number
+  let collection =
+    collections.find(
+      (c) => String(c.collection_id) === String(product.collection_id)
+    ) ||
+    collections.find(
+      (c) =>
+        // fallback: some products from API might be missing .collection_id field or have a mismatch
+        c.products?.some &&
+        Array.isArray(c.products) &&
+        c.products.some(
+          (p: any) => String(p.product_id) === String(product.product_id)
+        )
+    );
+
   const [selectedOption, setSelectedOption] = useState<
     ProductOption | undefined
-  >(undefined);
+  >(product.options?.[0]);
   const [showError, setShowError] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const onOptionSelect = (opt: ProductOption) => {
@@ -37,7 +50,8 @@ export function ProductInfo({ product, locale, collections }: Props) {
       setShowError(true);
       return;
     }
-    addItem(product, selectedOption);
+    const collectionName = collection ? collection.title[locale] : undefined;
+    addItem(product, selectedOption, collectionName);
     setOpenSnackbar(true);
   };
   const t = useTranslations("shop_page");
@@ -49,10 +63,10 @@ export function ProductInfo({ product, locale, collections }: Props) {
         open={openSnackbar}
         onClose={() => setOpenSnackbar(false)}
       />
-      <div className={"py-3 md:py-4 bg-[#FFFCF7E6] md:opacity-80"}>
+      <div className={"py-3 md:py-4 bg-[#FFFCF7] md:opacity-80"}>
         <div
           className={
-            "px-4 md:px-6 py-3 md:py-4 border-white border-b flex flex-col items-center md:items-start"
+            "px-4 md:px-6 py-3 md:py-2 border-white border-b flex flex-col items-center md:items-start"
           }
         >
           <h4
@@ -67,13 +81,15 @@ export function ProductInfo({ product, locale, collections }: Props) {
               className={
                 "text-xs md:text-sm font-light text-center md:text-left"
               }
-            >{`${formatNumber(selectedOption.price)} ${product.currency}`}</p>
+            >{`${formatNumber(selectedOption.price, 0)} ${
+              product.currency
+            }`}</p>
           )}
         </div>
         {collection && (
           <div
             className={
-              "px-4 md:px-6 py-3 md:py-4 border-white border-b flex justify-between gap-4 md:gap-[80px] text-xs md:text-sm font-normal"
+              "px-4 md:px-6 py-3 md:py-2 border-white border-b flex justify-between gap-4 md:gap-[80px] text-xs md:text-sm font-normal"
             }
           >
             <p>{t("collection")}</p>
@@ -88,7 +104,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
             options={product.options}
           />
         </div>
-        <div className={"px-4 md:px-6 py-3 md:py-4 border-white border-b"}>
+        <div className={"px-4 md:px-6 py-3 md:py-2 border-white border-b"}>
           <Button
             className={"w-full"}
             sx={{

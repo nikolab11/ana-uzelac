@@ -28,7 +28,7 @@ export default async function NewsShowPage(props: { params: Promise<Params> }) {
   const title = news[`title_${locale}`];
   const t = await getTranslations();
   return (
-    <AppLayout>
+    <AppLayout smallHeader mode="hover">
       <div>
         <div className="h-[320px] relative">
           <Image
@@ -49,7 +49,11 @@ export default async function NewsShowPage(props: { params: Promise<Params> }) {
           id={CONTENT_ID}
           className={"px-4 md:px-[var(--container-padding)] py-6 md:py-12"}
         >
-          <div className={"flex flex-col gap-3 md:gap-4 content-wrapper max-w-screen-xl mx-auto"}>
+          <div
+            className={
+              "flex flex-col gap-3 md:gap-4 content-wrapper max-w-screen-xl mx-auto"
+            }
+          >
             {parse(news[`content_${locale}`])}
           </div>
         </div>

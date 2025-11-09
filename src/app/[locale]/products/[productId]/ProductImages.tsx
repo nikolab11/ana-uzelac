@@ -7,6 +7,9 @@ import { ProductImagesView } from "@/app/[locale]/products/[productId]/ProductIm
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { BackButton } from "@/components/common/BackButton";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: Product;
@@ -18,6 +21,9 @@ export function ProductImages({ product }: Props) {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const t = useTranslations("shop_page");
+  const router = useRouter();
+
   useLayoutEffect(() => {
     if (!ref.current) return;
     const totalWidth = ref.current.scrollWidth;
@@ -37,6 +43,16 @@ export function ProductImages({ product }: Props) {
   if (!mounted) return null;
   return (
     <div className={"relative overflow-hidden w-full h-full"}>
+      {!open && (
+        <div className="absolute top-4 left-4 md:top-[var(--container-padding)] md:left-[var(--container-padding)] z-1400">
+          <BackButton
+            label={t("back")}
+            onClick={() => {
+              router.push("/shop");
+            }}
+          />
+        </div>
+      )}
       {createPortal(
         <ProductImagesView
           images={product.images}
