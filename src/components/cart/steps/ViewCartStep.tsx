@@ -6,9 +6,11 @@ import { EUR_SYMBOL, SHIPPING_PRICE } from "@/utils/constants";
 import { formatNumber } from "@/utils/product.utils";
 import { BackButton } from "@/components/common/BackButton";
 import { XIcon } from "@/components/icons/XIcon";
+import { useRouter } from "@/i18n/navigation";
 
 export function ViewCartStep() {
   const { onOpenChange, totalItems, totalPrice } = useCartContext();
+  const router = useRouter();
 
   const t = useTranslations("shop_page");
   return (
@@ -23,7 +25,7 @@ export function ViewCartStep() {
       </div>
       <div
         className={
-          "pl-4 md:pl-[var(--container-padding)] relative w-full md:w-[70vw] h-full pr-4 md:pr-9 pt-16 md:pt-[24px] pb-32 md:pb-0"
+          "pl-4 md:pl-[var(--container-padding)] relative w-full md:w-[70vw] h-full pr-4 md:pr-9 pt-16 md:pt-9 pb-32 md:pb-0"
         }
       >
         <BackButton
@@ -31,12 +33,13 @@ export function ViewCartStep() {
           label={t("back_to_shop")}
           onClick={() => {
             onOpenChange(false);
+            router.push("/shop");
           }}
         />
         <div className="flex flex-col sm:flex-row pb-4 md:pb-9 items-start sm:items-center justify-between gap-2 md:gap-0">
           <h4
             className={
-              "uppercase font-medium text-sm md:text-base py-3 md:py-9"
+              "uppercase font-medium text-sm md:text-base py-3 md:py-6"
             }
           >
             {t("shopping_cart")}
@@ -46,7 +49,7 @@ export function ViewCartStep() {
           </h4>
         </div>
         <div
-          className={"overflow-y-auto pb-20 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"}
+          className={"overflow-y-auto pb-48 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"}
         >
           <CartItemsGrid />
         </div>
@@ -59,17 +62,90 @@ export function ViewCartStep() {
         </div>
       </div>
       <div className={"w-full md:w-auto"}>
+        {/* Mobile: bottom-anchored summary */}
+        <Drawer
+          variant={"permanent"}
+          anchor={"bottom"}
+          className={"md:hidden"}
+          sx={{
+            "& .MuiDrawer-paper": {
+              width: "100%",
+              height: "auto",
+              borderTopLeftRadius: 12,
+              borderTopRightRadius: 12,
+              boxShadow: "0 -10px 30px rgba(0,0,0,0.15)",
+            },
+          }}
+        >
+          <div
+            className={
+              "px-4 py-4 flex flex-col w-full bg-[#FCF7F1] gap-4 border-t border-[#E5E5E5]"
+            }
+          >
+            <div>
+              <h4 className={"uppercase font-medium text-sm py-2"}>
+                {t("summary")}
+              </h4>
+            </div>
+            <div className={"grow flex flex-col gap-3"}>
+              <div className={"flex justify-between gap-4"}>
+                <div className={"font-medium text-xs"}>{t("subtotal")}</div>
+                <div className={"font-bold text-xs"}>{`${formatNumber(
+                  totalPrice
+                )}${EUR_SYMBOL}`}</div>
+              </div>
+              <div className={"flex justify-between gap-4"}>
+                <div className={"font-medium text-xs"}>{t("shipping")}</div>
+                <div className={"font-bold text-xs"}>{`${formatNumber(
+                  SHIPPING_PRICE
+                )}${EUR_SYMBOL}`}</div>
+              </div>
+            </div>
+            <div
+              className={
+                "flex justify-between gap-4 pt-4 border-t border-[#E5E5E5]"
+              }
+            >
+              <div className={"font-medium text-sm"}>{t("total")}</div>
+              <div className={"font-bold text-sm"}>{`${formatNumber(
+                totalPrice + SHIPPING_PRICE
+              )}${EUR_SYMBOL}`}</div>
+            </div>
+            <div>
+              <Button
+                color={"primary"}
+                variant={"contained"}
+                sx={{
+                  borderRadius: 0,
+                  padding: { xs: "14px 20px", md: "12px 30px" },
+                  width: "100%",
+                  fontSize: { xs: "0.875rem", md: "0.875rem" },
+                  fontWeight: { xs: 600, md: 400 },
+                  minHeight: { xs: "48px", md: "auto" },
+                }}
+                onClick={() => {
+                  onOpenChange(true, "checkout");
+                }}
+                className={"touch-manipulation"}
+              >
+                {t("checkout_button")}
+              </Button>
+            </div>
+          </div>
+        </Drawer>
+        {/* Desktop sidebar */}
         <Drawer
           variant={"permanent"}
           anchor={"right"}
+          className={"hidden md:block"}
           sx={{
             "& .MuiDrawer-paper": {
-              position: { xs: "sticky", md: "absolute" },
-              width: { xs: "100%", md: "30vw" },
-              height: { xs: "auto", md: "100%" },
-              bottom: { xs: 0, md: "auto" },
-              top: { xs: "auto", md: 0 },
-              maxWidth: { md: "350px" },
+              position: "absolute",
+              width: "30vw",
+              height: "100%",
+              bottom: "auto",
+              top: 0,
+              maxWidth: "350px",
               overflowX: "hidden",
             },
           }}

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 
 interface Props {
@@ -11,6 +11,13 @@ interface Props {
 
 export function LoadMoreProductsWrapper(props: Props) {
   const [open, setOpen] = useState(props.initialOpen ?? false);
+
+  // Auto-open if the prop becomes true (e.g., user activates Original Pieces filter)
+  useEffect(() => {
+    if (props.initialOpen) {
+      setOpen(true);
+    }
+  }, [props.initialOpen]);
 
   if (open) {
     return props.children;

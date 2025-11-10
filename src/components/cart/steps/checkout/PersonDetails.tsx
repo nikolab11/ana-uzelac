@@ -15,7 +15,7 @@ export function PersonDetails(props: Props) {
   const t = useTranslations("shop_page");
   return (
     <div className={"w-full md:w-[70%]"} id={"person-step"}>
-      <h4 className={"font-medium text-lg md:text-2xl pb-6 md:pb-[48px]"}>
+      <h4 className={"font-medium text-lg md:text-2xl pb-2 md:pb-[48px]"}>
         {t("who_is_ordering")}
       </h4>
 
@@ -32,9 +32,18 @@ export function PersonDetails(props: Props) {
             name={"email"}
             value={props.formState.email}
             sx={{
+              opacity: 0.67,
               "& .MuiInputBase-input": {
                 fontSize: { xs: "0.875rem", md: "1rem" },
+                color: "#444444",
+                fontWeight: 400,
+                "::placeholder": {
+                  color: "#444444",
+                  opacity: 1,
+                  fontWeight: 300,
+                },
               },
+              "& .MuiInputLabel-root": { color: "#444444" },
             }}
           />
           <div
@@ -51,9 +60,18 @@ export function PersonDetails(props: Props) {
               value={props.formState.firstName}
               label={t("first_name")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
             <TextField
@@ -65,9 +83,18 @@ export function PersonDetails(props: Props) {
               value={props.formState.lastName}
               label={t("last_name")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>
@@ -90,9 +117,18 @@ export function PersonDetails(props: Props) {
             name={"email"}
             value={props.formState.email}
             sx={{
+              opacity: 0.8,
               "& .MuiInputBase-input": {
                 fontSize: { xs: "0.875rem", md: "1rem" },
+                color: "#444444",
+                fontWeight: 400,
+                "::placeholder": {
+                  color: "#444444",
+                  opacity: 1,
+                  fontWeight: 300,
+                },
               },
+              "& .MuiInputLabel-root": { color: "#444444" },
             }}
           />
           <div
@@ -109,9 +145,18 @@ export function PersonDetails(props: Props) {
               value={props.formState.firstName}
               label={t("first_name")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
             <TextField
@@ -123,9 +168,18 @@ export function PersonDetails(props: Props) {
               value={props.formState.lastName}
               label={t("last_name")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>

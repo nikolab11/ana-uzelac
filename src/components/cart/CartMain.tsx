@@ -28,12 +28,15 @@ export function CartMain() {
       onClose={onClose}
       PaperProps={{
         sx: {
-          width: { xs: "100vw", md: "90vw" },
+          width: {
+            xs: "100vw",
+            md: hasItems || step === "checkout" ? "90vw" : "450px",
+          },
           height: { xs: "100vh", md: "90vh" },
         },
       }}
     >
-      <div className={`h-full w-full`}>
+      <div className={`h-full w-full `}>
         {!hasItems && step !== "checkout" && (
           <EmptyCart
             onClose={() => {
@@ -53,12 +56,14 @@ export function CartMain() {
 
 function EmptyCart(props: { onClose: () => void }) {
   const t = useTranslations("shop_page");
+  const { onOpenChange } = useCartContext();
 
   return (
     <div
       className={
         "p-4 md:p-9 overflow-auto h-full flex flex-col justify-between"
       }
+      style={{ backgroundColor: "#F6F1EB" }}
     >
       <div className={"flex justify-between items-center pb-4 md:pb-7"}>
         <h4
@@ -69,7 +74,7 @@ function EmptyCart(props: { onClose: () => void }) {
           {t("shopping_cart")}
         </h4>
         <div
-          onClick={props.onClose}
+          onClick={() => onOpenChange(false)}
           className={
             "cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
           }
@@ -84,7 +89,7 @@ function EmptyCart(props: { onClose: () => void }) {
           }
         >
           <div className={"mb-2 md:mb-0"}>
-            <ShoppingBag size={6} />
+            <ShoppingBag size={7} />
           </div>
           <p
             className={
@@ -97,7 +102,7 @@ function EmptyCart(props: { onClose: () => void }) {
             onClick={props.onClose}
             className={"font-medium touch-manipulation"}
             sx={{
-              padding: { xs: "14px 28px", md: "12px 24px" },
+              padding: { xs: "14px 28px", md: "10px 24px" },
               borderRadius: 0,
               fontSize: { xs: "0.875rem", md: "12px" },
               minHeight: { xs: "48px", md: "auto" },

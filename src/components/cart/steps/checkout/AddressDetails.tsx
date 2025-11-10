@@ -25,7 +25,7 @@ export function AddressDetails(props: Props) {
   const t = useTranslations("shop_page");
   return (
     <div className={"w-full md:w-[70%]"} id={"address-step"}>
-      <h4 className={"font-medium text-lg md:text-2xl pb-6 md:pb-[48px]"}>
+      <h4 className={"font-medium text-lg md:text-2xl pb-2 md:pb-[48px]"}>
         {t("order_details")}
       </h4>
       {props.isMobileForm ? (
@@ -39,9 +39,18 @@ export function AddressDetails(props: Props) {
             value={props.formState.address}
             label={t("address")}
             sx={{
+              opacity: 0.67,
               "& .MuiInputBase-input": {
                 fontSize: { xs: "0.875rem", md: "1rem" },
+                color: "#444444",
+                fontWeight: 400,
+                "::placeholder": {
+                  color: "#444444",
+                  opacity: 1,
+                  fontWeight: 300,
+                },
               },
+              "& .MuiInputLabel-root": { color: "#444444" },
             }}
           />
           <div
@@ -59,9 +68,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.city}
                 label={t("city")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -75,9 +93,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.zipCode}
                 label={t("zip_code")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -92,9 +119,18 @@ export function AddressDetails(props: Props) {
               value={props.formState.country}
               label={t("country")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>
@@ -107,9 +143,18 @@ export function AddressDetails(props: Props) {
               value={props.formState.state}
               label={t("state_province")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>
@@ -131,6 +176,8 @@ export function AddressDetails(props: Props) {
                       marginLeft: "-15px",
                       paddingTop: "5px",
                     },
+                    color: "#444444",
+                    opacity: 0.8,
                   }}
                 >
                   {t("country_code")}
@@ -142,8 +189,11 @@ export function AddressDetails(props: Props) {
                   name={"countryCode"}
                   value={props.formState.countryCode}
                   sx={{
+                    opacity: 0.8,
                     "& .MuiSelect-select": {
                       fontSize: { xs: "0.875rem", md: "1rem" },
+                      color: "#444444",
+                      fontWeight: 400,
                     },
                   }}
                 >
@@ -167,9 +217,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.phoneNumber}
                 label={t("phone_number")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -191,9 +250,18 @@ export function AddressDetails(props: Props) {
             value={props.formState.address}
             label={t("address")}
             sx={{
+              opacity: 0.8,
               "& .MuiInputBase-input": {
                 fontSize: { xs: "0.875rem", md: "1rem" },
+                color: "#444444",
+                fontWeight: 400,
+                "::placeholder": {
+                  color: "#444444",
+                  opacity: 1,
+                  fontWeight: 300,
+                },
               },
+              "& .MuiInputLabel-root": { color: "#444444" },
             }}
           />
           <div
@@ -211,9 +279,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.city}
                 label={t("city")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -227,9 +304,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.zipCode}
                 label={t("zip_code")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -244,9 +330,18 @@ export function AddressDetails(props: Props) {
               value={props.formState.country}
               label={t("country")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>
@@ -259,9 +354,18 @@ export function AddressDetails(props: Props) {
               value={props.formState.state}
               label={t("state_province")}
               sx={{
+                opacity: 0.8,
                 "& .MuiInputBase-input": {
                   fontSize: { xs: "0.875rem", md: "1rem" },
+                  color: "#444444",
+                  fontWeight: 400,
+                  "::placeholder": {
+                    color: "#444444",
+                    opacity: 1,
+                    fontWeight: 300,
+                  },
                 },
+                "& .MuiInputLabel-root": { color: "#444444" },
               }}
             />
           </div>
@@ -283,6 +387,8 @@ export function AddressDetails(props: Props) {
                       marginLeft: "-15px",
                       paddingTop: "5px",
                     },
+                    color: "#444444",
+                    opacity: 0.8,
                   }}
                 >
                   {t("country_code")}
@@ -294,8 +400,11 @@ export function AddressDetails(props: Props) {
                   name={"countryCode"}
                   value={props.formState.countryCode}
                   sx={{
+                    opacity: 0.8,
                     "& .MuiSelect-select": {
                       fontSize: { xs: "0.875rem", md: "1rem" },
+                      color: "#444444",
+                      fontWeight: 400,
                     },
                   }}
                 >
@@ -319,9 +428,18 @@ export function AddressDetails(props: Props) {
                 value={props.formState.phoneNumber}
                 label={t("phone_number")}
                 sx={{
+                  opacity: 0.8,
                   "& .MuiInputBase-input": {
                     fontSize: { xs: "0.875rem", md: "1rem" },
+                    color: "#444444",
+                    fontWeight: 400,
+                    "::placeholder": {
+                      color: "#444444",
+                      opacity: 1,
+                      fontWeight: 300,
+                    },
                   },
+                  "& .MuiInputLabel-root": { color: "#444444" },
                 }}
               />
             </div>
@@ -358,7 +476,11 @@ export function AddressDetails(props: Props) {
         </form>
       )}
       {props.isMobileForm && (
-        <div className={"pt-6 md:pt-9"}>
+        <div
+          className={
+            "md:hidden fixed left-0 right-0 bottom-0 z-1201 bg-[#FCF7F1] border-t border-[#E5E5E5] p-4"
+          }
+        >
           {props.submitState === "pending" && (
             <Button
               className={"uppercase touch-manipulation"}
