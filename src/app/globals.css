@@ -93,11 +93,14 @@ h3 {
 .collection-menu {
   overflow: hidden;
   position: absolute;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100vw;
   display: flex;
   justify-content: center;
   background-color: #fcf7f1;
-  z-index: 1;
+  z-index: 1000;
   transition: max-height 0.5s linear;
   max-height: 0;
   overflow-x: auto;
@@ -128,6 +131,10 @@ h3 {
 .rotate180 {
   transform: rotate(-180deg);
   transform-origin: center;
+}
+
+.header-transparent .collection-menu {
+  opacity: 1;
 }
 
 .content-wrapper h3 {

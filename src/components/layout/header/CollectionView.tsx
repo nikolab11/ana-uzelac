@@ -16,9 +16,11 @@ export function CollectionsView(props: CollectionViewProps) {
   const t = useTranslations("shop_page");
   return (
     <div
-      className={`flex ${isDrawer ? "flex-col" : ""} gap-9 ${
-        isDrawer ? "px-0" : "px-6"
-      } ${isDrawer ? "items-start" : "items-end"} py-9 overflow-y-auto`}
+      className={`${
+        isDrawer
+          ? "flex flex-col items-start gap-6 px-0"
+          : "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-10 px-6 w-full max-w-screen-xl mx-auto"
+      } py-9 md:pt-4`}
     >
       {props.collections.map((collection) => {
         const name = collection.title[locale];
@@ -32,18 +34,21 @@ export function CollectionsView(props: CollectionViewProps) {
               },
             }}
           >
-            <div className={`${isDrawer ? "w-full" : "basis-[20%]"}`}>
+            <div className={`${isDrawer ? "w-full" : "w-full"}`}>
               <div className={"font-medium text-xs uppercase pb-2"}>
                 {t("collection")}
               </div>
-              <div className={"font-bold text-xs uppercase pb-2"}>{name}</div>
-              <div className={"relative"}>
+              <div className={"font-bold text-xs uppercase pb-3"}>{name}</div>
+              <div
+                className={
+                  "relative aspect-square mx-auto w-[260px] max-w-full"
+                }
+              >
                 <Image
                   src={collection.images[0]}
                   alt={name}
-                  width={isDrawer ? 200 : 300}
-                  height={isDrawer ? 333 : 500}
-                  className={isDrawer ? "w-full h-auto" : ""}
+                  fill
+                  className={"object-cover brightness-110"}
                 />
               </div>
             </div>
