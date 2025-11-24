@@ -63,7 +63,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
         open={openSnackbar}
         onClose={() => setOpenSnackbar(false)}
       />
-      <div className={"py-3 md:py-4 bg-[#FFFCF7] md:opacity-80"}>
+      <div className={"py-3 md:py-4 bg-[#FFFCF7] md:opacity-95"}>
         <div
           className={
             "px-4 md:px-6 py-3 md:py-2 border-white border-b flex flex-col items-center md:items-start"

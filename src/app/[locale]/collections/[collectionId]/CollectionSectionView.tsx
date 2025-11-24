@@ -10,6 +10,7 @@ interface Props {
   section: CollectionSection;
   inverted: boolean;
   collectionId: number;
+  productId?: number;
 }
 
 export function CollectionSectionView(props: Props) {
@@ -49,7 +50,7 @@ export function CollectionSectionView(props: Props) {
               props.inverted ? "md:text-right" : "md:text-left"
             }`}
           >
-            {props.section.contentTitle[locale]}
+            {props.section.contentTitle["eng"]}
           </h4>
           <p
             className={`text-sm md:text-base font-normal text-center ${
@@ -63,7 +64,13 @@ export function CollectionSectionView(props: Props) {
               props.inverted ? "md:justify-end" : "md:justify-start"
             }`}
           >
-            <Link href={`/shop?collection_ids=${props.collectionId}`}>
+            <Link
+              href={
+                props.productId
+                  ? `/products/${props.productId}`
+                  : `/shop?collection_ids=${props.collectionId}`
+              }
+            >
               <HoveringButton
                 inverted={props.inverted}
                 mode="dark"

@@ -182,7 +182,7 @@ export function Footer(props: Props) {
       >
         {/* Desktop: Designed by, Copyright, Social */}
         <div className="hidden md:flex flex-row justify-between w-full gap-0">
-          <div className={"font-normal text-xs text-[#444444] text-left"}>
+          {/*    <div className={"font-normal text-xs text-[#444444] text-left"}>
             Designed by{" "}
             <a
               href="https://www.dinadoesit.com/"
@@ -192,7 +192,7 @@ export function Footer(props: Props) {
             >
               DinaDoesIt.com
             </a>
-          </div>
+          </div> */}
           <div className={"font-normal text-xs text-[#444444] text-left"}>
             {t("copyright")}
           </div>
@@ -235,7 +235,7 @@ export function Footer(props: Props) {
 
         {/* Mobile: Designed by first, then Copyright (reversed order) */}
         <div className="flex md:hidden flex-col items-center gap-2">
-          <div className={"font-normal text-xs text-[#444444] text-center"}>
+          {/*    <div className={"font-normal text-xs text-[#444444] text-center"}>
             Designed by{" "}
             <a
               href="https://www.dinadoesit.com/"
@@ -245,7 +245,7 @@ export function Footer(props: Props) {
             >
               DinaDoesIt.com
             </a>
-          </div>
+          </div> */}
           <div className={"font-normal text-xs text-[#444444] text-center"}>
             {t("copyright")}
           </div>

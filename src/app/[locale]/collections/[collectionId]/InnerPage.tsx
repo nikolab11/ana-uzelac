@@ -74,6 +74,11 @@ export function InnerPage({
           </p>
         </div>
         {collection.sections.map((section, index) => {
+          console.log(collection);
+          const product = collection.products.find(
+            (p) => p.name_eng === section.contentTitle["eng"]
+          );
+
           return (
             <div
               key={section.title[locale]}
@@ -85,6 +90,7 @@ export function InnerPage({
                 section={section}
                 inverted={index % 2 === 1}
                 collectionId={collection.collection_id}
+                productId={product?.product_id}
               />
             </div>
           );

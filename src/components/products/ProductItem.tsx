@@ -1,5 +1,5 @@
 import { Product } from "@/types/api.types";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ShoppingBag } from "@/components/icons/ShoppingBag";
 import { ProductItemImages } from "@/components/products/ProductItemImages";
@@ -23,6 +23,8 @@ export function ProductItem(props: Props) {
     pathname: "/products/[productId]" as const,
     params: { productId: props.product.product_id },
   };
+
+  const t = useTranslations("shop_page");
 
   return (
     <div className={props.dark ? "text-[var(--background)]" : undefined}>
@@ -50,7 +52,7 @@ export function ProductItem(props: Props) {
               <div
                 className={"text-sm font-light text-[var(--secondary-color)]"}
               >
-                Contact the artist
+                {t("contact_the_artist_for_original_painting")}
               </div>
             </>
           ) : (

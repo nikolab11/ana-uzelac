@@ -98,7 +98,7 @@ function InnerPage({
   hasOriginalPiecesSelected: boolean;
 }) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations();
+  const t = useTranslations("shop_page");
   if (!collections) {
     throw new Error("Collections not found");
   }
@@ -131,7 +131,7 @@ function InnerPage({
       {/* Show original pieces section when -1 is selected or no collection filter */}
       {shouldShowOriginalPieces ? (
         <LoadMoreProductsWrapper
-          text={t("shop_page.load_more_items")}
+          text={t("load_more_items")}
           initialOpen={hasOriginalPiecesSelected}
         >
           <div
@@ -144,7 +144,7 @@ function InnerPage({
                 "uppercase font-medium text-sm md:text-base text-[var(--background)] py-6 md:py-9 max-w-screen-xl mx-auto px-4 md:px-0"
               }
             >
-              ORIGINAL PIECES
+              {t("the_scarves")}
             </h4>
             {additionalProducts.length > 0 ? (
               <Grid
