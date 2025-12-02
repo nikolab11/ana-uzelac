@@ -14,7 +14,7 @@ interface Props {
  * Reorders products to display in order: 1, 2, 4, 3 (by product_id)
  */
 function reorderProducts(products: Product[]): Product[] {
-  const order = [1, 2, 4, 3];
+  const order = [9, 1, 2, 4, 3];
   const orderedProducts: Product[] = [];
   const restProducts: Product[] = [];
 
@@ -134,6 +134,7 @@ function CollectionItem(props: {
               ? reorderProducts(props.collection.products)?.reverse()
               : reorderProducts(props.collection.products)
           }
+          isFirst={props.collection.collection_id == 1}
         />
       </div>
     </div>

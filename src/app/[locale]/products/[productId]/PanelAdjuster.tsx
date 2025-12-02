@@ -22,7 +22,7 @@ export function PanelAdjuster({ targetId, sentinelId }: Props) {
       // Begin adjusting only after 200px of the footer is visible
       const effective = Math.max(0, visibleFooter);
       target.style.transform =
-        effective > 0 ? `translateY(-${effective - 180}px)` : "translateY(0)";
+        effective > 0 ? `translateY(-${effective - 40}px)` : "translateY(0)";
     };
 
     const tick = () => {

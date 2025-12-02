@@ -22,34 +22,6 @@ export default async function Home() {
   );
 }
 
-/**
- * Reorders images for specific products based on product_id
- * - product_id 6: last image comes first
- * - product_id 8: 2nd image (index 1) comes first
- */
-function reorderProductImages(product: any): any {
-  if (!product.images || product.images.length === 0) {
-    return product;
-  }
-
-  const reorderedProduct = { ...product };
-  const images = [...product.images];
-
-  if (product.product_id === 6 && images.length > 0) {
-    // Move last image to first position
-    const lastImage = images[images.length - 1];
-    const otherImages = images.slice(0, images.length - 1);
-    reorderedProduct.images = [lastImage, ...otherImages];
-  } else if (product.product_id === 8 && images.length >= 2) {
-    // Move 2nd image (index 1) to first position
-    const secondImage = images[1];
-    const otherImages = images.filter((_, index) => index !== 1);
-    reorderedProduct.images = [secondImage, ...otherImages];
-  }
-
-  return reorderedProduct;
-}
-
 async function InnerPage({ images, collections }: PageProps) {
   const products = await fetchAllProducts();
   const t = await getTranslations("home_page");
@@ -57,17 +29,13 @@ async function InnerPage({ images, collections }: PageProps) {
     throw new Error("Missing images and collections");
   }
 
-  console.log(products.products);
-
   // Filter and reorder images for specific products
-  const filteredProducts = products.products.collection_products
-    .filter(
-      (product: any) =>
-        product.product_id === 1 ||
-        product.product_id === 6 ||
-        product.product_id === 8
-    )
-    .map(reorderProductImages);
+  const filteredProducts = products.products.collection_products.filter(
+    (product: any) =>
+      product.product_id === 1 ||
+      product.product_id === 6 ||
+      product.product_id === 8
+  );
 
   return (
     <>
