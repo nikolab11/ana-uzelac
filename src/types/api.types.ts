@@ -109,6 +109,7 @@ export interface Product {
   short_description_eng?: string;
   short_description_fr?: string;
   images_down?: string[];
+  shop_page_images?: string[];
 }
 
 export interface GeAllProductsResponse {

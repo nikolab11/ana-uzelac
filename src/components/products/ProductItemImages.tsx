@@ -18,6 +18,9 @@ const buttonClasses =
 
 export function ProductItemImages(props: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const images = props.product.shop_page_images || props.product.images;
+
   return (
     <div
       className="relative transition-all"
@@ -47,7 +50,7 @@ export function ProductItemImages(props: Props) {
               height: "auto",
               display: "block",
             }}
-            src={props.product.images[activeIndex]}
+            src={images[activeIndex]}
             alt={props.product.name_eng}
           />
         ) : (
@@ -57,7 +60,7 @@ export function ProductItemImages(props: Props) {
               objectFit: "cover",
               objectPosition: props.alternative ? "top" : "top",
             }}
-            src={props.product.images[activeIndex]}
+            src={images[activeIndex]}
             alt={props.product.name_eng}
           />
         )}
@@ -78,7 +81,7 @@ export function ProductItemImages(props: Props) {
           )}
         </div>
         <div>
-          {activeIndex < props.product.images.length - 1 && (
+          {activeIndex < images.length - 1 && (
             <button
               className={buttonClasses}
               onClick={(e) => {
