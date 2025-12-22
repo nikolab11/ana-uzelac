@@ -3,6 +3,7 @@ import { ChangeEvent } from "react";
 import { useTranslations } from "next-intl";
 import {
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -11,7 +12,7 @@ import {
 } from "@mui/material";
 import { COUNTRY_CODES } from "@/utils/country-codes";
 
-export type SubmitState = "pending" | "success" | "error";
+export type SubmitState = "pending" | "loading" | "success" | "error";
 
 interface Props {
   formState: CheckoutDetails;
@@ -445,11 +446,12 @@ export function AddressDetails(props: Props) {
             </div>
           </div>
           <div className={"pt-6 md:pt-9"}>
-            {props.submitState === "pending" && (
+            {(props.submitState === "pending" || props.submitState === "loading") && (
               <Button
                 className={"uppercase touch-manipulation"}
                 type={"submit"}
                 color={"primary"}
+                disabled={props.submitState === "loading"}
                 sx={{
                   borderRadius: 0,
                   padding: { xs: "14px 24px", md: "12px 24px" },
@@ -459,7 +461,11 @@ export function AddressDetails(props: Props) {
                 }}
                 variant={"contained"}
               >
-                {t("proceed_to_payment")}
+                {props.submitState === "loading" ? (
+                  <CircularProgress size={20} sx={{ color: "white" }} />
+                ) : (
+                  t("proceed_to_payment")
+                )}
               </Button>
             )}
             {props.submitState === "success" && (
@@ -481,12 +487,13 @@ export function AddressDetails(props: Props) {
             "md:hidden fixed left-0 right-0 bottom-0 z-1201 bg-[#FCF7F1] border-t border-[#E5E5E5] p-4"
           }
         >
-          {props.submitState === "pending" && (
+          {(props.submitState === "pending" || props.submitState === "loading") && (
             <Button
               className={"uppercase touch-manipulation"}
               type={"submit"}
               form={"mobile-checkout-form"}
               color={"primary"}
+              disabled={props.submitState === "loading"}
               sx={{
                 borderRadius: 0,
                 padding: { xs: "14px 24px", md: "12px 24px" },
@@ -497,7 +504,11 @@ export function AddressDetails(props: Props) {
               }}
               variant={"contained"}
             >
-              {t("proceed_to_payment")}
+              {props.submitState === "loading" ? (
+                <CircularProgress size={20} sx={{ color: "white" }} />
+              ) : (
+                t("proceed_to_payment")
+              )}
             </Button>
           )}
           {props.submitState === "success" && (

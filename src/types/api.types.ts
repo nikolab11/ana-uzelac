@@ -55,6 +55,7 @@ export interface TranslationItem {
   journal_page: Record<string, string>;
   privacy_policy_page: Record<string, string>;
   terms_conditions_page: Record<string, string>;
+  order_page: Record<string, string>;
 }
 
 export interface Translations {

@@ -9,7 +9,9 @@ export const BASE_PATHS = {
 	'/about': '/about',
 	'/privacy-policy': '/privacy-policy',
 	'/terms-conditions': '/terms-conditions',
-	'/story': '/story'
+	'/story': '/story',
+	'/order-success': '/order-success',
+	'/order-cancelled': '/order-cancelled'
 } as const;
 
 export const DYNAMIC_PATHS = {

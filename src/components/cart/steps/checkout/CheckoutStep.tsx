@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   ChangeEvent,
   useEffect,
@@ -17,13 +17,14 @@ import { ItemsDrawer } from "@/components/cart/steps/checkout/ItemsDrawer";
 import { BackButton } from "@/components/common/BackButton";
 import { useCartContext } from "@/context/cart/cart.context";
 import { XIcon } from "@/components/icons/XIcon";
-import axios from "axios";
+import { buildCheckoutRequest, createCheckoutSession } from "@/api/stripe";
 
 export type CheckoutStep = "person" | "address";
 
 export function CheckoutStep() {
   const t = useTranslations("shop_page");
-  const { onOpenChange, items, onClear } = useCartContext();
+  const locale = useLocale() as "eng" | "fr";
+  const { onOpenChange, items } = useCartContext();
   const [submitState, setSubmitState] = useState<SubmitState>("pending");
   const [activeStep, setActiveStep] = useState<CheckoutStep>("person");
   const [formState, setFormState] = useState<CheckoutDetails>({
@@ -72,9 +73,16 @@ export function CheckoutStep() {
   }, [activeStep]);
   const onSubmit = async () => {
     try {
-      await axios.post("/order", { ...formState, items });
-      setSubmitState("success");
-      onClear();
+      setSubmitState("loading");
+      const request = buildCheckoutRequest(items, formState, locale);
+      const response = await createCheckoutSession(request);
+
+      if (response.status === 200 && response.data.checkout_url) {
+        // Redirect to Stripe checkout
+        window.location.href = response.data.checkout_url;
+      } else {
+        setSubmitState("error");
+      }
     } catch (error) {
       console.error(error);
       setSubmitState("error");
