@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import {
   ChangeEvent,
   useEffect,
@@ -22,7 +23,7 @@ import { buildCheckoutRequest, createCheckoutSession } from "@/api/stripe";
 export type CheckoutStep = "person" | "address";
 
 export function CheckoutStep() {
-  const t = useTranslations("shop_page");
+  const { t, tRaw } = useTranslationsWithParse("shop_page");
   const locale = useLocale() as "eng" | "fr";
   const { onOpenChange, items } = useCartContext();
   const [submitState, setSubmitState] = useState<SubmitState>("pending");
@@ -106,7 +107,7 @@ export function CheckoutStep() {
       <div className={"md:hidden"}>
         <BackButton
           initialExpanded
-          label={t("back_to_cart")}
+          label={tRaw("back_to_cart")}
           onClick={() => onOpenChange(submitState === "pending", "cart")}
         />
       </div>
@@ -127,7 +128,7 @@ export function CheckoutStep() {
             <div className={"hidden md:block mb-4"}>
               <BackButton
                 initialExpanded
-                label={t("back_to_cart")}
+                label={tRaw("back_to_cart")}
                 onClick={() => onOpenChange(submitState === "pending", "cart")}
               />
             </div>

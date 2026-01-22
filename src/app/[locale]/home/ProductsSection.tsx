@@ -1,7 +1,7 @@
 import { ProductItem } from "@/components/products/ProductItem";
 import { Link } from "@/i18n/navigation";
 import { Product } from "@/types/api.types";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { ChevronRight } from "@/components/icons/ChevronRight";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function ProductsSection(props: Props) {
-  const t = useTranslations("home_page");
+  const { t } = useTranslationsWithParse("home_page");
 
   return (
     <div

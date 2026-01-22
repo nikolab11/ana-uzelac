@@ -1,5 +1,6 @@
 import { Product } from "@/types/api.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Link } from "@/i18n/navigation";
 import { ShoppingBag } from "@/components/icons/ShoppingBag";
 import { ProductItemImages } from "@/components/products/ProductItemImages";
@@ -24,7 +25,7 @@ export function ProductItem(props: Props) {
     params: { productId: props.product.product_id },
   };
 
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   return (
     <div className={props.dark ? "text-[var(--background)]" : undefined}>

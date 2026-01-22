@@ -2,7 +2,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { PageProps } from "@/types/pages.types";
 import Image from "next/image";
 import { HeadText } from "@/components/common/HeadText";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Link } from "@/i18n/navigation";
 import { HoveringButton } from "@/components/common/HoveringButton";
 import { ImagesResponse } from "@/types/api.types";
@@ -21,7 +21,7 @@ export default function AboutPage() {
 const ABOUT_ELEMENT_ID = "about-description";
 
 function InnerPage({ images }: PageProps) {
-  const t = useTranslations("about_page");
+  const { tRaw } = useTranslationsWithParse("about_page");
   if (!images) {
     throw new Error("Missing images");
   }
@@ -37,8 +37,8 @@ function InnerPage({ images }: PageProps) {
           fill
         />
         <HeadText
-          title={t("founder_story")}
-          buttonLabel={t("view_more")}
+          title={tRaw("founder_story")}
+          buttonLabel={tRaw("view_more")}
           scrollElementId={ABOUT_ELEMENT_ID}
         />
       </div>
@@ -53,7 +53,7 @@ function InnerPage({ images }: PageProps) {
 }
 
 function AboutDescription() {
-  const t = useTranslations("about_page");
+  const { t, tRaw } = useTranslationsWithParse("about_page");
 
   return (
     <div
@@ -79,7 +79,7 @@ function AboutDescription() {
         </p>
 
         <Link href={"/shop"}>
-          <HoveringButton label={t("explore_collections")} />
+          <HoveringButton label={tRaw("explore_collections")} />
         </Link>
       </div>
     </div>
@@ -87,7 +87,7 @@ function AboutDescription() {
 }
 
 function MainImages({ images }: { images: ImagesResponse }) {
-  const t = useTranslations("about_page");
+  const { tRaw } = useTranslationsWithParse("about_page");
 
   return (
     <div
@@ -106,7 +106,7 @@ function MainImages({ images }: { images: ImagesResponse }) {
           }}
           className="md:max-h-[500px]"
           src={images.about_page.about_page_1}
-          alt={t("ana_uzelac")}
+          alt={tRaw("ana_uzelac")}
           fill
         />
         {/* <HeadText position={'end'}>{t('ana_uzelac')} </HeadText> */}
@@ -122,7 +122,7 @@ function MainImages({ images }: { images: ImagesResponse }) {
           }}
           className="md:max-h-[500px]"
           src={images.about_page.about_page_3}
-          alt={t("moodboard")}
+          alt={tRaw("moodboard")}
           fill
         />
         {/* <HeadText position={'end'}>{t('moodboard')}</HeadText> */}
@@ -138,7 +138,7 @@ function MainImages({ images }: { images: ImagesResponse }) {
           }}
           className="md:max-h-[500px]"
           src={images.about_page.about_page_5}
-          alt={t("work_in_progress")}
+          alt={tRaw("work_in_progress")}
           fill
         />
         {/* 	<HeadText position={'end'}>

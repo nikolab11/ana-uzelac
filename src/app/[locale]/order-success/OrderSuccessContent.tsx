@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useRouter } from "@/i18n/navigation";
 import { useCartContext } from "@/context/cart/cart.context";
 import { OrderStatusResponse, getOrderStatus } from "@/api/stripe";
@@ -12,7 +12,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 export function OrderSuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const t = useTranslations("order_page");
+  const { t } = useTranslationsWithParse("order_page");
   const router = useRouter();
   const { onClear } = useCartContext();
 

@@ -1,5 +1,6 @@
 import { CollectionSection } from "@/types/api.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { SectionImages } from "@/app/[locale]/collections/[collectionId]/SectionImages";
 import Image from "next/image";
@@ -15,7 +16,7 @@ interface Props {
 
 export function CollectionSectionView(props: Props) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations("home_page");
+  const { tRaw } = useTranslationsWithParse("home_page");
 
   return (
     <div className="max-w-screen-xl mx-auto flex flex-col gap-8 md:gap-20">
@@ -74,7 +75,7 @@ export function CollectionSectionView(props: Props) {
               <HoveringButton
                 inverted={props.inverted}
                 mode="dark"
-                label={t("shop_now")}
+                label={tRaw("shop_now")}
               />
             </Link>
           </div>

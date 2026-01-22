@@ -3,7 +3,7 @@ import { ProductsSection } from "@/app/[locale]/home/ProductsSection";
 import { fetchAllProducts } from "@/api/products";
 import { CollectionsSection } from "@/app/[locale]/home/CollectionsSection";
 import { FooterImage } from "@/components/layout/FooterImage";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { HoveringButton } from "@/components/common/HoveringButton";
 import { GrandOpeningSection } from "@/app/[locale]/home/GrandOpeningSection";
 import { AppLayout } from "@/components/layout/AppLayout";
@@ -92,7 +92,7 @@ async function InnerPage({ images, collections }: PageProps) {
 }
 
 function HeadText() {
-  const t = useTranslations("home_page");
+  const { t, tRaw } = useTranslationsWithParse("home_page");
   return (
     <div
       className={
@@ -121,7 +121,7 @@ function HeadText() {
       </div>
       <div>
         <Link href={"/shop"}>
-          <HoveringButton label={t("shop_now")} />
+          <HoveringButton label={tRaw("shop_now")} />
         </Link>
       </div>
     </div>

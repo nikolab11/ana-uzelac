@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import {
   HeaderMode,
   HeaderWrapper,
@@ -33,7 +34,8 @@ interface Props {
 }
 
 export function Header(props: Props) {
-  const t = useTranslations("header");
+  const { t, tRaw } = useTranslationsWithParse("header");
+  // tRaw for string props (label, placeholder), t for JSX content
   const locale = useLocale() as LocaleType;
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -78,7 +80,7 @@ export function Header(props: Props) {
             </Link>
           </div>
           <div className="flex items-center ml-auto">
-            <CartButton label={t("cart")} hideLabel />
+            <CartButton label={tRaw("cart")} hideLabel />
           </div>
         </div>
         {/* Animated Search Input - Full Width */}
@@ -91,7 +93,7 @@ export function Header(props: Props) {
             <div className="flex gap-3 items-center w-full">
               <SearchIcon />
               <div className="flex-1">
-                <SearchInput placeholder={t("search")} />
+                <SearchInput placeholder={tRaw("search")} />
               </div>
             </div>
           </div>
@@ -108,7 +110,7 @@ export function Header(props: Props) {
         <div className="flex gap-3 justify-between pb-4 overflow-x-auto items-end max-w-screen-xl mx-auto">
           <div className={"flex gap-3 items-center"}>
             <SearchIcon />
-            <SearchInput placeholder={t("search")} />
+            <SearchInput placeholder={tRaw("search")} />
           </div>
           <div className="flex flex-1 justify-center items-end gap-[32px]">
             <HeaderLink href={"/home"}>{t("home")}</HeaderLink>
@@ -126,7 +128,7 @@ export function Header(props: Props) {
                 <LocalesMenu locale={locale} />
               </div>
             </div>
-            <CartButton label={t("cart")} />
+            <CartButton label={tRaw("cart")} />
           </div>
         </div>
         <CollectionViewContainer>

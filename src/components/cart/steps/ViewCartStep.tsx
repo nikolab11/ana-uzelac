@@ -1,5 +1,5 @@
 import { useCartContext } from "@/context/cart/cart.context";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { CartItemsGrid } from "@/components/cart/CartItemsGrid";
 import { Button, Drawer } from "@mui/material";
 import { EUR_SYMBOL, SHIPPING_PRICE } from "@/utils/constants";
@@ -12,7 +12,7 @@ export function ViewCartStep() {
   const { onOpenChange, totalItems, totalPrice } = useCartContext();
   const router = useRouter();
 
-  const t = useTranslations("shop_page");
+  const { t, tRaw } = useTranslationsWithParse("shop_page");
   return (
     <div className={"h-full relative bg-[#F6F1EB] flex flex-col md:flex-row"}>
       <div
@@ -30,7 +30,7 @@ export function ViewCartStep() {
       >
         <BackButton
           initialExpanded
-          label={t("back_to_shop")}
+          label={tRaw("back_to_shop")}
           onClick={() => {
             onOpenChange(false);
             router.push("/shop");
@@ -164,7 +164,7 @@ export function ViewCartStep() {
               className={
                 "hidden md:flex absolute top-6 right-4 md:right-9 cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] items-center justify-center z-10"
               }
-              aria-label={t("close")}
+              aria-label={tRaw("close")}
               role="button"
             >
               <XIcon size={4} />

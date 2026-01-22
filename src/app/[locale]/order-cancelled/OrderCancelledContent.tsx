@@ -1,13 +1,13 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@mui/material";
 import { useCartContext } from "@/context/cart/cart.context";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export function OrderCancelledContent() {
-  const t = useTranslations("order_page");
+  const { t } = useTranslationsWithParse("order_page");
   const router = useRouter();
   const { onOpenChange, totalItems } = useCartContext();
 

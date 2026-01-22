@@ -1,6 +1,7 @@
 import { Collection, Product } from "@/types/api.types";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { ProductsSection } from "@/app/[locale]/home/ProductsSection";
 import { HoveringButton } from "@/components/common/HoveringButton";
 import { LocaleType } from "@/types/routing";
@@ -63,7 +64,7 @@ function CollectionItem(props: {
   isFirst?: boolean;
 }) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations("home_page");
+  const { t, tRaw } = useTranslationsWithParse("home_page");
   const name = props.collection.title[locale];
 
   const description =
@@ -120,7 +121,7 @@ function CollectionItem(props: {
                   } as never,
                 }}
               >
-                <HoveringButton label={t("view_collection")} />
+                <HoveringButton label={tRaw("view_collection")} />
               </Link>
             </div>
           </div>

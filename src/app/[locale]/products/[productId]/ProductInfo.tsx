@@ -4,7 +4,7 @@ import { Collection, Product, ProductOption } from "@/types/api.types";
 import { LocaleType } from "@/types/routing";
 import { SizesSection } from "@/app/[locale]/products/[productId]/SizesSection";
 import { Button } from "@mui/material";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { ShoppingBag } from "@/components/icons/ShoppingBag";
 import { useState } from "react";
 import { useCartContext } from "@/context/cart/cart.context";
@@ -54,7 +54,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
     addItem(product, selectedOption, collectionName);
     setOpenSnackbar(true);
   };
-  const t = useTranslations("shop_page");
+  const { t, tRaw } = useTranslationsWithParse("shop_page");
   return (
     <div>
       <AddedToCartSnackbar
@@ -98,7 +98,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
         )}
         <div className="flex justify-center md:justify-start">
           <SizesSection
-            error={showError ? t("please_choose_a_size") : undefined}
+            error={showError ? tRaw("please_choose_a_size") : undefined}
             selected={selectedOption}
             onChange={onOptionSelect}
             options={product.options}

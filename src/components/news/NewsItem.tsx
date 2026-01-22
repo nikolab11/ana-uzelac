@@ -1,5 +1,6 @@
 import { BaseNews } from "@/types/api.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { Link } from "@/i18n/navigation";
 import { HoveringButton } from "@/components/common/HoveringButton";
@@ -11,7 +12,7 @@ interface Props {
 export function NewsItem(props: Props) {
   const locale = useLocale() as LocaleType;
   const title = props.news[`title_${locale}`];
-  const t = useTranslations("about_page");
+  const { t } = useTranslationsWithParse("about_page");
   const description = props.news[`subtitle_${locale}`];
   return (
     <div>

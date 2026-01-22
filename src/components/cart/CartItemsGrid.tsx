@@ -1,5 +1,6 @@
 import { Grid, IconButton, SxProps, Theme } from "@mui/material";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useCartContext } from "@/context/cart/cart.context";
 import { EUR_SYMBOL } from "@/utils/constants";
 import Image from "next/image";
@@ -15,7 +16,7 @@ const buttonSx: SxProps<Theme> = {
 };
 
 export function CartItemsGrid() {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   const { items, updateItem, removeItem } = useCartContext();
   const rows = Object.values(items).flatMap((val) => {
     return Object.values(val);

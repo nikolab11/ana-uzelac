@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Collection } from "@/types/api.types";
 import { FooterList } from "@/components/layout/FooterList";
 import { LocaleType } from "@/types/routing";
@@ -12,9 +13,9 @@ interface Props {
 }
 
 export function Footer(props: Props) {
-  const t = useTranslations("footer");
+  const { t, tRaw } = useTranslationsWithParse("footer");
   const locale = useLocale() as LocaleType;
-  const headerT = useTranslations("header");
+  const { tRaw: headerTRaw } = useTranslationsWithParse("header");
   return (
     <div style={{ backgroundColor: "#FCF7F1" }} className={"pt-8 md:pt-[48px]"}>
       {/* Desktop layout */}
@@ -42,7 +43,7 @@ export function Footer(props: Props) {
             title={"Collections"}
             items={[
               {
-                name: headerT("shop"),
+                name: headerTRaw("shop"),
                 path: "/shop",
                 type: "base",
               },
@@ -57,32 +58,32 @@ export function Footer(props: Props) {
             ]}
           />
           <FooterList
-            title={t("about")}
+            title={tRaw("about")}
             items={[
               {
                 path: "/story",
-                name: t("story"),
+                name: tRaw("story"),
                 type: "base",
               },
               {
                 path: "/news",
                 type: "base",
-                name: t("news"),
+                name: tRaw("news"),
               },
             ]}
           />
           <FooterList
-            title={t("legals")}
+            title={tRaw("legals")}
             items={[
               {
                 path: "/privacy-policy",
                 type: "base",
-                name: t("privacy_policy"),
+                name: tRaw("privacy_policy"),
               },
               {
                 path: "/terms-conditions",
                 type: "base",
-                name: t("terms_conditions"),
+                name: tRaw("terms_conditions"),
               },
             ]}
           />
@@ -117,7 +118,7 @@ export function Footer(props: Props) {
             title={"Collections"}
             items={[
               {
-                name: headerT("shop"),
+                name: headerTRaw("shop"),
                 path: "/shop",
                 type: "base",
               },

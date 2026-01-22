@@ -4,7 +4,7 @@ import { FilterIcon } from "@/components/icons/FilterIcon";
 import { useState } from "react";
 import { FilterModal } from "@/app/[locale]/shop/FilterModal";
 import { Collection, ProductFilter } from "@/types/api.types";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 
 interface Props {
   usedFilters: number;
@@ -27,7 +27,7 @@ export function ShopHeader({
 }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   return (
     <div

@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { BackButton } from "@/components/common/BackButton";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -21,7 +21,7 @@ export function ProductImages({ product }: Props) {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
-  const t = useTranslations("shop_page");
+  const { tRaw } = useTranslationsWithParse("shop_page");
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -46,7 +46,7 @@ export function ProductImages({ product }: Props) {
       {!open && (
         <div className="absolute top-4 left-4 md:top-[var(--container-padding)] md:left-[var(--container-padding)] z-1400">
           <BackButton
-            label={t("back")}
+            label={tRaw("back")}
             onClick={() => {
               router.push("/shop");
             }}

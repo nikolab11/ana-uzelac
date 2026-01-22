@@ -3,7 +3,8 @@ import { Product, ProductOption } from "@/types/api.types";
 import { Button, Snackbar } from "@mui/material";
 import { XIcon } from "@/components/icons/XIcon";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { useCartContext } from "@/context/cart/cart.context";
 import { createPortal } from "react-dom";
@@ -20,7 +21,7 @@ interface Props {
 export function AddedToCartSnackbar(props: Props) {
   const locale = useLocale() as LocaleType;
   const { onOpenChange } = useCartContext();
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   // Guard for client-only portal
   const [mounted, setMounted] = useState(false);

@@ -1,7 +1,7 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { fetchNews } from "@/api/news";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { NewsItem } from "@/components/news/NewsItem";
 import { PageProps } from "@/types/pages.types";
 import { BaseNews } from "@/types/api.types";
@@ -21,7 +21,7 @@ export default async function NewsPage() {
 const SCROLL_ELEMENT_ID = "news-section";
 
 function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
-  const t = useTranslations();
+  const { tRaw } = useTranslationsWithParse();
   if (!images) {
     throw new Error("Missing images");
   }
@@ -38,8 +38,8 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
           fill
         />
         <HeadText
-          title={t("journal_page.the_journal")}
-          buttonLabel={t("about_page.view_more")}
+          title={tRaw("journal_page.the_journal")}
+          buttonLabel={tRaw("about_page.view_more")}
           scrollElementId={SCROLL_ELEMENT_ID}
         />
       </div>

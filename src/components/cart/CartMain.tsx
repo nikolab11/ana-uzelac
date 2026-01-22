@@ -2,7 +2,7 @@ import { Button, Drawer } from "@mui/material";
 import { useCartContext } from "@/context/cart/cart.context";
 import { XIcon } from "@/components/icons/XIcon";
 import { CSSProperties } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { ShoppingBag } from "@/components/icons/ShoppingBag";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ViewCartStep } from "@/components/cart/steps/ViewCartStep";
@@ -14,7 +14,7 @@ const containerStyle: CSSProperties = {
 };
 
 export function CartMain() {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   const { open, onOpenChange, items, step } = useCartContext();
   const onClose = () => onOpenChange(false);
   const router = useRouter();
@@ -55,7 +55,7 @@ export function CartMain() {
 }
 
 function EmptyCart(props: { onClose: () => void }) {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   const { onOpenChange } = useCartContext();
 
   return (

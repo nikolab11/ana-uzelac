@@ -7,7 +7,7 @@ import { XIcon } from "@/components/icons/XIcon";
 import { useRouter } from "next/navigation";
 import * as querystring from "querystring";
 import { EUR_SYMBOL } from "@/utils/constants";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 
 interface Props {
   params: Partial<ProductFilter>;
@@ -17,7 +17,7 @@ interface Props {
 
 export function ProductActiveFilters({ params, collections, locale }: Props) {
   const router = useRouter();
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   const updateParams = (
     updateParams: (old: Partial<ProductFilter>) => Partial<ProductFilter>

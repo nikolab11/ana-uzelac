@@ -1,6 +1,7 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import {
   Accordion,
   AccordionDetails,
@@ -57,7 +58,7 @@ const initalFilters: ProductFilter = {
 type SeactionName = "price" | "collection" | "size" | "sort";
 
 export function FilterModal(props: Props) {
-  const t = useTranslations("filter_and_sort");
+  const { t } = useTranslationsWithParse("filter_and_sort");
   const locale = useLocale() as LocaleType;
   const router = useRouter();
   const [openSection, setOpenSection] = useState<SeactionName | undefined>(

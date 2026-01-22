@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Collection } from "@/types/api.types";
 import { LocaleType } from "@/types/routing";
 import { HeadText } from "@/components/common/HeadText";
@@ -19,7 +20,7 @@ export function InnerPage({
   images,
 }: { collection: Collection } & PageProps) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations("shop_page");
+  const { t, tRaw } = useTranslationsWithParse("shop_page");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Auto-rotate images if there are multiple images
@@ -54,7 +55,7 @@ export function InnerPage({
           <HeadText
             title={collection.title[locale]}
             position={"center"}
-            buttonLabel={t("explore_collection")}
+            buttonLabel={tRaw("explore_collection")}
             scrollElementId={SCROLL_ELEMENT_ID}
           >
             <p
@@ -109,7 +110,7 @@ export function InnerPage({
           {collection.neki_opis[locale]}
         </p>
         <Link href={`/shop?collection_ids=${collection.collection_id}`}>
-          <HoveringButton mode={"dark"} label={t("shop_collection")} />
+          <HoveringButton mode={"dark"} label={tRaw("shop_collection")} />
         </Link>
       </div>
       <FooterImage img={images?.home_page.wearing_the_moment || ""} />

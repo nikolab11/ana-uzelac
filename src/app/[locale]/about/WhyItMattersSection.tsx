@@ -1,11 +1,11 @@
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 
 interface Props {
   image: string;
 }
 
 export function WhyItMattersSection({ image }: Props) {
-  const t = useTranslations("about_page");
+  const { t, tRaw } = useTranslationsWithParse("about_page");
   return (
     <div
       className={
@@ -16,7 +16,7 @@ export function WhyItMattersSection({ image }: Props) {
         <div className={"relative md:basis-sm grow"}>
           <img
             src={image}
-            alt={t("why_it_matters")}
+            alt={tRaw("why_it_matters")}
             width={"100%"}
             height={"auto"}
           />

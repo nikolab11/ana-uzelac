@@ -1,12 +1,13 @@
 import { Drawer } from "@mui/material";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useCartContext } from "@/context/cart/cart.context";
 import { LocaleType } from "@/types/routing";
 import { formatNumber } from "@/utils/product.utils";
 import { EUR_SYMBOL } from "@/utils/constants";
 
 export function ItemsDrawer() {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   const { onOpenChange, items, totalPrice } = useCartContext();
   const flattened = Object.values(items).flatMap((val) => Object.values(val));
   const locale = useLocale() as LocaleType;

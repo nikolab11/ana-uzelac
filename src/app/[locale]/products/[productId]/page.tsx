@@ -3,7 +3,8 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { ProductImages } from "@/app/[locale]/products/[productId]/ProductImages";
 import { Product } from "@/types/api.types";
 import { ProductInfo } from "@/app/[locale]/products/[productId]/ProductInfo";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
@@ -40,7 +41,7 @@ interface Props {
 
 function InnerPage({ product, collections, images }: Props & PageProps) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   return (
     <div className={"w-full relative md:h-full"}>

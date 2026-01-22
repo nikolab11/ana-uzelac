@@ -2,7 +2,7 @@
 
 import { Collection } from '@/types/api.types';
 import { ChevronDown } from '@/components/icons/ChevronDown';
-import { useTranslations } from 'next-intl';
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { useCollectionSubmenuContext } from '@/context/collection-submenu/CollectionSubmenu.context';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function CollectionMenuItem(props: Props) {
-	const t = useTranslations('header');
+	const { t } = useTranslationsWithParse("header");
 	const { open, onSwitch } = useCollectionSubmenuContext();
 	return (
 		<div className='flex gap-3 items-center cursor-pointer' onClick={onSwitch}>

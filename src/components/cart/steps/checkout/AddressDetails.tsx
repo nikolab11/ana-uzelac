@@ -1,6 +1,6 @@
 import { CheckoutDetails } from "@/types/cart";
 import { ChangeEvent } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import {
   Button,
   CircularProgress,
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export function AddressDetails(props: Props) {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   return (
     <div className={"w-full md:w-[70%]"} id={"address-step"}>
       <h4 className={"font-medium text-lg md:text-2xl pb-2 md:pb-[48px]"}>

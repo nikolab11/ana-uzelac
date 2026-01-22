@@ -1,12 +1,12 @@
 import { ImagesResponse } from "@/types/api.types";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 
 interface Props {
   images: ImagesResponse;
 }
 
 export function DifferentKindOfLuxurySection(props: Props) {
-  const t = useTranslations("about_page");
+  const { t, tRaw } = useTranslationsWithParse("about_page");
 
   return (
     <div
@@ -38,7 +38,7 @@ export function DifferentKindOfLuxurySection(props: Props) {
         <div className={"relative basis-sm  grow"}>
           <img
             src={props.images.about_page.a_different_kind_of_luxury}
-            alt={t("a_different_kind_of_luxury")}
+            alt={tRaw("a_different_kind_of_luxury")}
             width={"100%"}
             height={"auto"}
             style={{
@@ -57,7 +57,7 @@ export function DifferentKindOfLuxurySection(props: Props) {
             <img
               className={"w-full h-full object-cover"}
               src={props.images.about_page.about_page_1}
-              alt={t("a_different_kind_of_luxury")}
+              alt={tRaw("a_different_kind_of_luxury")}
               loading={"lazy"}
             />
           </div>
@@ -65,7 +65,7 @@ export function DifferentKindOfLuxurySection(props: Props) {
             <img
               className={"w-full h-full object-cover"}
               src={props.images.about_page.about_page_6}
-              alt={t("a_different_kind_of_luxury")}
+              alt={tRaw("a_different_kind_of_luxury")}
               loading={"lazy"}
             />
           </div>
@@ -75,7 +75,7 @@ export function DifferentKindOfLuxurySection(props: Props) {
             <img
               className={"w-full h-full object-cover"}
               src={props.images.about_page.about_page_4}
-              alt={t("a_different_kind_of_luxury")}
+              alt={tRaw("a_different_kind_of_luxury")}
               loading={"lazy"}
             />
           </div>
@@ -83,7 +83,7 @@ export function DifferentKindOfLuxurySection(props: Props) {
             <img
               className={"w-full h-full object-cover"}
               src={props.images.about_page.about_page_7}
-              alt={t("a_different_kind_of_luxury")}
+              alt={tRaw("a_different_kind_of_luxury")}
               loading={"lazy"}
             />
           </div>

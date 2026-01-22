@@ -7,7 +7,7 @@ import {
   Grid,
 } from "@mui/material";
 import { ArrowDropdown } from "@/components/icons/ArrowDropdown";
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { AlertIcon } from "@/components/icons/AlertIcon";
 import { ProductOption } from "@/types/api.types";
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function SizesSection(props: Props) {
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
 
   return (
     <div className="w-full px-4 md:px-6 py-3 md:py-2 border-white border-b text-xs md:text-sm font-normal">

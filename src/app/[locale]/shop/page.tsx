@@ -10,7 +10,8 @@ import {
 } from "@/types/api.types";
 import { ProductActiveFilters } from "@/app/[locale]/shop/ProductActiveFilters";
 import { PageProps } from "@/types/pages.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { calculatePrices, filterProducts } from "@/utils/product.utils";
 import { ShopHeader } from "@/app/[locale]/shop/ShopHeader";
@@ -98,7 +99,7 @@ function InnerPage({
   hasOriginalPiecesSelected: boolean;
 }) {
   const locale = useLocale() as LocaleType;
-  const t = useTranslations("shop_page");
+  const { t, tRaw } = useTranslationsWithParse("shop_page");
   if (!collections) {
     throw new Error("Collections not found");
   }
@@ -131,7 +132,7 @@ function InnerPage({
       {/* Show original pieces section when -1 is selected or no collection filter */}
       {shouldShowOriginalPieces ? (
         <LoadMoreProductsWrapper
-          text={t("load_more_items")}
+          text={tRaw("load_more_items")}
           initialOpen={hasOriginalPiecesSelected}
         >
           <div

@@ -1,5 +1,6 @@
 import { Collection } from "@/types/api.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -13,7 +14,7 @@ interface CollectionViewProps {
 export function CollectionsView(props: CollectionViewProps) {
   const locale = useLocale() as LocaleType;
   const isDrawer = props.isDrawer;
-  const t = useTranslations("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   return (
     <div
       className={`${

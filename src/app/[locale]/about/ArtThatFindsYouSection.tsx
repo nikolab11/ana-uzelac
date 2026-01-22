@@ -1,18 +1,18 @@
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 
 interface Props {
   image: string;
 }
 
 export function ArtThatFindsYouSection({ image }: Props) {
-  const t = useTranslations("about_page");
+  const { t, tRaw } = useTranslationsWithParse("about_page");
   return (
     <div className={"px-[var(--container-padding)] bg-black relative z-10"}>
       <div className="max-w-screen-xl mx-auto flex-col md:flex-row py-[40px] md:py-[80px] flex justify-between gap-3 md:gap-9">
         <div className={"relative md:basis-sm grow"}>
           <img
             src={image}
-            alt={t("art_that_finds_you")}
+            alt={tRaw("art_that_finds_you")}
             width={"100%"}
             height={"auto"}
           />

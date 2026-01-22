@@ -1,16 +1,15 @@
-import { useTranslations } from "next-intl";
+import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Link } from "@/i18n/navigation";
 import { CountdownTimer } from "@/app/[locale]/home/CountdownTimer";
 import { Button } from "@mui/material";
 import Image from "next/image";
-import parse from "html-react-parser";
 
 interface Props {
   images: string[];
 }
 
 export function GrandOpeningSection(props: Props) {
-  const t = useTranslations("home_page");
+  const { t, tRaw } = useTranslationsWithParse("home_page");
 
   return (
     <div className="flex flex-col md:flex-row gap-8 relative max-w-screen-xl mx-auto justify-between pt-[var(--vertical-padding)] px-[var(--container-padding)] md:px-0">
@@ -26,7 +25,7 @@ export function GrandOpeningSection(props: Props) {
           className={"pb-3 text-sm md:text-base text-center md:text-left"}
           style={{ fontSize: "14px" }}
         >
-          {parse(t("grand_opening_description"))}
+          {t("grand_opening_description")}
         </p>
 
         <div className="flex justify-center md:justify-start">
@@ -52,7 +51,7 @@ export function GrandOpeningSection(props: Props) {
             {t("countdown_to_launch")}
           </h3>
           <div className="flex justify-center md:justify-start">
-            <CountdownTimer labels={t("countdown_labels").split(", ")} />
+            <CountdownTimer labels={tRaw("countdown_labels").split(", ")} />
           </div>
         </div>
       </div>
