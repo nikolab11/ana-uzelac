@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 interface Props {
   onClick?: () => void;
-  label: string;
+  label: ReactNode;
   icon?: ReactNode;
   mode?: "dark" | "light";
   inverted?: boolean;

@@ -18,6 +18,7 @@ import {
   Slider,
 } from "@mui/material";
 import { XIcon } from "@/components/icons/XIcon";
+import parse from "html-react-parser";
 import { ArrowDropdown } from "@/components/icons/ArrowDropdown";
 import { CSSProperties, ReactNode, useEffect, useMemo, useState } from "react";
 import {
@@ -411,7 +412,7 @@ export function FilterModal(props: Props) {
                             : "text-[var(--text-color)]"
                         }`}
                       >
-                        {`${collection.title[locale]} (${collection.products.length})`}
+                        {parse(`${collection.title[locale]} (${collection.products.length})`)}
                       </div>
                     }
                   />

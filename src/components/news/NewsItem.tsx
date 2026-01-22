@@ -4,6 +4,7 @@ import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import { Link } from "@/i18n/navigation";
 import { HoveringButton } from "@/components/common/HoveringButton";
+import parse from "html-react-parser";
 
 interface Props {
   news: BaseNews;
@@ -22,8 +23,8 @@ export function NewsItem(props: Props) {
         width={"100%"}
         height={"auto"}
       />
-      <h3 className={"text-bold text-base md:text-lg py-2 md:py-4"}>{title}</h3>
-      <p className={"text-xs md:text-sm pb-3 md:pb-4"}>{description}</p>
+      <h3 className={"text-bold text-base md:text-lg py-2 md:py-4"}>{parse(title)}</h3>
+      <p className={"text-xs md:text-sm pb-3 md:pb-4"}>{parse(description)}</p>
       {/* 	<Link href={{
 				pathname: '/news/[newsId]',
 				params: {

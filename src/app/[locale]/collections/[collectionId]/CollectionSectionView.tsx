@@ -6,6 +6,7 @@ import { SectionImages } from "@/app/[locale]/collections/[collectionId]/Section
 import Image from "next/image";
 import Link from "next/link";
 import { HoveringButton } from "@/components/common/HoveringButton";
+import parse from "html-react-parser";
 
 interface Props {
   section: CollectionSection;
@@ -16,7 +17,7 @@ interface Props {
 
 export function CollectionSectionView(props: Props) {
   const locale = useLocale() as LocaleType;
-  const { tRaw } = useTranslationsWithParse("home_page");
+  const { t } = useTranslationsWithParse("home_page");
 
   return (
     <div className="max-w-screen-xl mx-auto flex flex-col gap-8 md:gap-20">
@@ -30,14 +31,14 @@ export function CollectionSectionView(props: Props) {
             "grow text-nowrap font-bold text-3xl md:text-6xl text-center md:text-left"
           }
         >
-          {props.section.title[locale]}
+          {parse(props.section.title[locale])}
         </h3>
         <p
           className={`text-sm md:text-base font-normal text-center ${
             props.inverted ? "md:text-left" : "md:text-right"
           } md:pl-6 pl-0`}
         >
-          {props.section.description[locale]}
+          {parse(props.section.description[locale])}
         </p>
       </div>
       <div
@@ -51,14 +52,14 @@ export function CollectionSectionView(props: Props) {
               props.inverted ? "md:text-right" : "md:text-left"
             }`}
           >
-            {props.section.contentTitle["eng"]}
+            {parse(props.section.contentTitle["eng"])}
           </h4>
           <p
             className={`text-sm md:text-base font-normal text-center ${
               props.inverted ? "md:text-right" : "md:text-left"
             }`}
           >
-            {props.section.content[locale]}
+            {parse(props.section.content[locale])}
           </p>
           <div
             className={`pt-3 md:pt-4 flex justify-center ${
@@ -75,7 +76,7 @@ export function CollectionSectionView(props: Props) {
               <HoveringButton
                 inverted={props.inverted}
                 mode="dark"
-                label={tRaw("shop_now")}
+                label={t("shop_now")}
               />
             </Link>
           </div>

@@ -53,9 +53,9 @@ export function InnerPage({
         ))}
         <div className="absolute inset-0 z-20">
           <HeadText
-            title={collection.title[locale]}
+            title={parse(collection.title[locale])}
             position={"center"}
-            buttonLabel={tRaw("explore_collection")}
+            buttonLabel={t("explore_collection")}
             scrollElementId={SCROLL_ELEMENT_ID}
           >
             <p
@@ -63,7 +63,7 @@ export function InnerPage({
                 "text-[var(--background)] text-base md:text-xl font-light text-center"
               }
             >
-              {collection.subtitle[locale]}
+              {parse(collection.subtitle[locale])}
             </p>
           </HeadText>
         </div>
@@ -107,10 +107,10 @@ export function InnerPage({
             "text-sm md:text-base font-normal text-center md:max-w-[50%]"
           }
         >
-          {collection.neki_opis[locale]}
+          {parse(collection.neki_opis[locale])}
         </p>
         <Link href={`/shop?collection_ids=${collection.collection_id}`}>
-          <HoveringButton mode={"dark"} label={tRaw("shop_collection")} />
+          <HoveringButton mode={"dark"} label={t("shop_collection")} />
         </Link>
       </div>
       <FooterImage img={images?.home_page.wearing_the_moment || ""} />

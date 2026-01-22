@@ -21,7 +21,7 @@ export default async function NewsPage() {
 const SCROLL_ELEMENT_ID = "news-section";
 
 function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
-  const { tRaw } = useTranslationsWithParse();
+  const { t } = useTranslationsWithParse();
   if (!images) {
     throw new Error("Missing images");
   }
@@ -38,8 +38,8 @@ function InnerPage({ images, news }: PageProps & { news: BaseNews[] }) {
           fill
         />
         <HeadText
-          title={tRaw("journal_page.the_journal")}
-          buttonLabel={tRaw("about_page.view_more")}
+          title={t("journal_page.the_journal")}
+          buttonLabel={t("about_page.view_more")}
           scrollElementId={SCROLL_ELEMENT_ID}
         />
       </div>

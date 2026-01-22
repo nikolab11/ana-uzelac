@@ -2,10 +2,10 @@
 
 import { ShoppingBag } from '@/components/icons/ShoppingBag';
 import { useCartContext } from '@/context/cart/cart.context';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface Props {
-	label: string;
+	label: ReactNode;
 	hideLabel?: boolean;
 }
 

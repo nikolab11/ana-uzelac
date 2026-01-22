@@ -21,7 +21,7 @@ export default function AboutPage() {
 const ABOUT_ELEMENT_ID = "about-description";
 
 function InnerPage({ images }: PageProps) {
-  const { tRaw } = useTranslationsWithParse("about_page");
+  const { t } = useTranslationsWithParse("about_page");
   if (!images) {
     throw new Error("Missing images");
   }
@@ -37,8 +37,8 @@ function InnerPage({ images }: PageProps) {
           fill
         />
         <HeadText
-          title={tRaw("founder_story")}
-          buttonLabel={tRaw("view_more")}
+          title={t("founder_story")}
+          buttonLabel={t("view_more")}
           scrollElementId={ABOUT_ELEMENT_ID}
         />
       </div>
@@ -79,7 +79,7 @@ function AboutDescription() {
         </p>
 
         <Link href={"/shop"}>
-          <HoveringButton label={tRaw("explore_collections")} />
+          <HoveringButton label={t("explore_collections")} />
         </Link>
       </div>
     </div>

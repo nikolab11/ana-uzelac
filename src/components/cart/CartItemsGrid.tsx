@@ -10,6 +10,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { LocaleType } from "@/types/routing";
 import { XIcon } from "@/components/icons/XIcon";
 import { formatNumber } from "@/utils/product.utils";
+import parse from "html-react-parser";
 
 const buttonSx: SxProps<Theme> = {
   borderRadius: 0,
@@ -91,7 +92,7 @@ export function CartItemsGrid() {
                         "font-medium text-sm md:text-sm leading-tight mb-1"
                       }
                     >
-                      {row.product[`name_${locale}`]}
+                      {parse(row.product[`name_${locale}`])}
                     </h4>
                     <h4
                       style={{
@@ -105,7 +106,7 @@ export function CartItemsGrid() {
                         paddingTop: "2px",
                       }}
                     >
-                      {row.collection_name}
+                      {row.collection_name && parse(row.collection_name)}
                     </h4>
                     <div className={"flex items-center gap-2 md:hidden"}>
                       <span className={"text-xs text-[#838383]"}>

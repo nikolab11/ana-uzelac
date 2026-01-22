@@ -2,6 +2,7 @@ import { Product } from "@/types/api.types";
 import { useLocale } from "next-intl";
 import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { Link } from "@/i18n/navigation";
+import parse from "html-react-parser";
 import { ShoppingBag } from "@/components/icons/ShoppingBag";
 import { ProductItemImages } from "@/components/products/ProductItemImages";
 import { LocaleType } from "@/types/routing";
@@ -49,7 +50,7 @@ export function ProductItem(props: Props) {
         <div>
           {props.original ? (
             <>
-              <div className={"text-sm font-light"}>{name}</div>
+              <div className={"text-sm font-light"}>{parse(name)}</div>
               <div
                 className={"text-sm font-light text-[var(--secondary-color)]"}
               >
@@ -59,7 +60,7 @@ export function ProductItem(props: Props) {
           ) : (
             <Link href={productLink}>
               <div>
-                <div className={"text-sm font-light"}>{name}</div>
+                <div className={"text-sm font-light"}>{parse(name)}</div>
                 <div className={"pb-2  text-sm font-light"}>
                   {`${formatNumber(getMinProductPrice(props.product), 0)}${
                     props.product.currency

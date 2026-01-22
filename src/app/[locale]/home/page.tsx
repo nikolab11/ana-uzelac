@@ -121,7 +121,7 @@ function HeadText() {
       </div>
       <div>
         <Link href={"/shop"}>
-          <HoveringButton label={tRaw("shop_now")} />
+          <HoveringButton label={t("shop_now")} />
         </Link>
       </div>
     </div>

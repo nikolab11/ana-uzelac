@@ -6,6 +6,7 @@ import { FooterList } from "@/components/layout/FooterList";
 import { LocaleType } from "@/types/routing";
 import { Link } from "@/i18n/navigation";
 import { FaInstagram, FaRegEnvelope, FaFacebookF } from "react-icons/fa";
+import parse from "html-react-parser";
 
 interface Props {
   logo: string;
@@ -13,9 +14,9 @@ interface Props {
 }
 
 export function Footer(props: Props) {
-  const { t, tRaw } = useTranslationsWithParse("footer");
+  const { t } = useTranslationsWithParse("footer");
   const locale = useLocale() as LocaleType;
-  const { tRaw: headerTRaw } = useTranslationsWithParse("header");
+  const { t: headerT } = useTranslationsWithParse("header");
   return (
     <div style={{ backgroundColor: "#FCF7F1" }} className={"pt-8 md:pt-[48px]"}>
       {/* Desktop layout */}
@@ -43,14 +44,14 @@ export function Footer(props: Props) {
             title={"Collections"}
             items={[
               {
-                name: headerTRaw("shop"),
+                name: headerT("shop"),
                 path: "/shop",
                 type: "base",
               },
               ...props.collections.map((item) => {
                 return {
                   type: "dynamic",
-                  name: item.title[locale],
+                  name: parse(item.title[locale]),
                   path: "/collections/[collectionId]",
                   params: { collectionId: item.collection_id },
                 } as const;
@@ -58,32 +59,32 @@ export function Footer(props: Props) {
             ]}
           />
           <FooterList
-            title={tRaw("about")}
+            title={t("about")}
             items={[
               {
                 path: "/story",
-                name: tRaw("story"),
+                name: t("story"),
                 type: "base",
               },
               {
                 path: "/news",
                 type: "base",
-                name: tRaw("news"),
+                name: t("news"),
               },
             ]}
           />
           <FooterList
-            title={tRaw("legals")}
+            title={t("legals")}
             items={[
               {
                 path: "/privacy-policy",
                 type: "base",
-                name: tRaw("privacy_policy"),
+                name: t("privacy_policy"),
               },
               {
                 path: "/terms-conditions",
                 type: "base",
-                name: tRaw("terms_conditions"),
+                name: t("terms_conditions"),
               },
             ]}
           />
@@ -118,14 +119,14 @@ export function Footer(props: Props) {
             title={"Collections"}
             items={[
               {
-                name: headerTRaw("shop"),
+                name: headerT("shop"),
                 path: "/shop",
                 type: "base",
               },
               ...props.collections.map((item) => {
                 return {
                   type: "dynamic",
-                  name: item.title[locale],
+                  name: parse(item.title[locale]),
                   path: "/collections/[collectionId]",
                   params: { collectionId: item.collection_id },
                 } as const;

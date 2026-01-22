@@ -5,6 +5,7 @@ import { useCartContext } from "@/context/cart/cart.context";
 import { LocaleType } from "@/types/routing";
 import { formatNumber } from "@/utils/product.utils";
 import { EUR_SYMBOL } from "@/utils/constants";
+import parse from "html-react-parser";
 
 export function ItemsDrawer() {
   const { t } = useTranslationsWithParse("shop_page");
@@ -57,7 +58,7 @@ export function ItemsDrawer() {
                       "pb-2 md:pb-2 font-medium text-xs md:text-sm leading-tight"
                     }
                   >
-                    {element.product[`name_${locale}`]}
+                    {parse(element.product[`name_${locale}`])}
                   </h4>
                   <p className={"font-normal text-[10px] md:text-xs"}>
                     {element.option.size}

@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 
 interface Props {
   children: ReactNode;
-  text: string;
+  text: ReactNode;
   initialOpen?: boolean;
 }
 

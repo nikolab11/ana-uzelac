@@ -74,7 +74,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
               "pb-2 text-lg md:text-xl font-normal text-center md:text-left"
             }
           >
-            {product[`name_${locale}`]}
+            {parse(product[`name_${locale}`])}
           </h4>
           {selectedOption && (
             <p
@@ -93,7 +93,7 @@ export function ProductInfo({ product, locale, collections }: Props) {
             }
           >
             <p>{t("collection")}</p>
-            <p>{collection.title[locale]}</p>
+            <p>{parse(collection.title[locale])}</p>
           </div>
         )}
         <div className="flex justify-center md:justify-start">

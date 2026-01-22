@@ -132,7 +132,7 @@ function InnerPage({
       {/* Show original pieces section when -1 is selected or no collection filter */}
       {shouldShowOriginalPieces ? (
         <LoadMoreProductsWrapper
-          text={tRaw("load_more_items")}
+          text={t("load_more_items")}
           initialOpen={hasOriginalPiecesSelected}
         >
           <div

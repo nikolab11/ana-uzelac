@@ -4,6 +4,7 @@ import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
 import { LocaleType } from "@/types/routing";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import parse from "html-react-parser";
 
 interface CollectionViewProps {
   collections: Collection[];
@@ -39,7 +40,7 @@ export function CollectionsView(props: CollectionViewProps) {
               <div className={"font-medium text-xs uppercase pb-2"}>
                 {t("collection")}
               </div>
-              <div className={"font-bold text-xs uppercase pb-3"}>{name}</div>
+              <div className={"font-bold text-xs uppercase pb-3"}>{parse(name)}</div>
               <div
                 className={
                   "relative aspect-square mx-auto w-[260px] max-w-full"

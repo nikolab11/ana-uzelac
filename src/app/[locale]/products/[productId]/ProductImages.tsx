@@ -21,7 +21,7 @@ export function ProductImages({ product }: Props) {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
-  const { tRaw } = useTranslationsWithParse("shop_page");
+  const { t } = useTranslationsWithParse("shop_page");
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -46,7 +46,7 @@ export function ProductImages({ product }: Props) {
       {!open && (
         <div className="absolute top-4 left-4 md:top-[var(--container-padding)] md:left-[var(--container-padding)] z-1400">
           <BackButton
-            label={tRaw("back")}
+            label={t("back")}
             onClick={() => {
               router.push("/shop");
             }}

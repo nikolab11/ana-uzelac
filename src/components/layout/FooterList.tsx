@@ -1,13 +1,14 @@
 import { Link } from "@/i18n/navigation";
 import { BasePath, DynamicPath } from "@/types/routing";
+import { ReactNode } from "react";
 
 interface Props {
-  title: string;
+  title: ReactNode;
   items: (
-    | { path: BasePath; name: string; type: "base" }
+    | { path: BasePath; name: ReactNode; type: "base" }
     | {
         path: DynamicPath;
-        name: string;
+        name: ReactNode;
         params: Record<string, string | number>;
         type: "dynamic";
       }
@@ -20,9 +21,9 @@ export function FooterList(props: Props) {
       <div className={"font-bold text-sm text-[#484848] pb-2 md:pb-5"}>
         {props.title}
       </div>
-      {props.items.map((item) => {
+      {props.items.map((item, index) => {
         return (
-          <div className="pb-1.5" key={item.name}>
+          <div className="pb-1.5" key={item.type === "dynamic" ? `${item.path}-${JSON.stringify(item.params)}` : item.path}>
             <Link
               className={"font-normal text-sm text-[#484848]"}
               href={

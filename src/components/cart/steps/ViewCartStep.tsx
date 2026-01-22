@@ -30,7 +30,7 @@ export function ViewCartStep() {
       >
         <BackButton
           initialExpanded
-          label={tRaw("back_to_shop")}
+          label={t("back_to_shop")}
           onClick={() => {
             onOpenChange(false);
             router.push("/shop");

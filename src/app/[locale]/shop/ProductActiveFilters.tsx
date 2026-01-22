@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import * as querystring from "querystring";
 import { EUR_SYMBOL } from "@/utils/constants";
 import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
+import parse from "html-react-parser";
 
 interface Props {
   params: Partial<ProductFilter>;
@@ -99,7 +100,7 @@ export function ProductActiveFilters({ params, collections, locale }: Props) {
         }
         return (
           <FilterItem
-            content={collection.title[locale]}
+            content={parse(collection.title[locale])}
             key={collectionId}
             onDelete={() => {
               updateParams((prev) => {

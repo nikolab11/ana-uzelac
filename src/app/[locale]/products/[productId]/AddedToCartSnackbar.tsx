@@ -5,6 +5,7 @@ import { XIcon } from "@/components/icons/XIcon";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useTranslationsWithParse } from "@/hooks/useTranslationsWithParse";
+import parse from "html-react-parser";
 import { LocaleType } from "@/types/routing";
 import { useCartContext } from "@/context/cart/cart.context";
 import { createPortal } from "react-dom";
@@ -87,7 +88,7 @@ export function AddedToCartSnackbar(props: Props) {
           </div>
           <div className={"min-w-0 flex-1"}>
             <h4 className={"font-semibold text-xs md:text-sm pb-1 md:pb-2"}>
-              {props.product[`name_${locale}`]}
+              {parse(props.product[`name_${locale}`])}
             </h4>
             <p className={"text-xs md:text-sm font-light"}>{`${t("size")}: ${
               props.option?.size

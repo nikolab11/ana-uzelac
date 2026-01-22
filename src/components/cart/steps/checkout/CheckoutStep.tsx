@@ -107,7 +107,7 @@ export function CheckoutStep() {
       <div className={"md:hidden"}>
         <BackButton
           initialExpanded
-          label={tRaw("back_to_cart")}
+          label={t("back_to_cart")}
           onClick={() => onOpenChange(submitState === "pending", "cart")}
         />
       </div>
@@ -128,7 +128,7 @@ export function CheckoutStep() {
             <div className={"hidden md:block mb-4"}>
               <BackButton
                 initialExpanded
-                label={tRaw("back_to_cart")}
+                label={t("back_to_cart")}
                 onClick={() => onOpenChange(submitState === "pending", "cart")}
               />
             </div>

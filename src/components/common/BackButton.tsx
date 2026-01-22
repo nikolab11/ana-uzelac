@@ -1,8 +1,9 @@
 import { Button, IconButton } from "@mui/material";
 import { ChevronLeft } from "@/components/icons/ChevronLeft";
+import { ReactNode } from "react";
 
 interface Props {
-  label?: string;
+  label?: ReactNode;
   onClick: () => void;
   initialExpanded?: boolean;
 }
@@ -57,7 +58,7 @@ export function BackButton(props: Props) {
             startIcon={<ChevronLeft size={3.5} stroke={"var(--foreground)"} />}
           >
             <span className="button-label capitalize">
-              {props.label?.toLowerCase()}
+              {props.label}
             </span>
           </Button>
         </div>

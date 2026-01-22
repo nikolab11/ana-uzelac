@@ -6,6 +6,7 @@ import { ProductsSection } from "@/app/[locale]/home/ProductsSection";
 import { HoveringButton } from "@/components/common/HoveringButton";
 import { LocaleType } from "@/types/routing";
 import { Link } from "@/i18n/navigation";
+import parse from "html-react-parser";
 
 interface Props {
   collections: Collection[];
@@ -64,7 +65,7 @@ function CollectionItem(props: {
   isFirst?: boolean;
 }) {
   const locale = useLocale() as LocaleType;
-  const { t, tRaw } = useTranslationsWithParse("home_page");
+  const { t } = useTranslationsWithParse("home_page");
   const name = props.collection.title[locale];
 
   const description =
@@ -103,7 +104,7 @@ function CollectionItem(props: {
                 "text-[var(--background)] font-bold text-3xl md:text-7xl text-center md:text-left"
               }
             >
-              {name}
+              {parse(name)}
             </h3>
             <div
               className={
@@ -121,7 +122,7 @@ function CollectionItem(props: {
                   } as never,
                 }}
               >
-                <HoveringButton label={tRaw("view_collection")} />
+                <HoveringButton label={t("view_collection")} />
               </Link>
             </div>
           </div>

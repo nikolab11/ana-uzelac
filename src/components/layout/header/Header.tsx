@@ -35,7 +35,6 @@ interface Props {
 
 export function Header(props: Props) {
   const { t, tRaw } = useTranslationsWithParse("header");
-  // tRaw for string props (label, placeholder), t for JSX content
   const locale = useLocale() as LocaleType;
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -80,7 +79,7 @@ export function Header(props: Props) {
             </Link>
           </div>
           <div className="flex items-center ml-auto">
-            <CartButton label={tRaw("cart")} hideLabel />
+            <CartButton label={t("cart")} hideLabel />
           </div>
         </div>
         {/* Animated Search Input - Full Width */}
@@ -128,7 +127,7 @@ export function Header(props: Props) {
                 <LocalesMenu locale={locale} />
               </div>
             </div>
-            <CartButton label={tRaw("cart")} />
+            <CartButton label={t("cart")} />
           </div>
         </div>
         <CollectionViewContainer>

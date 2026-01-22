@@ -1,10 +1,10 @@
 'use client';
 import { HoveringButton } from '@/components/common/HoveringButton';
 import { ChevronDown } from '@/components/icons/ChevronDown';
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 
 interface Props {
-	label: string;
+	label: ReactNode;
 	scrollElementId: string;
 }
 
