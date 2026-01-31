@@ -26,14 +26,15 @@ export function ProductImages({ product }: Props) {
 
   useLayoutEffect(() => {
     if (!ref.current) return;
-    const totalWidth = ref.current.scrollWidth;
-    const imageWidth =
-      totalWidth / (isMd ? product.images.length + 0.8 : product.images.length);
+    const images = ref.current.querySelectorAll("img");
+    if (!images[activeIndex]) return;
+    const targetImage = images[activeIndex] as HTMLElement;
+    const scrollLeft = targetImage.offsetLeft - (isMd ? targetImage.offsetWidth * 0.2 : 0);
     ref.current.scrollTo({
       behavior: "smooth",
-      left: Math.max(0, imageWidth * (activeIndex - (isMd ? 0.2 : 0))),
+      left: Math.max(0, scrollLeft),
     });
-  }, [activeIndex, product.images.length, isMd]);
+  }, [activeIndex, isMd]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -61,37 +62,25 @@ export function ProductImages({ product }: Props) {
         />,
         document.body
       )}
-      <div ref={ref} className={"h-full overflow-hidden w-full h-full"}>
-        <div
-          className={`flex h-full`}
-          style={{
-            width: isMd
-              ? `${product.images.length * 50 + 40}%`
-              : `${product.images.length * 100}%`,
-          }}
-        >
+      <div ref={ref} className={"h-full overflow-hidden w-full"}>
+        <div className={"flex h-full"}>
           {product.images.map((image, index) => (
-            <div
-              className={"relative"}
-              style={{
-                width: isMd
-                  ? `${100 / (product.images.length + 0.8)}%`
-                  : `100%`,
-                height: "100%",
-              }}
+            <Image
               key={index}
-            >
-              <Image
-                style={{
-                  objectFit: "cover",
-                }}
-                fill
-                src={image}
-                alt={"Image"}
-                onClick={() => setOpen(true)}
-              />
-            </div>
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{
+                width: "auto",
+                height: "100%",
+                flexShrink: 0,
+              }}
+              src={image}
+              alt={"Image"}
+              onClick={() => setOpen(true)}
+            />
           ))}
+          {isMd && <div style={{ minWidth: "40vw", flexShrink: 0 }} />}
         </div>
       </div>
       <div
