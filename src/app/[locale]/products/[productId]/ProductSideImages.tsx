@@ -16,13 +16,13 @@ export function ProductSideImages(props: Props) {
               <Image
                 style={{
                   width: "100%",
-                  height: "100%",
+                  height: 700,
                   objectFit: "cover",
                 }}
                 src={image}
                 alt={"Image"}
-                width={500}
-                height={700}
+                width={1000}
+                height={1400}
               />
             </div>
           );
@@ -38,8 +38,8 @@ export function ProductSideImages(props: Props) {
               }}
               src={image}
               alt={"Image"}
-              width={500}
-              height={700}
+              width={1000}
+              height={1400}
             />
           </div>
         );

@@ -13,6 +13,9 @@ import { formatNumber } from "@/utils/product.utils";
 import { FIRST_SIZE_ONLY_PRODUCT_IDS } from "@/utils/constants";
 import parse from "html-react-parser";
 
+// Garden Day and Night product ID - add fake 112x112 size (disabled)
+const GARDEN_DAY_AND_NIGHT_ID = 7;
+
 interface Props {
   product: Product;
   collections: Collection[];
@@ -36,9 +39,32 @@ export function ProductInfo({ product, locale, collections }: Props) {
         )
     );
 
+  // For Garden Day and Night, add a fake 112x112 size at the beginning (disabled)
+  const isGardenDayAndNight = product.product_id === GARDEN_DAY_AND_NIGHT_ID;
+  const displayOptions = isGardenDayAndNight
+    ? [{ size: "112 cm x 112 cm", price: 0 }, ...product.options]
+    : product.options;
+
+  // Get disabled indexes: for Garden Day and Night, disable index 0 (fake size)
+  // For other restricted products, disable index 1 (second size)
+  const getDisabledIndexes = () => {
+    if (isGardenDayAndNight) {
+      return [0];
+    }
+    if (FIRST_SIZE_ONLY_PRODUCT_IDS.includes(product.product_id)) {
+      return [1];
+    }
+    return undefined;
+  };
+
+  // Default to first real option (skip fake size for Garden Day and Night)
+  const defaultOption = isGardenDayAndNight
+    ? product.options?.[0]
+    : product.options?.[0];
+
   const [selectedOption, setSelectedOption] = useState<
     ProductOption | undefined
-  >(product.options?.[0]);
+  >(defaultOption);
   const [showError, setShowError] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const onOptionSelect = (opt: ProductOption) => {
@@ -102,12 +128,8 @@ export function ProductInfo({ product, locale, collections }: Props) {
             error={showError ? tRaw("please_choose_a_size") : undefined}
             selected={selectedOption}
             onChange={onOptionSelect}
-            options={product.options}
-            disabledIndexes={
-              FIRST_SIZE_ONLY_PRODUCT_IDS.includes(product.product_id)
-                ? [1]
-                : undefined
-            }
+            options={displayOptions}
+            disabledIndexes={getDisabledIndexes()}
           />
         </div>
         <div className={"px-4 md:px-6 py-3 md:py-2 border-white border-b"}>

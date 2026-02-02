@@ -101,11 +101,11 @@ export function CollectionSectionView(props: Props) {
               alt={"saffs"}
               src={image}
               style={{
-                width: "100%",
+                objectFit: "cover",
               }}
-              width={250}
-              height={300}
-              className="w-full md:w-auto"
+              width={500}
+              height={900}
+              className="w-full md:w-[calc(25%-15px)] md:h-[450px]"
             />
           );
         })}
