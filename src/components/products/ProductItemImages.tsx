@@ -11,15 +11,16 @@ interface Props {
   alternative?: boolean;
   original?: boolean;
   discoverAllButton?: boolean;
+  customImages?: string[];
 }
 
 const buttonClasses =
-  "border cursor-pointer border-white p-2 rounded-full transition-opacity child opacity-0 group-hover:opacity-100";
+  "border cursor-pointer border-white p-2 rounded-full transition-opacity child opacity-100 md:opacity-0 md:group-hover:opacity-100";
 
 export function ProductItemImages(props: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const images = props.product.shop_page_images || props.product.images;
+  const images = props.customImages || props.product.shop_page_images || props.product.images;
 
   return (
     <div

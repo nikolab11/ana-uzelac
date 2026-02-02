@@ -16,6 +16,7 @@ interface Props {
   dark?: boolean;
   alternative?: boolean;
   discoverAllButton?: boolean;
+  customImages?: string[];
 }
 
 export function ProductItem(props: Props) {
@@ -35,6 +36,7 @@ export function ProductItem(props: Props) {
           product={props.product}
           alternative={props.alternative}
           original={props.original}
+          customImages={props.customImages}
         />
       ) : (
         <Link href={productLink}>
@@ -43,6 +45,7 @@ export function ProductItem(props: Props) {
             alternative={props.alternative}
             original={props.original}
             discoverAllButton={props.discoverAllButton}
+            customImages={props.customImages}
           />
         </Link>
       )}

@@ -26,10 +26,14 @@ export function ProductImages({ product }: Props) {
 
   useLayoutEffect(() => {
     if (!ref.current) return;
-    const images = ref.current.querySelectorAll("img");
-    if (!images[activeIndex]) return;
-    const targetImage = images[activeIndex] as HTMLElement;
-    const scrollLeft = targetImage.offsetLeft - (isMd ? targetImage.offsetWidth * 0.2 : 0);
+    const scrollLeft = isMd
+      ? (() => {
+          const images = ref.current!.querySelectorAll("img");
+          if (!images[activeIndex]) return 0;
+          const targetImage = images[activeIndex] as HTMLElement;
+          return targetImage.offsetLeft - targetImage.offsetWidth * 0.2;
+        })()
+      : activeIndex * window.innerWidth;
     ref.current.scrollTo({
       behavior: "smooth",
       left: Math.max(0, scrollLeft),
@@ -64,22 +68,38 @@ export function ProductImages({ product }: Props) {
       )}
       <div ref={ref} className={"h-full overflow-hidden w-full"}>
         <div className={"flex h-full"}>
-          {product.images.map((image, index) => (
-            <Image
-              key={index}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{
-                width: "auto",
-                height: "100%",
-                flexShrink: 0,
-              }}
-              src={image}
-              alt={"Image"}
-              onClick={() => setOpen(true)}
-            />
-          ))}
+          {product.images.map((image, index) =>
+            isMd ? (
+              <Image
+                key={index}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{
+                  width: "auto",
+                  height: "100%",
+                  flexShrink: 0,
+                }}
+                src={image}
+                alt={"Image"}
+                onClick={() => setOpen(true)}
+              />
+            ) : (
+              <div
+                key={index}
+                className="relative"
+                style={{ width: "100vw", height: "100%", flexShrink: 0 }}
+              >
+                <Image
+                  fill
+                  style={{ objectFit: "cover" }}
+                  src={image}
+                  alt={"Image"}
+                  onClick={() => setOpen(true)}
+                />
+              </div>
+            )
+          )}
           {isMd && <div style={{ minWidth: "40vw", flexShrink: 0 }} />}
         </div>
       </div>
