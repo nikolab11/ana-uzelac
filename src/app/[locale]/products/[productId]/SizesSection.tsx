@@ -16,6 +16,7 @@ interface Props {
   selected?: ProductOption;
   onChange: (val: ProductOption) => void;
   error?: string;
+  disabledIndexes?: number[];
 }
 
 export function SizesSection(props: Props) {
@@ -64,7 +65,8 @@ export function SizesSection(props: Props) {
             )}
             <div className="py-2">
               <Grid sx={{ padding: 0 }} container spacing={1}>
-                {props.options.map((option) => {
+                {props.options.map((option, index) => {
+                  const isDisabled = props.disabledIndexes?.includes(index);
                   return (
                     <Grid
                       sx={{ padding: 0, textAlign: "center" }}
@@ -72,9 +74,13 @@ export function SizesSection(props: Props) {
                       size={{ md: 6, sm: 12 }}
                     >
                       <div
-                        onClick={() => props.onChange(option)}
+                        onClick={() => !isDisabled && props.onChange(option)}
                         className={
-                          "text-sm font-normal border-[var(--foreground)] border py-3 px-3 cursor-pointer hover:shadow-lg transition"
+                          `text-sm font-normal border-[var(--foreground)] border py-3 px-3 transition ${
+                            isDisabled
+                              ? "opacity-50 cursor-not-allowed"
+                              : "cursor-pointer hover:shadow-lg"
+                          }`
                         }
                         style={{
                           color:

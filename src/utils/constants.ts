@@ -12,6 +12,9 @@ export const EUR_SYMBOL = "€";
 
 export const SHIPPING_PRICE = 0;
 
+// Products where only the first size can be added to cart (second size is display only)
+export const FIRST_SIZE_ONLY_PRODUCT_IDS = [1, 2, 3, 7, 8, 9];
+
 export const SORT_OPTIONS = ["relevance", "price-min", "price-max"] as const;
 
 export type SortOption = (typeof SORT_OPTIONS)[number];

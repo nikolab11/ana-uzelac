@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useCartContext } from "@/context/cart/cart.context";
 import { AddedToCartSnackbar } from "@/app/[locale]/products/[productId]/AddedToCartSnackbar";
 import { formatNumber } from "@/utils/product.utils";
+import { FIRST_SIZE_ONLY_PRODUCT_IDS } from "@/utils/constants";
 import parse from "html-react-parser";
 
 interface Props {
@@ -102,6 +103,11 @@ export function ProductInfo({ product, locale, collections }: Props) {
             selected={selectedOption}
             onChange={onOptionSelect}
             options={product.options}
+            disabledIndexes={
+              FIRST_SIZE_ONLY_PRODUCT_IDS.includes(product.product_id)
+                ? [1]
+                : undefined
+            }
           />
         </div>
         <div className={"px-4 md:px-6 py-3 md:py-2 border-white border-b"}>
