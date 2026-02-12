@@ -13,13 +13,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "anauzelac.s3.eu-north-1.amazonaws.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "live.staticflickr.com",
-        pathname: "/**",
+        hostname: "**",
       },
     ],
     minimumCacheTTL: 86400,
