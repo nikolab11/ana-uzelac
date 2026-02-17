@@ -10,7 +10,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Ana Uzelac Design ",
+  title: "Ana Uzelac - Silk Paintings & Scarves",
   description: "Ana Uzelac art shop",
   icons: {
     icon: "/favicon.ico",
