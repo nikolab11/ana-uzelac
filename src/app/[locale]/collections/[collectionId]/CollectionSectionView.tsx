@@ -18,6 +18,7 @@ interface Props {
 export function CollectionSectionView(props: Props) {
   const locale = useLocale() as LocaleType;
   const { t } = useTranslationsWithParse("home_page");
+  const { t: tShop } = useTranslationsWithParse("shop_page");
 
   return (
     <div className="max-w-screen-xl mx-auto flex flex-col gap-8 md:gap-20">
@@ -76,7 +77,7 @@ export function CollectionSectionView(props: Props) {
               <HoveringButton
                 inverted={props.inverted}
                 mode="dark"
-                label={t("shop_now")}
+                label={tShop("view_scarf")}
               />
             </Link>
           </div>
