@@ -46,14 +46,14 @@ export function GrandOpeningSection(props: Props) {
             </Button>
           </Link>
         </div>
-        <div className={"pt-6"}>
+    {/*     <div className={"pt-6"}>
           <h3 className="text-[#444444] text-lg md:text-2xl font-semibold text-center md:text-left">
             {t("countdown_to_launch")}
           </h3>
           <div className="flex justify-center md:justify-start">
             <CountdownTimer labels={tRaw("countdown_labels").split(", ")} />
           </div>
-        </div>
+        </div> */}
       </div>
       <div
         className={
